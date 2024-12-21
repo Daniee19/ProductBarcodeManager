@@ -1,0 +1,12 @@
+com\codigodebarra\model\CodigoBarra.class
+com\codigodebarra\view\JInterfazPrincipal.class
+com\codigodebarra\main\Main.class
+com\codigodebarra\dao\daoimpl\CodigoBarraDaoImpl.class
+com\codigodebarra\dao\CodigoBarraDao.class
+com\codigodebarra\dao\ProductoDao.class
+com\codigodebarra\controller\ProductoController.class
+com\codigodebarra\dao\daoimpl\ProductoDaoImpl.class
+com\codigodebarra\model\Producto.class
+com\codigodebarra\config\Conexion.class
+com\codigodebarra\dao\Dao.class
+com\codigodebarra\view\JInterfazPrincipal$1.class
