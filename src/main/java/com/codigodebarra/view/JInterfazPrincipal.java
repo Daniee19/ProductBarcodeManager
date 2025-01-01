@@ -28,12 +28,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         cb_tipo_barra = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         btnObtenerPDF = new javax.swing.JButton();
         txtIdProducto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtCodigoBarra = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -47,10 +45,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 410, 50));
 
         jLabel2.setText("Cantidad");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, -1, -1));
-        jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 290, -1));
-        jPanel1.add(txtCantidadProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 110, -1));
-        jPanel1.add(txtPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 130, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
+        jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 140, -1));
+        jPanel1.add(txtCantidadProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 120, -1));
+        jPanel1.add(txtPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 140, -1));
 
         btnCrearProducto.setText("Crear producto");
         btnCrearProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -58,26 +56,23 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                 btnCrearProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCrearProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, -1, -1));
+        jPanel1.add(btnCrearProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
 
         jLabel6.setText("Precio");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
 
         jLabel7.setText("Escoja el tipo de código de barras");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
 
         jLabel8.setText("Nombre");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
 
-        jPanel1.add(cb_tipo_barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 110, -1));
-
-        jLabel9.setText("Código de barra");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, -1, -1));
+        jPanel1.add(cb_tipo_barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 120, -1));
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 40, 290));
 
-        btnObtenerPDF.setText("Obtener PDF");
+        btnObtenerPDF.setText("Ver  PDF");
         btnObtenerPDF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObtenerPDFActionPerformed(evt);
@@ -89,7 +84,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("en PDF");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 190, -1));
-        jPanel1.add(txtCodigoBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 130, -1));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 420, 60));
 
         jLabel10.setText("Ingrese el id del  producto");
@@ -296,12 +290,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField txtCantidadProducto;
-    private javax.swing.JTextField txtCodigoBarra;
     private javax.swing.JTextField txtIdProducto;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecioProducto;

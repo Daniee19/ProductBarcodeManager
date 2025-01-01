@@ -11,11 +11,13 @@ public class Conexion {
     String user = "root";
     String pass = "admin";
 
+    //Podría crearlo en una función específica y fin
     public Conexion() {
         con = null;
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pass);
+
             if (con != null) {
                 System.out.println("Conexión establecida.");
             }
@@ -26,6 +28,5 @@ public class Conexion {
 
     public Connection getConexion() {
         return con; //Es necesario obtener la variable con, para poder utilizarlo en el DAO.
-
     }
 }

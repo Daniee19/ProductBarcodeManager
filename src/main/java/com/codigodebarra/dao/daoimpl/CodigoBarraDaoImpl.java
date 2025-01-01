@@ -84,9 +84,9 @@ public class CodigoBarraDaoImpl implements CodigoBarraDao {
     }
 
     @Override
-    public boolean insert(CodigoBarra cb) {
+    public int insert(CodigoBarra cb) {
 
-        return true;
+        return 0;
     }
 
     @Override

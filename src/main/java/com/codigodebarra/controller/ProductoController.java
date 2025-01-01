@@ -50,15 +50,18 @@ public class ProductoController implements ActionListener {
         CodigoBarra cb = new CodigoBarra();
 
         CodigoBarraDao daoCodigo = new CodigoBarraDaoImpl();
+        //Nombre del tipo de código de barra con el visible
         CodigoBarra objetoCodigo = daoCodigo.selectByType(view.getCb_tipo_barra().getSelectedItem().toString());
+
         cb.setId_barra(objetoCodigo.getId_barra());
+
         p.setId_barra(cb);
         p.setNombre(view.getTxtNombreProducto().getText());
         p.setPrecio(Double.parseDouble(view.getTxtPrecioProducto().getText()));
         p.setCantidad(Integer.parseInt(view.getTxtCantidadProducto().getText()));
 
         productoDaoImpl.insert(p);
-
+        //No 
     }
 
     public void obtenerPDF() {

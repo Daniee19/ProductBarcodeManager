@@ -8,6 +8,6 @@ public interface Dao<T> {
 
     public List<T> selectAll();
 
-    public boolean insert(T producto);
+    public int insert(T producto);
 
 }

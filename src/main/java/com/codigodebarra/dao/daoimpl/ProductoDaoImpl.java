@@ -7,6 +7,7 @@ import com.codigodebarra.model.Producto;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class ProductoDaoImpl implements ProductoDao {
 
@@ -86,28 +87,34 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public boolean insert(Producto producto) {
-        boolean valor_boolean = false;
+    public int insert(Producto producto) {
+        int id_obtenido_producto = 0;
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO ").append(" producto ")
                 .append("(id_barra, ").append("producto.nombre, ").append("producto.precio, ").append("producto.cantidad")
                 .append(") values (").append("?,?,?,?").append(")");
         try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
+            Connection conn = con.getConexion(); //Llamar a la variable, la cual ya pasó por el DriverManager...
+            ps = conn.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, producto.getId_barra().getId_barra());
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
             ps.setInt(4, producto.getCantidad());
 
-            int resultado = ps.executeUpdate();
-            if (resultado > 0) {
-                valor_boolean = true;
+            ps.executeUpdate(); //Tenemos que ejecutarlo primero, para obtener el id del producto que se haya creado
+
+            ResultSet resultado = ps.getGeneratedKeys();
+
+            if (resultado.next()) {
+                id_obtenido_producto = resultado.getInt("GENERATED_KEY");
+                //Solo se obtiene en el resultset el id generado, el cual solo habrá una columna... (columna 1 o "GENERATED_KEY")
+                
+                JOptionPane.showMessageDialog(null, "El id que obtuviste es de : " + id_obtenido_producto);
             }
         } catch (SQLException e) {
             System.out.println("Error al insertar el producto: " + e.getMessage());
         }
-        return valor_boolean;
+        return id_obtenido_producto;
     }
 
 }
