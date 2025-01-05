@@ -16,6 +16,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -38,17 +39,54 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Gestión de productos");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 410, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 12;
+        gridBagConstraints.ipadx = 49;
+        gridBagConstraints.ipady = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(60, 170, 0, 0);
+        jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel2.setText("Cantidad");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, -1));
-        jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 140, -1));
-        jPanel1.add(txtCantidadProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 120, -1));
-        jPanel1.add(txtPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 140, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 30, 0, 0);
+        jPanel1.add(jLabel2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 6;
+        gridBagConstraints.ipadx = 76;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 190, 0, 0);
+        jPanel1.add(txtNombreProducto, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 56;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 30, 0, 0);
+        jPanel1.add(txtCantidadProducto, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 17;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 76;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 190, 0, 0);
+        jPanel1.add(txtPrecioProducto, gridBagConstraints);
 
         btnCrearProducto.setText("Crear producto");
         btnCrearProducto.addActionListener(new java.awt.event.ActionListener() {
@@ -56,21 +94,62 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                 btnCrearProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCrearProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 20;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(38, 66, 0, 0);
+        jPanel1.add(btnCrearProducto, gridBagConstraints);
 
         jLabel6.setText("Precio");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 190, 0, 0);
+        jPanel1.add(jLabel6, gridBagConstraints);
 
         jLabel7.setText("Escoja el tipo de código de barras");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 30, 0, 0);
+        jPanel1.add(jLabel7, gridBagConstraints);
 
         jLabel8.setText("Nombre");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 190, 0, 0);
+        jPanel1.add(jLabel8, gridBagConstraints);
 
-        jPanel1.add(cb_tipo_barra, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 120, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridheight = 6;
+        gridBagConstraints.ipadx = 48;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 30, 0, 0);
+        jPanel1.add(cb_tipo_barra, gridBagConstraints);
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 40, 290));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 12;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridheight = 21;
+        gridBagConstraints.ipadx = 39;
+        gridBagConstraints.ipady = 289;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 40, 95, 0);
+        jPanel1.add(jSeparator1, gridBagConstraints);
 
         btnObtenerPDF.setText("Ver  PDF");
         btnObtenerPDF.addActionListener(new java.awt.event.ActionListener() {
@@ -78,20 +157,65 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                 btnObtenerPDFActionPerformed(evt);
             }
         });
-        jPanel1.add(btnObtenerPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 220, 110, -1));
-        jPanel1.add(txtIdProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 180, 60, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 16;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 36;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 30, 0, 0);
+        jPanel1.add(btnObtenerPDF, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridheight = 7;
+        gridBagConstraints.ipadx = -4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 30, 0, 0);
+        jPanel1.add(txtIdProducto, gridBagConstraints);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("en PDF");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 130, 190, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 420, 60));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 144;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 30, 0, 76);
+        jPanel1.add(jLabel3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 11;
+        gridBagConstraints.gridheight = 5;
+        gridBagConstraints.ipadx = 419;
+        gridBagConstraints.ipady = 59;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 140, 0, 0);
+        jPanel1.add(jSeparator2, gridBagConstraints);
 
         jLabel10.setText("Ingrese el id del  producto");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 160, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 30, 0, 0);
+        jPanel1.add(jLabel10, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Consultar productos ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 100, 190, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(100, 30, 0, 76);
+        jPanel1.add(jLabel4, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,13 +330,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.jLabel8 = jLabel8;
     }
 
-    public JLabel getjLabel9() {
-        return jLabel9;
-    }
 
-    public void setjLabel9(JLabel jLabel9) {
-        this.jLabel9 = jLabel9;
-    }
 
     public JPanel getjPanel1() {
         return jPanel1;
@@ -246,13 +364,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.txtCantidadProducto = txtCantidadProducto;
     }
 
-    public JTextField getTxtCodigoBarra() {
-        return txtCodigoBarra;
-    }
-
-    public void setTxtCodigoBarra(JTextField txtCodigoBarra) {
-        this.txtCodigoBarra = txtCodigoBarra;
-    }
 
     public JTextField getTxtIdProducto() {
         return txtIdProducto;
