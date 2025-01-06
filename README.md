@@ -19,4 +19,14 @@ cantidad integer not null
 alter table producto add constraint id_barra 
 foreign key (id_barra) 
 references codigo_barra(id_barra); 
+
+-- ACTUALIZAR LOS CAMPOS DE LA TABLA PRODUCTOS, EN LA CUAL HE AGREGADO 3 CAMPOS MÁS
+ALTER TABLE producto add column compania varchar(50), 
+add column cantidad_contenida varchar(20), 
+add column imagenURL varchar(200);
+
+ALTER TABLE producto 
+MODIFY nombre varchar(50) null,
+MODIFY precio decimal(8,2) null default 0,
+MODIFY cantidad int null default 0;
 ```
