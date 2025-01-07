@@ -78,4 +78,9 @@ public class Producto {
         this.imagenURL = imagenURL;
     }
 
+    @Override
+    public String toString() {
+        return "Producto{" + "id=" + id + ", id_barra=" + id_barra + ", nombre=" + nombre + ", compania=" + compania + ", cantidad_contenida=" + cantidad_contenida + ", imagenURL=" + imagenURL + ", precio=" + precio + ", cantidad=" + cantidad + '}';
+    }
+
 }

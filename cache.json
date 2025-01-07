@@ -5886,6 +5886,56 @@
         "status_verbose": "product found",
         "status": 1
     },
+    "5000328181844": {
+        "product": {
+            "brands": "Doritos,Old el paso",
+            "quantity": "300 g",
+            "selected_images": {
+                "nutrition": {
+                    "small": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/nutrition_en.29.200.jpg"},
+                    "thumb": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/nutrition_en.29.100.jpg"},
+                    "display": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/nutrition_en.29.400.jpg"}
+                },
+                "ingredients": {
+                    "small": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_en.23.200.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_fr.5.200.jpg"
+                    },
+                    "thumb": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_en.23.100.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_fr.5.100.jpg"
+                    },
+                    "display": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_en.23.400.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_fr.5.400.jpg"
+                    }
+                },
+                "packaging": {
+                    "small": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/packaging_en.26.200.jpg"},
+                    "thumb": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/packaging_en.26.100.jpg"},
+                    "display": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/packaging_en.26.400.jpg"}
+                },
+                "front": {
+                    "small": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_en.12.200.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_fr.3.200.jpg"
+                    },
+                    "thumb": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_en.12.100.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_fr.3.100.jpg"
+                    },
+                    "display": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_en.12.400.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_fr.3.400.jpg"
+                    }
+                }
+            },
+            "product_name": "Taco Shells"
+        },
+        "code": "5000328181844",
+        "status_verbose": "product found",
+        "status": 1
+    },
     "5000328014845": {
         "product": {
             "brands": "Doritos",
@@ -7796,6 +7846,27 @@
             "nutriscore_2021_tags": ["c"]
         },
         "code": "3168930005339",
+        "status_verbose": "product found",
+        "status": 1
+    },
+    "5000328159003": {
+        "product": {
+            "brands": "Doritos",
+            "selected_images": {
+                "nutrition": {
+                    "small": {"fr": "https://images.openfoodfacts.org/images/products/500/032/815/9003/nutrition_fr.5.200.jpg"},
+                    "thumb": {"fr": "https://images.openfoodfacts.org/images/products/500/032/815/9003/nutrition_fr.5.100.jpg"},
+                    "display": {"fr": "https://images.openfoodfacts.org/images/products/500/032/815/9003/nutrition_fr.5.400.jpg"}
+                },
+                "front": {
+                    "small": {"fr": "https://images.openfoodfacts.org/images/products/500/032/815/9003/front_fr.3.200.jpg"},
+                    "thumb": {"fr": "https://images.openfoodfacts.org/images/products/500/032/815/9003/front_fr.3.100.jpg"},
+                    "display": {"fr": "https://images.openfoodfacts.org/images/products/500/032/815/9003/front_fr.3.400.jpg"}
+                }
+            },
+            "product_name": "Doritos Hot Salsa Dip 326G"
+        },
+        "code": "5000328159003",
         "status_verbose": "product found",
         "status": 1
     },

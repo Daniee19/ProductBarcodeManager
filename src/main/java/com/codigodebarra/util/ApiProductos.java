@@ -1,10 +1,11 @@
 package com.codigodebarra.util;
 
+import com.codigodebarra.model.CodigoBarra;
+import com.codigodebarra.model.Producto;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JOptionPane;
@@ -17,11 +18,11 @@ public class ApiProductos {
     //Map<String, JSONObject> cachee = new ConcurrentHashMap<>();
     Map<String, JSONObject> cache = new ConcurrentHashMap<>();
 
-    public boolean consumirApi(String codigo_barra) {
+    public Producto consumirApi(String codigo_barra) {
         boolean estado = false;
         //Traer el archivo de los productos encontrados
         cache = objetoCache.cargarCacheDesdeArchivo();
-
+        Producto producto = new Producto();
         try {
 
             if (cache.containsKey(codigo_barra)) {
@@ -58,6 +59,14 @@ public class ApiProductos {
                 System.out.println("Imagen: " + imagenURL);
                 JOptionPane.showMessageDialog(null, "Está en el if");
 
+                CodigoBarra cbarra = new CodigoBarra();
+                cbarra.setNombre_barra(codigo_barra);
+                producto.setId_barra(cbarra);
+                producto.setNombre(product.optString("product_name"));
+                producto.setCantidad_contenida(product.optString("quantity"));
+                producto.setCompania(product.optString("brands"));
+                producto.setImagenURL(imagenURL);
+
             } else {
                 // Llama a la API, guarda en cache
 
@@ -86,14 +95,46 @@ public class ApiProductos {
                 cache.put(codigo_barra, jsonResponse);
 
                 //
+                JSONObject product = cache.get(codigo_barra).getJSONObject("product");
+
+                //
+                String[] idiomas = {"es", "en", "fr"};
+
+                //Establecer una dirección donde se encuentra la imagen
+                JSONObject display = product.getJSONObject("selected_images")
+                        .getJSONObject("front")
+                        .getJSONObject("display");
+
+                String imagenURL = "";
+
+                for (String idioma : idiomas) {
+                    imagenURL = display.optString(idioma);
+                    if (!imagenURL.isBlank()) {
+                        break; //Si encuentra una URL termina el bucle
+                    }
+                }
+                if (imagenURL.isBlank()) {
+                    imagenURL = "No se encontró la imagen";
+                }
+
+                //
+                CodigoBarra cbarra = new CodigoBarra();
+                cbarra.setNombre_barra(codigo_barra);
+                producto.setId_barra(cbarra);
+                producto.setNombre(product.optString("product_name"));
+                producto.setCantidad_contenida(product.optString("quantity"));
+                producto.setCompania(product.optString("brands"));
+                producto.setImagenURL(imagenURL);
+                System.out.println("En el apiProducts: "+ producto);
+                //
                 objetoCache.guardarCacheEnArchivo(cache); //Guardamos ese mapa que será, posteriormente un jsonObject que se almacenará al archivo
                 JOptionPane.showMessageDialog(null, "Está en el else");
+
             }
-            estado = true;
         } catch (Exception e) {
             System.out.println("Error al consumir la API: " + e.getMessage());
         }
-        return estado;
+        return producto;
     }
 }
 
