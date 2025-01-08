@@ -1,10 +1,7 @@
 package com.codigodebarra.controller;
 
-import com.codigodebarra.dao.CodigoBarraDao;
 import com.codigodebarra.dao.ProductoDao;
-import com.codigodebarra.dao.daoimpl.CodigoBarraDaoImpl;
 import com.codigodebarra.dao.daoimpl.ProductoDaoImpl;
-import com.codigodebarra.model.CodigoBarra;
 import com.codigodebarra.model.Producto;
 import com.codigodebarra.util.ApiProductos;
 import com.codigodebarra.util.Barras;
@@ -20,7 +17,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class ProductoController implements ActionListener {
 
@@ -28,17 +24,17 @@ public class ProductoController implements ActionListener {
 
     JEscanear vista;
     JInformacion vistaInfo;
-    ProductoDao productoDaoImpl;
-    CodigoBarraDaoImpl codigoBarraDaoImpl;
+    ProductoDao productoDao;
     ApiProductos api = new ApiProductos();
 
     public ProductoController(JEscanear vista) {
         this.vista = vista;
         this.vista.setVisible(true);
         this.vista.setLocationRelativeTo(null);
+        //Se instancia pero no se muestra, hasta que se de en el botón escanear
         vistaInfo = new JInformacion(vista, true);
-        productoDaoImpl = new ProductoDaoImpl();
-        codigoBarraDaoImpl = new CodigoBarraDaoImpl();
+        productoDao = new ProductoDaoImpl();
+
         acciones();
         disenio();
         //mostrar_elementos_cb();
@@ -70,53 +66,41 @@ public class ProductoController implements ActionListener {
 
     }
 
-    private void mostrar_elementos_cb() {
-
-        List<CodigoBarra> codigos = codigoBarraDaoImpl.selectAll();
-
-        for (CodigoBarra cs : codigos) {
-            view.getCb_tipo_barra().addItem(cs.getTipo());
-        }
-    }
-
     private void acciones() {
 //        view.getBtnCrearProducto().addActionListener(this);
 //        view.getCb_tipo_barra().addActionListener(this);
 //        view.getBtnObtenerPDF().addActionListener(this);
 
         vista.getBtnOkEscanear().addActionListener(this);
-        this.vistaInfo.getBtnCancelar().addActionListener(this);
+        vistaInfo.getBtnCancelar().addActionListener(this);
 
+        //Se hace esto porque queremos detallar más en el uso específico del botón aceptar
+        vistaInfo.getBtnAceptar().addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Ayudará a separar la lógica del botón
+                String command = e.getActionCommand();
+                if (command.equals("aumentar")) {
+
+                } else if (command.equals("agregar")) {
+                    //productoDao.insert();
+                }
+            }
+        });
     }
 
     private void crearProducto() {
-        JOptionPane.showMessageDialog(null, "Se va a crear el producto. No te rindas");
-        Producto p = new Producto();
-        CodigoBarra cb = new CodigoBarra();
 
-        CodigoBarraDao daoCodigo = new CodigoBarraDaoImpl();
-        //Nombre del tipo de código de barra con el visible
-        CodigoBarra objetoCodigo = daoCodigo.selectByType(view.getCb_tipo_barra().getSelectedItem().toString());
-
-        cb.setId_barra(objetoCodigo.getId_barra());
-
-        p.setId_barra(cb);
-        p.setNombre(view.getTxtNombreProducto().getText());
-        p.setPrecio(Double.parseDouble(view.getTxtPrecioProducto().getText()));
-        p.setCantidad(Integer.parseInt(view.getTxtCantidadProducto().getText()));
-
-        productoDaoImpl.insert(p);
-        //No 
     }
 
     public void obtenerPDF() {
         Barras ba = new Barras();
-        List<Producto> productos = productoDaoImpl.selectAll();
+        List<Producto> productos = productoDao.selectAll();
         System.out.println(productos);
         for (Producto ps : productos) {
-            ba.generarCodBarras(ps.getId_barra().getNombre_barra(), ps.getId_barra().getTipo());
+            ba.generarCodBarras(ps.getCodigo_barra(), "EAN-13");
         }
-
     }
 
     public void escanearCodigo() throws MalformedURLException {
@@ -135,13 +119,27 @@ public class ProductoController implements ActionListener {
                     .append("\n")
                     .append("Cantidad del producto: ")
                     .append(producto.getCantidad_contenida());
-            vistaInfo = new JInformacion(vista, true);
+
             vistaInfo.getTxtAreaInformacion().setText(sb.toString());
 
             if (producto.getImagenURL() != null) {
                 cargarImagenPorURL(producto.getImagenURL());
             } else {
                 vistaInfo.getLblImagen().setText("Imagen no encontrada");
+            }
+
+            //Se va a consultar en el daoProducto para ver si existe o no en la base de datos
+            boolean existe = productoDao.selectByCodeProduct(vista.getTxtCodigoEscanear().getText());
+
+            //Separar la lógica si existe o no el producto en la base de datos
+            if (existe) {
+                System.out.println("Si existe en la base de datos");
+                vistaInfo.getLblPreguntar().setText("El producto ya está almacenado. ¿Desea aumentar su cantidad?");
+                vistaInfo.getBtnAceptar().setActionCommand("aumentar");
+            } else {
+                System.out.println("No existe en la base de datos");
+                vistaInfo.getLblPreguntar().setText("El producto es nuevo. ¿Desea agregarlo?");
+                vistaInfo.getBtnAceptar().setActionCommand("agregar");
             }
 
             vistaInfo.setLocationRelativeTo(null);
@@ -179,7 +177,6 @@ public class ProductoController implements ActionListener {
         }
         //
         if (e.getSource() == vistaInfo.getBtnCancelar()) {
-            System.out.println("HELLOOOOOOOO");
             vistaInfo.dispose();
         }
 

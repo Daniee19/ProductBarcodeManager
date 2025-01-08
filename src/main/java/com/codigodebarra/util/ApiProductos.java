@@ -1,6 +1,5 @@
 package com.codigodebarra.util;
 
-import com.codigodebarra.model.CodigoBarra;
 import com.codigodebarra.model.Producto;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,7 +18,6 @@ public class ApiProductos {
     Map<String, JSONObject> cache = new ConcurrentHashMap<>();
 
     public Producto consumirApi(String codigo_barra) {
-        boolean estado = false;
         //Traer el archivo de los productos encontrados
         cache = objetoCache.cargarCacheDesdeArchivo();
         Producto producto = new Producto();
@@ -59,9 +57,7 @@ public class ApiProductos {
                 System.out.println("Imagen: " + imagenURL);
                 JOptionPane.showMessageDialog(null, "Está en el if");
 
-                CodigoBarra cbarra = new CodigoBarra();
-                cbarra.setNombre_barra(codigo_barra);
-                producto.setId_barra(cbarra);
+                producto.setCodigo_barra(codigo_barra);
                 producto.setNombre(product.optString("product_name"));
                 producto.setCantidad_contenida(product.optString("quantity"));
                 producto.setCompania(product.optString("brands"));
@@ -118,14 +114,12 @@ public class ApiProductos {
                 }
 
                 //
-                CodigoBarra cbarra = new CodigoBarra();
-                cbarra.setNombre_barra(codigo_barra);
-                producto.setId_barra(cbarra);
+                producto.setCodigo_barra(codigo_barra);
                 producto.setNombre(product.optString("product_name"));
                 producto.setCantidad_contenida(product.optString("quantity"));
                 producto.setCompania(product.optString("brands"));
                 producto.setImagenURL(imagenURL);
-                System.out.println("En el apiProducts: "+ producto);
+                System.out.println("En el apiProducts: " + producto);
                 //
                 objetoCache.guardarCacheEnArchivo(cache); //Guardamos ese mapa que será, posteriormente un jsonObject que se almacenará al archivo
                 JOptionPane.showMessageDialog(null, "Está en el else");

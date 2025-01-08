@@ -3,7 +3,7 @@ package com.codigodebarra.model;
 public class Producto {
 
     int id;
-    CodigoBarra id_barra;
+    String codigo_barra;
     String nombre;
     String compania;
     String cantidad_contenida;
@@ -22,12 +22,12 @@ public class Producto {
         this.id = id;
     }
 
-    public CodigoBarra getId_barra() {
-        return id_barra;
+    public String getCodigo_barra() {
+        return codigo_barra;
     }
 
-    public void setId_barra(CodigoBarra id_barra) {
-        this.id_barra = id_barra;
+    public void setCodigo_barra(String codigo_barra) {
+        this.codigo_barra = codigo_barra;
     }
 
     public String getNombre() {
@@ -80,7 +80,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", id_barra=" + id_barra + ", nombre=" + nombre + ", compania=" + compania + ", cantidad_contenida=" + cantidad_contenida + ", imagenURL=" + imagenURL + ", precio=" + precio + ", cantidad=" + cantidad + '}';
+        return "Producto{" + "id=" + id + ", codigo_barra=" + codigo_barra + ", nombre=" + nombre + ", compania=" + compania + ", cantidad_contenida=" + cantidad_contenida + ", imagenURL=" + imagenURL + ", precio=" + precio + ", cantidad=" + cantidad + '}';
     }
 
 }

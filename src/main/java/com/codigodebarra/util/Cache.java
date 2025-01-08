@@ -1,7 +1,6 @@
 package com.codigodebarra.util;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,16 +17,14 @@ public class Cache {
     public void guardarCacheEnArchivo(Map<String, JSONObject> cache) {
         //Es un JSONObject, el acepta pares clave valor.
 
-        //JSONObject cache_existente = leerCacheDeArchivo(); //Leer datos existentes
-        //Añadir nuevos datos al JSON existente
         /**
          * El .entrySet, lo que hace es devolver todos los pares Clave, Valor.
+         * Pero no es porque lo haga de la nada, no. Sino es que cache es una
+         * variable tipo map que previamente ha leído todos la información que
+         * había en el archivo cache, más la nueva información encontrada.
          * Recordar: El key es el código de barra del producto, y el valor es el
          * JSONObject del producto (El valor encontrado en formato JSON).
          */
-        //¿Porque uso el for? - Porque como recorrerá todo, almacenará también el último valor que se acaba de ingresar
-        //Los valores duplicados se sobreescribirán
-        //Seleccionamos todo lo que hay, pero supuestamente solo hay un valor
         for (Map.Entry<String, JSONObject> entry : cache.entrySet()) {
             //Lo que hace es agregar todos los pares Clave, Valor, al JSONObject
             cache_existente.put(entry.getKey(), entry.getValue());
@@ -42,33 +39,6 @@ public class Cache {
 
     } //FIN DEL MÉTODO GUARDAR
 
-    /*public JSONObject leerCacheDeArchivo() {
-        //Comprobar si existe o no el archivo.
-        File file = new File(CACHE_FILE);
-
-        if (!file.exists()) {
-            return new JSONObject();
-        }
-        //El BufferedReader permitirá leer archivos grandes
-        //Lee todo el contenido que existe en el archivo del CACHE_FILE
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            StringBuilder contenido = new StringBuilder();
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                contenido.append(linea);
-            }
-
-            /**
-             * Lo que hace es retornar el JSON de todo el archivo que estaba en
-             * el CACHE_FILE.
-     *//*
-            return new JSONObject(contenido.toString());
-        } catch (IOException e) {
-            System.out.println("Error al leer el caché: " + e.getMessage());
-            return new JSONObject();
-        }
-    }
-     */
     public Map<String, JSONObject> cargarCacheDesdeArchivo() {
 
         try (BufferedReader reader = new BufferedReader(new FileReader(CACHE_FILE))) {
