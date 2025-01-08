@@ -9,7 +9,7 @@ nombre varchar(60) not null,
 precio decimal(8,2) not null default 0,
 cantidad integer not null default 0,
 compania varchar(50) null,
-cantidad_contenida varchar(20) null,
+contenido varchar(20) null,
 imagenURL varchar(200) null
 );
 ```
