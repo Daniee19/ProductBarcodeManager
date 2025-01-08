@@ -6,7 +6,7 @@ public class Producto {
     String codigo_barra;
     String nombre;
     String compania;
-    String cantidad_contenida;
+    String contenido;
     String imagenURL;
     double precio;
     int cantidad;
@@ -62,12 +62,12 @@ public class Producto {
         this.compania = compania;
     }
 
-    public String getCantidad_contenida() {
-        return cantidad_contenida;
+    public String getContenido() {
+        return contenido;
     }
 
-    public void setCantidad_contenida(String cantidad_contenida) {
-        this.cantidad_contenida = cantidad_contenida;
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
     }
 
     public String getImagenURL() {
@@ -80,7 +80,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", codigo_barra=" + codigo_barra + ", nombre=" + nombre + ", compania=" + compania + ", cantidad_contenida=" + cantidad_contenida + ", imagenURL=" + imagenURL + ", precio=" + precio + ", cantidad=" + cantidad + '}';
+        return "Producto{" + "id=" + id + ", codigo_barra=" + codigo_barra + ", nombre=" + nombre + ", compania=" + compania + ", contenido=" + contenido + ", imagenURL=" + imagenURL + ", precio=" + precio + ", cantidad=" + cantidad + '}';
     }
 
 }

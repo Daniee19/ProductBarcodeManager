@@ -9,5 +9,5 @@ public interface Dao<T> {
     public List<T> selectAll();
 
     public int insert(T producto);
-
+    
 }

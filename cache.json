@@ -1,50 +1,124 @@
-{"5000328181844": {
-    "product": {
-        "brands": "Doritos,Old el paso",
-        "quantity": "300 g",
-        "selected_images": {
-            "nutrition": {
-                "small": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/nutrition_en.29.200.jpg"},
-                "thumb": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/nutrition_en.29.100.jpg"},
-                "display": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/nutrition_en.29.400.jpg"}
-            },
-            "ingredients": {
-                "small": {
-                    "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_en.23.200.jpg",
-                    "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_fr.5.200.jpg"
+{
+    "5000328014876": {
+        "product": {
+            "brands": "Doritos",
+            "quantity": "280g",
+            "selected_images": {
+                "nutrition": {
+                    "small": {"en": "https://images.openfoodfacts.org/images/products/500/032/801/4876/nutrition_en.9.200.jpg"},
+                    "thumb": {"en": "https://images.openfoodfacts.org/images/products/500/032/801/4876/nutrition_en.9.100.jpg"},
+                    "display": {"en": "https://images.openfoodfacts.org/images/products/500/032/801/4876/nutrition_en.9.400.jpg"}
                 },
-                "thumb": {
-                    "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_en.23.100.jpg",
-                    "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_fr.5.100.jpg"
+                "ingredients": {
+                    "small": {"en": "https://images.openfoodfacts.org/images/products/500/032/801/4876/ingredients_en.12.200.jpg"},
+                    "thumb": {"en": "https://images.openfoodfacts.org/images/products/500/032/801/4876/ingredients_en.12.100.jpg"},
+                    "display": {"en": "https://images.openfoodfacts.org/images/products/500/032/801/4876/ingredients_en.12.400.jpg"}
                 },
-                "display": {
-                    "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_en.23.400.jpg",
-                    "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_fr.5.400.jpg"
+                "front": {
+                    "small": {"en": "https://images.openfoodfacts.org/images/products/500/032/801/4876/front_en.3.200.jpg"},
+                    "thumb": {"en": "https://images.openfoodfacts.org/images/products/500/032/801/4876/front_en.3.100.jpg"},
+                    "display": {"en": "https://images.openfoodfacts.org/images/products/500/032/801/4876/front_en.3.400.jpg"}
                 }
             },
-            "packaging": {
-                "small": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/packaging_en.26.200.jpg"},
-                "thumb": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/packaging_en.26.100.jpg"},
-                "display": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/packaging_en.26.400.jpg"}
-            },
-            "front": {
-                "small": {
-                    "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_en.12.200.jpg",
-                    "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_fr.3.200.jpg"
-                },
-                "thumb": {
-                    "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_en.12.100.jpg",
-                    "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_fr.3.100.jpg"
-                },
-                "display": {
-                    "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_en.12.400.jpg",
-                    "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_fr.3.400.jpg"
-                }
-            }
+            "product_name": "Doritos Nacho Cheese 280g"
         },
-        "product_name": "Taco Shells"
+        "code": "5000328014876",
+        "status_verbose": "product found",
+        "status": 1
     },
-    "code": "5000328181844",
-    "status_verbose": "product found",
-    "status": 1
-}}
+    "7802215501968": {
+        "product": {
+            "brands": "Costa",
+            "quantity": "180 g / 6.3 oz",
+            "selected_images": {
+                "nutrition": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_fr.5.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_es.11.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_fr.5.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_es.11.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_fr.5.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_es.11.400.jpg"
+                    }
+                },
+                "ingredients": {
+                    "small": {"es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/ingredients_es.10.200.jpg"},
+                    "thumb": {"es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/ingredients_es.10.100.jpg"},
+                    "display": {"es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/ingredients_es.10.400.jpg"}
+                },
+                "front": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_fr.3.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_es.9.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_fr.3.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_es.9.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_fr.3.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_es.9.400.jpg"
+                    }
+                }
+            },
+            "product_name": "Costa Soda"
+        },
+        "code": "7802215501968",
+        "status_verbose": "product found",
+        "status": 1
+    },
+    "5000328181844": {
+        "product": {
+            "brands": "Doritos,Old el paso",
+            "quantity": "300 g",
+            "selected_images": {
+                "nutrition": {
+                    "small": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/nutrition_en.29.200.jpg"},
+                    "thumb": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/nutrition_en.29.100.jpg"},
+                    "display": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/nutrition_en.29.400.jpg"}
+                },
+                "ingredients": {
+                    "small": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_en.23.200.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_fr.5.200.jpg"
+                    },
+                    "thumb": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_en.23.100.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_fr.5.100.jpg"
+                    },
+                    "display": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_en.23.400.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/ingredients_fr.5.400.jpg"
+                    }
+                },
+                "packaging": {
+                    "small": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/packaging_en.26.200.jpg"},
+                    "thumb": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/packaging_en.26.100.jpg"},
+                    "display": {"en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/packaging_en.26.400.jpg"}
+                },
+                "front": {
+                    "small": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_en.12.200.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_fr.3.200.jpg"
+                    },
+                    "thumb": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_en.12.100.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_fr.3.100.jpg"
+                    },
+                    "display": {
+                        "en": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_en.12.400.jpg",
+                        "fr": "https://images.openfoodfacts.org/images/products/500/032/818/1844/front_fr.3.400.jpg"
+                    }
+                }
+            },
+            "product_name": "Taco Shells"
+        },
+        "code": "5000328181844",
+        "status_verbose": "product found",
+        "status": 1
+    }
+}

@@ -59,7 +59,7 @@ public class ApiProductos {
 
                 producto.setCodigo_barra(codigo_barra);
                 producto.setNombre(product.optString("product_name"));
-                producto.setCantidad_contenida(product.optString("quantity"));
+                producto.setContenido(product.optString("quantity"));
                 producto.setCompania(product.optString("brands"));
                 producto.setImagenURL(imagenURL);
 
@@ -116,7 +116,7 @@ public class ApiProductos {
                 //
                 producto.setCodigo_barra(codigo_barra);
                 producto.setNombre(product.optString("product_name"));
-                producto.setCantidad_contenida(product.optString("quantity"));
+                producto.setContenido(product.optString("quantity"));
                 producto.setCompania(product.optString("brands"));
                 producto.setImagenURL(imagenURL);
                 System.out.println("En el apiProducts: " + producto);

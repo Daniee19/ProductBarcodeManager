@@ -19,14 +19,16 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public class ProductoController implements ActionListener {
-
+    
     JInterfazPrincipal view;
-
+    
     JEscanear vista;
     JInformacion vistaInfo;
     ProductoDao productoDao;
     ApiProductos api = new ApiProductos();
-
+    private Producto productoGlobal;
+    private StringBuilder textAreaInfo = new StringBuilder();
+    
     public ProductoController(JEscanear vista) {
         this.vista = vista;
         this.vista.setVisible(true);
@@ -34,12 +36,12 @@ public class ProductoController implements ActionListener {
         //Se instancia pero no se muestra, hasta que se de en el botón escanear
         vistaInfo = new JInformacion(vista, true);
         productoDao = new ProductoDaoImpl();
-
+        
         acciones();
         disenio();
         //mostrar_elementos_cb();
     }
-
+    
     private void disenio() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -65,7 +67,7 @@ public class ProductoController implements ActionListener {
         //</editor-fold>
 
     }
-
+    
     private void acciones() {
 //        view.getBtnCrearProducto().addActionListener(this);
 //        view.getCb_tipo_barra().addActionListener(this);
@@ -76,24 +78,38 @@ public class ProductoController implements ActionListener {
 
         //Se hace esto porque queremos detallar más en el uso específico del botón aceptar
         vistaInfo.getBtnAceptar().addActionListener(new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Ayudará a separar la lógica del botón
                 String command = e.getActionCommand();
                 if (command.equals("aumentar")) {
-
+                    System.out.println("Se va a aumentar");
+                    productoDao.updateQuantityAfterInsert(productoGlobal.getId());
+                    
+                    //Cambiar el TextArea por elementos gráficos separados, dentro de un panel
+                    vistaInfo.getTxtAreaInformacion().setText(textAreaInfo.toString());
+                    System.out.println("El id es: " + productoGlobal.getId());
                 } else if (command.equals("agregar")) {
-                    //productoDao.insert();
+                    System.out.println("Se va a agregar");
+                    int idObtenido = productoDao.insert(productoGlobal);
+                    if (idObtenido > 0) {
+                        System.out.println("Se agregó el producto, mira la bd");
+                        productoDao.updateQuantityAfterInsert(idObtenido);
+                        vistaInfo.dispose();
+                        
+                    } else {
+                        System.out.println("No se agregó");
+                    }
                 }
             }
         });
     }
-
+    
     private void crearProducto() {
-
+        
     }
-
+    
     public void obtenerPDF() {
         Barras ba = new Barras();
         List<Producto> productos = productoDao.selectAll();
@@ -102,14 +118,17 @@ public class ProductoController implements ActionListener {
             ba.generarCodBarras(ps.getCodigo_barra(), "EAN-13");
         }
     }
-
+    
     public void escanearCodigo() throws MalformedURLException {
-
+        //Traido de la api, o más rápido de la caché
         Producto producto = api.consumirApi(vista.getTxtCodigoEscanear().getText());
 
+        //Pero la información más detallada, se traerá de la bd
+        Producto producto_existe = productoDao.selectByCodeProduct(vista.getTxtCodigoEscanear().getText());
+        
         if (producto != null) {
             System.out.println("Funciono la api");
-
+            
             StringBuilder sb = new StringBuilder();
             sb.append("Nombre del producto: ")
                     .append(producto.getNombre())
@@ -117,11 +136,20 @@ public class ProductoController implements ActionListener {
                     .append("Compañía: ")
                     .append(producto.getCompania())
                     .append("\n")
-                    .append("Cantidad del producto: ")
-                    .append(producto.getCantidad_contenida());
-
+                    .append("Contenido del producto: ")
+                    .append(producto.getContenido())
+                    .append("\n")
+                    .append("Cantidad del producto:");
+            if (producto_existe == null) {
+                sb.append(0);
+            } else {
+                sb.append(producto_existe.getCantidad());
+            }
             vistaInfo.getTxtAreaInformacion().setText(sb.toString());
 
+            //Almacenamos en la variable global para ver los cambios al actualizar
+            this.textAreaInfo = sb;
+            
             if (producto.getImagenURL() != null) {
                 cargarImagenPorURL(producto.getImagenURL());
             } else {
@@ -129,27 +157,27 @@ public class ProductoController implements ActionListener {
             }
 
             //Se va a consultar en el daoProducto para ver si existe o no en la base de datos
-            boolean existe = productoDao.selectByCodeProduct(vista.getTxtCodigoEscanear().getText());
-
             //Separar la lógica si existe o no el producto en la base de datos
-            if (existe) {
+            if (producto_existe != null) {
                 System.out.println("Si existe en la base de datos");
                 vistaInfo.getLblPreguntar().setText("El producto ya está almacenado. ¿Desea aumentar su cantidad?");
                 vistaInfo.getBtnAceptar().setActionCommand("aumentar");
+                this.productoGlobal = producto_existe;
             } else {
                 System.out.println("No existe en la base de datos");
                 vistaInfo.getLblPreguntar().setText("El producto es nuevo. ¿Desea agregarlo?");
                 vistaInfo.getBtnAceptar().setActionCommand("agregar");
+                this.productoGlobal = producto;
             }
-
+            
             vistaInfo.setLocationRelativeTo(null);
             vistaInfo.setVisible(true);
-
+            
         } else {
             System.out.println("No funciono la api");
         }
     }
-
+    
     public void cargarImagenPorURL(String url_imagen) throws MalformedURLException {
         URL url = new URL(url_imagen);
 
@@ -164,10 +192,10 @@ public class ProductoController implements ActionListener {
         vistaInfo.getLblImagen().setIcon(imagen);
         vistaInfo.getLblImagen().setText("");
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        
         if (e.getSource() == vista.getBtnOkEscanear()) {
             try {
                 escanearCodigo();
@@ -179,7 +207,7 @@ public class ProductoController implements ActionListener {
         if (e.getSource() == vistaInfo.getBtnCancelar()) {
             vistaInfo.dispose();
         }
-
+        
     }
-
+    
 }

@@ -27,7 +27,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append(" from ")
                 .append("producto")
                 .append(" where")
-                .append("id = ?");
+                .append("id_producto = ?");
         try {
             Connection conn = con.getConexion();
             ps = conn.prepareStatement(sql.toString());
@@ -43,7 +43,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setCompania(rs.getString("compania"));
-                p.setCantidad_contenida(rs.getString("cantidad_contenida"));
+                p.setContenido(rs.getString("contenido"));
                 p.setImagenURL(rs.getString("imagenURL"));
             }
 
@@ -77,7 +77,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setCompania(rs.getString("compania"));
-                p.setCantidad_contenida(rs.getString("cantidad_contenida"));
+                p.setContenido(rs.getString("contenido"));
                 p.setImagenURL(rs.getString("imagenURL"));
                 productos.add(p);
             }
@@ -98,7 +98,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto.precio, ")
                 .append("producto.cantidad, ")
                 .append("producto.compania, ")
-                .append("producto.cantidad_contenida, ")
+                .append("producto.contenido, ")
                 .append("producto.imagenURL ")
                 .append(") values (")
                 .append("?,?,?,?,?,?,?")
@@ -111,7 +111,7 @@ public class ProductoDaoImpl implements ProductoDao {
             ps.setDouble(3, producto.getPrecio());
             ps.setInt(4, producto.getCantidad());
             ps.setString(5, producto.getCompania());
-            ps.setString(6, producto.getCantidad_contenida());
+            ps.setString(6, producto.getContenido());
             ps.setString(7, producto.getImagenURL());
 
             ps.executeUpdate(); //Tenemos que ejecutarlo primero, para obtener el id del producto que se haya creado
@@ -132,8 +132,8 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public boolean selectByCodeProduct(String codigo_barra) {
-        boolean estado = false;
+    public Producto selectByCodeProduct(String codigo_barra) {
+        Producto p = null;
 
         StringBuilder sql = new StringBuilder();
         sql.append("Select ")
@@ -149,7 +149,7 @@ public class ProductoDaoImpl implements ProductoDao {
 
             rs = ps.executeQuery();
             if (rs.next()) {
-                Producto p = new Producto();
+                p = new Producto();
 
                 p.setId(rs.getInt("id_producto"));
                 p.setCodigo_barra(rs.getString("codigo_barra"));
@@ -157,14 +157,36 @@ public class ProductoDaoImpl implements ProductoDao {
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setCompania(rs.getString("compania"));
-                p.setCantidad_contenida(rs.getString("cantidad_contenida"));
+                p.setContenido(rs.getString("contenido"));
                 p.setImagenURL(rs.getString("imagenURL"));
-                estado = true;
+
             }
+        } catch (SQLException e) {
+            System.out.println("Error al momento de consultar por codigo de barra: " + e.getMessage());
+        }
+        return p;
+    }
+
+    @Override
+    public boolean updateQuantityAfterInsert(int id) {
+        boolean estado = false;
+        StringBuilder sql = new StringBuilder();
+        sql.append("Update ")
+                .append("producto")
+                .append(" set ")
+                .append("cantidad = cantidad +1")
+                .append(" where ")
+                .append("id_producto = ?");
+        try {
+            Connection conn = con.getConexion();
+            ps = conn.prepareStatement(sql.toString());
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+            estado = true;
         } catch (SQLException e) {
             System.out.println("Error al momento de consultar: " + e.getMessage());
         }
         return estado;
     }
-
 }
