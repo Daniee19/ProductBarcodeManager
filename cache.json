@@ -26,6 +26,23 @@
         "status_verbose": "product found",
         "status": 1
     },
+    "7840042000117": {
+        "product": {"selected_images": {
+            "nutrition": {
+                "small": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/nutrition_en.9.200.jpg"},
+                "thumb": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/nutrition_en.9.100.jpg"},
+                "display": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/nutrition_en.9.400.jpg"}
+            },
+            "front": {
+                "small": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/front_en.7.200.jpg"},
+                "thumb": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/front_en.7.100.jpg"},
+                "display": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/front_en.7.400.jpg"}
+            }
+        }},
+        "code": "7840042000117",
+        "status_verbose": "product found",
+        "status": 1
+    },
     "7802215501968": {
         "product": {
             "brands": "Costa",

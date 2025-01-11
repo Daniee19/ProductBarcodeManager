@@ -88,7 +88,7 @@ public class ApiProductos {
                  * en el textField. Y su valor que es el valor encontrado de ese
                  * código de barra pero en tipo JSON.
                  */
-                cache.put(codigo_barra, jsonResponse);
+                cache.put(codigo_barra, jsonResponse); //Esto es importante porque asignamos el codigo con el valor encontrado de la api
 
                 //
                 JSONObject product = cache.get(codigo_barra).getJSONObject("product");
@@ -114,13 +114,15 @@ public class ApiProductos {
                 }
 
                 //
+                
                 producto.setCodigo_barra(codigo_barra);
+                
                 producto.setNombre(product.optString("product_name"));
                 producto.setContenido(product.optString("quantity"));
                 producto.setCompania(product.optString("brands"));
                 producto.setImagenURL(imagenURL);
                 System.out.println("En el apiProducts: " + producto);
-                //
+                ////Esto es importante para guardarlo en el archivo json
                 objetoCache.guardarCacheEnArchivo(cache); //Guardamos ese mapa que será, posteriormente un jsonObject que se almacenará al archivo
                 JOptionPane.showMessageDialog(null, "Está en el else");
 

@@ -6,8 +6,10 @@ package com.codigodebarra.view;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  *
@@ -32,73 +34,54 @@ public class JInformacion extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        txtNombreProd = new javax.swing.JTextField();
+        txtCompaniaProd = new javax.swing.JTextField();
+        txtContenidoProd = new javax.swing.JTextField();
+        txtCantidadProd = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lblImagen = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAreaInformacion = new javax.swing.JTextArea();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lblPreguntar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtNombreProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
+        jPanel1.add(txtNombreProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 220, -1));
+
+        txtCompaniaProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Compañía"));
+        jPanel1.add(txtCompaniaProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 220, -1));
+
+        txtContenidoProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Contenido"));
+        jPanel1.add(txtContenidoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 120, -1));
+
+        txtCantidadProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad"));
+        jPanel1.add(txtCantidadProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 90, 40));
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 280, 170));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Información del producto");
-
-        txtAreaInformacion.setEditable(false);
-        txtAreaInformacion.setColumns(20);
-        txtAreaInformacion.setRows(5);
-        jScrollPane1.setViewportView(txtAreaInformacion);
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 34, -1, 38));
+        jPanel2.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 300, 217));
 
         btnAceptar.setText("Aceptar");
+        jPanel2.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 109, 35));
 
         btnCancelar.setText("Cancelar");
+        jPanel2.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 96, 35));
 
         lblPreguntar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel2.add(lblPreguntar, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 313, 541, 41));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(164, 164, 164))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(104, 104, 104)
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(32, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblPreguntar, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPreguntar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -177,28 +160,12 @@ public class JInformacion extends javax.swing.JDialog {
         this.lblPreguntar = jLabel2;
     }
 
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
-    }
-
-    public void setjScrollPane1(JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
-    }
-
     public JLabel getLblImagen() {
         return lblImagen;
     }
 
     public void setLblImagen(JLabel lblImagen) {
         this.lblImagen = lblImagen;
-    }
-
-    public JTextArea getTxtAreaInformacion() {
-        return txtAreaInformacion;
-    }
-
-    public void setTxtAreaInformacion(JTextArea txtAreaInformacion) {
-        this.txtAreaInformacion = txtAreaInformacion;
     }
 
     public JLabel getLblPreguntar() {
@@ -208,14 +175,67 @@ public class JInformacion extends javax.swing.JDialog {
     public void setLblPreguntar(JLabel lblPreguntar) {
         this.lblPreguntar = lblPreguntar;
     }
-    
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public void setjPanel1(JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public void setjPanel2(JPanel jPanel2) {
+        this.jPanel2 = jPanel2;
+    }
+
+    public JTextField getTxtCantidadProd() {
+        return txtCantidadProd;
+    }
+
+    public void setTxtCantidadProd(JTextField txtCantidadProd) {
+        this.txtCantidadProd = txtCantidadProd;
+    }
+
+    public JTextField getTxtCompaniaProd() {
+        return txtCompaniaProd;
+    }
+
+    public void setTxtCompaniaProd(JTextField txtCompaniaProd) {
+        this.txtCompaniaProd = txtCompaniaProd;
+    }
+
+    public JTextField getTxtContenidoProd() {
+        return txtContenidoProd;
+    }
+
+    public void setTxtContenidoProd(JTextField txtContenidoProd) {
+        this.txtContenidoProd = txtContenidoProd;
+    }
+
+    public JTextField getTxtNombreProd() {
+        return txtNombreProd;
+    }
+
+    public void setTxtNombreProd(JTextField txtNombreProd) {
+        this.txtNombreProd = txtNombreProd;
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblPreguntar;
-    private javax.swing.JTextArea txtAreaInformacion;
+    private javax.swing.JTextField txtCantidadProd;
+    private javax.swing.JTextField txtCompaniaProd;
+    private javax.swing.JTextField txtContenidoProd;
+    private javax.swing.JTextField txtNombreProd;
     // End of variables declaration//GEN-END:variables
 }
