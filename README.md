@@ -17,12 +17,15 @@ create table usuario (
 id_usuario integer primary key not null auto_increment,
 nombre varchar(40) not null,
 apellido varchar(40)  not null,
+nombreUsuario varchar(20) not null,
+contrasenia blob,
 rol varchar(20) not null
 );
 
 create table pedido(
 id_pedido integer primary key not null auto_increment,
-id_usuario integer not null, foreign key(id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+id_usuario integer not null, foreign key(id_usuario)
+REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
 descuento decimal(8,2) null default 0,
 subtotal decimal(8,2) not null default 0,
 total decimal(8,2) not null default 0
@@ -30,8 +33,10 @@ total decimal(8,2) not null default 0
 
 create table detalle_pedido(
 id_detalle_pedidos integer primary key not null auto_increment,
-id_pedido integer not null, foreign key(id_pedido) REFERENCES pedido(id_pedido) ON DELETE CASCADE ON UPDATE CASCADE,
-id_producto integer not null, foreign key(id_producto) REFERENCES producto(id_producto) ON DELETE CASCADE ON UPDATE CASCADE, 
+id_pedido integer not null, foreign key(id_pedido) REFERENCES
+pedido(id_pedido) ON DELETE CASCADE ON UPDATE CASCADE,
+id_producto integer not null, foreign key(id_producto) REFERENCES
+producto(id_producto) ON DELETE CASCADE ON UPDATE CASCADE, 
 cantidad decimal(6,2) not null default 0,
 importe decimal(8,2) not null default 0
 );
