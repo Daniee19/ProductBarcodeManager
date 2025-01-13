@@ -60,7 +60,7 @@ public class JInformacion extends javax.swing.JDialog {
         jPanel1.add(txtCompaniaProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 220, -1));
 
         txtContenidoProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Contenido"));
-        jPanel1.add(txtContenidoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 120, -1));
+        jPanel1.add(txtContenidoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 120, 40));
 
         txtCantidadProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad"));
         jPanel1.add(txtCantidadProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 90, 40));

@@ -112,9 +112,7 @@ public class ApiProductos {
                 if (imagenURL.isBlank()) {
                     imagenURL = "No se encontró la imagen";
                 }
-
-                //
-                
+                //             
                 producto.setCodigo_barra(codigo_barra);
                 
                 producto.setNombre(product.optString("product_name"));
@@ -133,23 +131,3 @@ public class ApiProductos {
         return producto;
     }
 }
-
-//            //ESTO ES OTRA COSA
-//            if (jsonResponse.getInt("status") == 1) {
-//                JSONObject product = jsonResponse.getJSONObject("product"); //El jsonResponse despues de haber leido todo, ingresa al objeto product
-//                String imagenURL = product.getJSONObject("selected_images")
-//                        .getJSONObject("front")
-//                        .getJSONObject("display")
-//                        .getString("es");
-//                System.out.println("Codigo de barras: " + codigo_barra);
-//                System.out.println("Producto: " + product.getString("product_name"));
-//                System.out.println("Marca: " + product.getString("brands"));
-//                System.out.println("Cantidad: " + product.getString("quantity"));
-//                System.out.println("Imagen: " + imagenURL);
-//
-//            } else {
-//                System.out.println("Producto no encontrado");
-//            }
-//            conn.disconnect();
-//            estado = true;
-

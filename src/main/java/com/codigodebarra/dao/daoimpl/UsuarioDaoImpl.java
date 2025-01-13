@@ -116,6 +116,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getNombreUsuario());
+            /**
+             * Puse 2 veces el usuario.getContrasenia(), porque quiero que la
+             * clave sea la misma que la contraseña. Esto no significa que se
+             * guardará la contraseña como tipo String, es decir, como texto...
+             * Sino que servirá como clave para poder descifrar esa contraseña.
+             */
             ps.setString(4, usuario.getContrasenia());
             ps.setString(5, usuario.getContrasenia());
             ps.setString(6, usuario.getRol());
@@ -138,8 +144,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
     }
 
     @Override
-    public boolean evaluarUsuario(String nombreUsuario, char[] contrasenia) {
-        System.out.println(contrasenia);
+    public Usuario evaluarUsuario(String nombreUsuario, char[] contrasenia) {
+
+        Usuario usuario = null;
         StringBuilder sb = new StringBuilder();
         sb.append("Select ")
                 .append("usuario.id_usuario, ")
@@ -156,7 +163,13 @@ public class UsuarioDaoImpl implements UsuarioDao {
                 .append("AND ")
                 .append("AES_DECRYPT(contrasenia, ?) = ")
                 .append("?");
-
+        /**
+         * Quiero desencriptar un valor del campo que se encuentre en la columna
+         * *contrasenia* (del where), la cual se desencriptará en todo caso yo
+         * ingrese la clave secreta, la cual es el primer '?' dentro de append
+         * de AES_DECRYPT. Y bueno el segundo parámetro vendría a ser el valor
+         * ingresado a comparar.
+         */
         try {
 
             Connection conn = con.getConexion();
@@ -171,7 +184,14 @@ public class UsuarioDaoImpl implements UsuarioDao {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                usuario = new Usuario();
+                usuario.setNombre(rs.getString("nombre"));
+                usuario.setApellido(rs.getString("apellido"));
+                usuario.setId_usuario(rs.getInt("id_usuario"));
+                usuario.setNombreUsuario("nombreUsuario");
+                usuario.setRol(rs.getString("rol"));
                 System.out.println("ELEMENTOS ENCONTRADOS");
+
             } else {
                 System.out.println("Elementos no encontradoss, no coincide la contrasenia o el nombre de usuario");
             }
@@ -179,7 +199,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
             System.out.println("Error al evaluar al usuario: " + e.getMessage());
         }
 
-        return false;
+        return usuario;
     }
 
 }

@@ -137,5 +137,131 @@
         "code": "5000328181844",
         "status_verbose": "product found",
         "status": 1
+    },
+    "7501011123588": {
+        "product": {
+            "brands": "Doritos",
+            "quantity": "61 gr",
+            "selected_images": {
+                "nutrition": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_fr.28.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_es.24.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_fr.28.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_es.24.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_fr.28.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_es.24.400.jpg"
+                    }
+                },
+                "ingredients": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_fr.7.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_es.21.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_fr.7.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_es.21.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_fr.7.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_es.21.400.jpg"
+                    }
+                },
+                "front": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_fr.4.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_es.30.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_fr.4.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_es.30.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_fr.4.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_es.30.400.jpg"
+                    }
+                }
+            },
+            "product_name": "doritos nacho"
+        },
+        "code": "7501011123588",
+        "status_verbose": "product found",
+        "status": 1
+    },
+    "7802000002564": {
+        "product": {
+            "brands": "Lay's",
+            "quantity": "38 g",
+            "selected_images": {
+                "nutrition": {
+                    "small": {"es": "https://images.openfoodfacts.org/images/products/780/200/000/2564/nutrition_es.14.200.jpg"},
+                    "thumb": {"es": "https://images.openfoodfacts.org/images/products/780/200/000/2564/nutrition_es.14.100.jpg"},
+                    "display": {"es": "https://images.openfoodfacts.org/images/products/780/200/000/2564/nutrition_es.14.400.jpg"}
+                },
+                "ingredients": {
+                    "small": {"en": "https://images.openfoodfacts.org/images/products/780/200/000/2564/ingredients_en.5.200.jpg"},
+                    "thumb": {"en": "https://images.openfoodfacts.org/images/products/780/200/000/2564/ingredients_en.5.100.jpg"},
+                    "display": {"en": "https://images.openfoodfacts.org/images/products/780/200/000/2564/ingredients_en.5.400.jpg"}
+                },
+                "front": {
+                    "small": {
+                        "en": "https://images.openfoodfacts.org/images/products/780/200/000/2564/front_en.3.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/200/000/2564/front_es.12.200.jpg"
+                    },
+                    "thumb": {
+                        "en": "https://images.openfoodfacts.org/images/products/780/200/000/2564/front_en.3.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/200/000/2564/front_es.12.100.jpg"
+                    },
+                    "display": {
+                        "en": "https://images.openfoodfacts.org/images/products/780/200/000/2564/front_en.3.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/200/000/2564/front_es.12.400.jpg"
+                    }
+                }
+            },
+            "product_name": "Papas Fritas Corte Americano Original Bolsa"
+        },
+        "code": "7802000002564",
+        "status_verbose": "product found",
+        "status": 1
+    },
+    "7771701001865": {
+        "product": {
+            "brands": "La Estrella,Chizitos",
+            "quantity": "29 g",
+            "selected_images": {
+                "nutrition": {
+                    "small": {"es": "https://images.openfoodfacts.org/images/products/777/170/100/1865/nutrition_es.21.200.jpg"},
+                    "thumb": {"es": "https://images.openfoodfacts.org/images/products/777/170/100/1865/nutrition_es.21.100.jpg"},
+                    "display": {"es": "https://images.openfoodfacts.org/images/products/777/170/100/1865/nutrition_es.21.400.jpg"}
+                },
+                "ingredients": {
+                    "small": {"es": "https://images.openfoodfacts.org/images/products/777/170/100/1865/ingredients_es.20.200.jpg"},
+                    "thumb": {"es": "https://images.openfoodfacts.org/images/products/777/170/100/1865/ingredients_es.20.100.jpg"},
+                    "display": {"es": "https://images.openfoodfacts.org/images/products/777/170/100/1865/ingredients_es.20.400.jpg"}
+                },
+                "front": {
+                    "small": {
+                        "aa": "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_aa.3.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_es.19.200.jpg"
+                    },
+                    "thumb": {
+                        "aa": "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_aa.3.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_es.19.100.jpg"
+                    },
+                    "display": {
+                        "aa": "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_aa.3.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_es.19.400.jpg"
+                    }
+                }
+            },
+            "product_name": "Chizitos"
+        },
+        "code": "7771701001865",
+        "status_verbose": "product found",
+        "status": 1
     }
 }

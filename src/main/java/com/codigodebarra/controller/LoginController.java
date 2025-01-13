@@ -1,8 +1,10 @@
 package com.codigodebarra.controller;
 
+import com.codigodebarra.config.Disenio;
 import com.codigodebarra.dao.UsuarioDao;
 import com.codigodebarra.dao.daoimpl.UsuarioDaoImpl;
 import com.codigodebarra.model.Usuario;
+import com.codigodebarra.view.JInterfazPrincipal;
 import com.codigodebarra.view.JLogin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +16,13 @@ public class LoginController implements ActionListener {
 
     JLogin vistaLogin;
     UsuarioDao usuarioDao = new UsuarioDaoImpl();
+    Disenio d = new Disenio();
 
     public LoginController(JLogin vistaLogin) {
         this.vistaLogin = vistaLogin;
         this.vistaLogin.setVisible(true);
         this.vistaLogin.setLocationRelativeTo(null);
-        disenio();
+        d.getDesignWindows();
         acciones();
     }
 
@@ -38,45 +41,31 @@ public class LoginController implements ActionListener {
 
     }
 
-    public void disenio() {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-    }
-
     public void evaluarLogin(String nombreUsuario, char[] contrasenia) {
-        if ((nombreUsuario != null && contrasenia != null)) {
-            usuarioDao.evaluarUsuario(nombreUsuario, contrasenia);
+        if ((!nombreUsuario.isEmpty()) && contrasenia.length != 0) {
+            Usuario usuario = usuarioDao.evaluarUsuario(nombreUsuario, contrasenia);
 
+            if (usuario != null) {
+                JInterfazPrincipal ip = new JInterfazPrincipal();
+                PrincipalController pc = new PrincipalController(ip, usuario);
+                vistaLogin.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+            }
+            /**
+             * <br> Esto se tiene que hacer en la sección del administrador.
+             */
 //            Usuario usuario = new Usuario();
-//            usuario.setNombre("Daniel");
+//            usuario.setNombre("Yoshua");
 //            usuario.setApellido("Castaneda");
-//            usuario.setNombreUsuario("Danie19");
-//            usuario.setContrasenia("Contraseniaaaaaaaaaaaaa");
+//            usuario.setNombreUsuario("da");
+//            usuario.setContrasenia("da");
 //            usuario.setRol("Administrador");
-//            
+//
 //            usuarioDao.insert(usuario);
-            JOptionPane.showMessageDialog(null, "SE RECIBIO VALORES DE LOS TEXT Y PASSWORD FIELDS");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese los campos para iniciar sesión");
+
         }
     }
 
