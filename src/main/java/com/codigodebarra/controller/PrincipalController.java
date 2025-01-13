@@ -33,9 +33,11 @@ public final class PrincipalController implements ActionListener {
 
     public PrincipalController(JInterfazPrincipal vistaIp, Usuario usuario) {
         this.vistaIp = vistaIp;
+        //Se necesita que la vistaIp ya haya sida creada
+        bienvenida(usuario);
         this.vistaIp.setVisible(true);
         this.vistaIp.setLocationRelativeTo(null);
-        bienvenida(usuario);
+
         vistaInfo = new JInformacion(vistaIp, true);
         productoDao = new ProductoDaoImpl();
         api = new ApiProductos();
