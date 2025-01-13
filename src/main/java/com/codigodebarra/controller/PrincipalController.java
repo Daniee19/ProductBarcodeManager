@@ -8,6 +8,7 @@ import com.codigodebarra.model.Usuario;
 import com.codigodebarra.util.ApiProductos;
 import com.codigodebarra.view.JInformacion;
 import com.codigodebarra.view.JInterfazPrincipal;
+import com.codigodebarra.view.JLogin;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,8 +43,18 @@ public final class PrincipalController implements ActionListener {
         productoDao = new ProductoDaoImpl();
         api = new ApiProductos();
         d.getDesignWindows();
-
+        ocultarPestaniasDelPanel();
         acciones();
+
+    }
+
+    public void ocultarPestaniasDelPanel() {
+        vistaIp.getjTabbedPane1().setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
+            @Override
+            protected int calculateTabAreaHeight(int tabPlacement, int runCount, int maxTabHeight) {
+                return 0; // Ocultar las pestañas
+            }
+        });
 
     }
 
@@ -99,7 +110,15 @@ public final class PrincipalController implements ActionListener {
                 }
             }
         });
+        vistaIp.getPnlCerrarSesion().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                vistaIp.dispose();
 
+                JLogin login = new JLogin();
+                LoginController lc = new LoginController(login);
+            }
+        });
     }
 
     public void escanearCodigo() throws MalformedURLException {
@@ -219,14 +238,6 @@ public final class PrincipalController implements ActionListener {
         }
 
         vistaIp.getTxtCodigoEscanear().setText("");
-    }
-
-    public void editarOff() {
-        vistaInfo.getTxtNombreProd().setEditable(false);
-        vistaInfo.getTxtCompaniaProd().setEditable(false);
-        vistaInfo.getTxtContenidoProd().setEditable(false);
-        vistaInfo.getTxtCantidadProd().setEditable(false);
-
     }
 
     public void cargarImagenPorURL(String url_imagen) throws MalformedURLException {

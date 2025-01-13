@@ -16,9 +16,11 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         pnlNorth = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         pnlLeft = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         pnlPrincipal = new javax.swing.JPanel();
@@ -26,41 +28,56 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlEscanear = new javax.swing.JPanel();
         lblEscanear = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        pnlSur = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        pnlCerrarSesion = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         pnlCenter = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelPrincipal = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
-        jSeparator1 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
+        pnlSur = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         panelEscanear = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtCodigoEscanear = new javax.swing.JTextField();
         btnOkEscanear = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
+        pnlNorth.setBackground(new java.awt.Color(51, 51, 51));
         pnlNorth.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlNorth.setMaximumSize(new java.awt.Dimension(32767, 40));
         pnlNorth.setPreferredSize(new java.awt.Dimension(1065, 40));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("LA CANASTA");
 
         javax.swing.GroupLayout pnlNorthLayout = new javax.swing.GroupLayout(pnlNorth);
         pnlNorth.setLayout(pnlNorthLayout);
         pnlNorthLayout.setHorizontalGroup(
             pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnlNorthLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(1170, Short.MAX_VALUE))
         );
         pnlNorthLayout.setVerticalGroup(
             pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnlNorthLayout.createSequentialGroup()
+                .addComponent(jLabel7)
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         jPanel1.add(pnlNorth, java.awt.BorderLayout.NORTH);
@@ -72,9 +89,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tienda_icono.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
         jLabel5.setToolTipText("");
-        pnlLeft.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 118, 114));
+        pnlLeft.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 118, 114));
 
         lblPrincipal.setBackground(new java.awt.Color(0, 0, 0));
+        lblPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPrincipal.setForeground(new java.awt.Color(0, 0, 0));
         lblPrincipal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPrincipal.setText("Principal");
@@ -84,7 +102,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlPrincipal.setLayout(pnlPrincipalLayout);
         pnlPrincipalLayout.setHorizontalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+            .addComponent(lblPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
         pnlPrincipalLayout.setVerticalGroup(
             pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,9 +111,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                 .addComponent(lblPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pnlLeft.add(pnlPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 170, -1));
+        pnlLeft.add(pnlPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 200, -1));
 
         lblEscanear.setBackground(new java.awt.Color(0, 0, 0));
+        lblEscanear.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEscanear.setForeground(new java.awt.Color(0, 0, 0));
         lblEscanear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEscanear.setText("Escanear productos");
@@ -105,7 +124,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlEscanear.setLayout(pnlEscanearLayout);
         pnlEscanearLayout.setHorizontalGroup(
             pnlEscanearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblEscanear, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+            .addComponent(lblEscanear, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
         );
         pnlEscanearLayout.setVerticalGroup(
             pnlEscanearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,15 +133,84 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                 .addComponent(lblEscanear, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pnlLeft.add(pnlEscanear, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 170, 40));
+        pnlLeft.add(pnlEscanear, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 200, 40));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("LA CANASTA");
-        pnlLeft.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 130, -1));
+        pnlLeft.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 130, -1));
+
+        pnlCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Cerrar sesión");
+
+        javax.swing.GroupLayout pnlCerrarSesionLayout = new javax.swing.GroupLayout(pnlCerrarSesion);
+        pnlCerrarSesion.setLayout(pnlCerrarSesionLayout);
+        pnlCerrarSesionLayout.setHorizontalGroup(
+            pnlCerrarSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+        pnlCerrarSesionLayout.setVerticalGroup(
+            pnlCerrarSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        pnlLeft.add(pnlCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 200, 40));
 
         jPanel1.add(pnlLeft, java.awt.BorderLayout.WEST);
+
+        pnlCenter.setLayout(new java.awt.GridLayout(1, 0));
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
+
+        panelPrincipal.setBackground(new java.awt.Color(255, 204, 153));
+        panelPrincipal.setForeground(new java.awt.Color(255, 255, 255));
+        panelPrincipal.setLayout(new java.awt.BorderLayout());
+        panelPrincipal.add(jSeparator3, java.awt.BorderLayout.PAGE_END);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Gestión de productos");
+
+        jSeparator1.setForeground(new java.awt.Color(153, 153, 153));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1306, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 35, Short.MAX_VALUE))
+        );
+
+        panelPrincipal.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setForeground(new java.awt.Color(0, 0, 0));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setText("Bienvenido(a), ");
+
+        lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+
+        pnlSur.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel6.setText("jLabel6");
 
@@ -131,49 +219,17 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlSurLayout.setHorizontalGroup(
             pnlSurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSurLayout.createSequentialGroup()
-                .addGap(333, 333, 333)
+                .addGap(325, 325, 325)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(664, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlSurLayout.setVerticalGroup(
             pnlSurLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSurLayout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel6)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
-
-        jPanel1.add(pnlSur, java.awt.BorderLayout.PAGE_END);
-
-        panelPrincipal.setLayout(new java.awt.BorderLayout());
-        panelPrincipal.add(jSeparator3, java.awt.BorderLayout.PAGE_END);
-
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        panelPrincipal.add(jSeparator1, java.awt.BorderLayout.LINE_END);
-
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Gestión de productos");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 6, Short.MAX_VALUE))
-        );
-
-        panelPrincipal.add(jPanel3, java.awt.BorderLayout.PAGE_START);
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Bienvenido(a), ");
-
-        lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -183,68 +239,109 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(523, Short.MAX_VALUE))
+            .addComponent(pnlSur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(483, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 489, Short.MAX_VALUE)
+                .addComponent(pnlSur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         panelPrincipal.add(jPanel5, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab("tab1", panelPrincipal);
 
-        panelEscanear.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelEscanear.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelEscanear.setOpaque(false);
+        panelEscanear.setLayout(new java.awt.BorderLayout());
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setForeground(new java.awt.Color(240, 240, 240));
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("ESCANEAR CÓDIGO DEL PRODUCTO");
-        panelEscanear.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 460, 58));
-        panelEscanear.add(txtCodigoEscanear, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 287, 38));
+        jLabel4.setAutoscrolls(true);
+        jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 114;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(140, 250, 0, 276);
+        jPanel2.add(jLabel4, gridBagConstraints);
 
+        txtCodigoEscanear.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtCodigoEscanear.setBorder(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 336;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(70, 420, 0, 0);
+        jPanel2.add(txtCodigoEscanear, gridBagConstraints);
+
+        btnOkEscanear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnOkEscanear.setText("OK");
-        panelEscanear.add(btnOkEscanear, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 80, 33));
+        btnOkEscanear.setAutoscrolls(true);
+        btnOkEscanear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOkEscanear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 590, 346, 0);
+        jPanel2.add(btnOkEscanear, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 679;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 300, 0, 0);
+        jPanel2.add(jSeparator2, gridBagConstraints);
+
+        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 439;
+        gridBagConstraints.ipady = 29;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 400, 0, 0);
+        jPanel2.add(jSeparator4, gridBagConstraints);
+
+        panelEscanear.add(jPanel2, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab("tab2", panelEscanear);
+        panelEscanear.getAccessibleContext().setAccessibleDescription("");
 
-        javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
-        pnlCenter.setLayout(pnlCenterLayout);
-        pnlCenterLayout.setHorizontalGroup(
-            pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCenterLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(424, Short.MAX_VALUE))
-        );
-        pnlCenterLayout.setVerticalGroup(
-            pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCenterLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        pnlCenter.add(jTabbedPane1);
 
         jPanel1.add(pnlCenter, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1065, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -401,6 +498,102 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.txtCodigoEscanear = txtCodigoEscanear;
     }
 
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public void setjLabel7(JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    public JLabel getjLabel8() {
+        return jLabel8;
+    }
+
+    public void setjLabel8(JLabel jLabel8) {
+        this.jLabel8 = jLabel8;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public void setjPanel3(JPanel jPanel3) {
+        this.jPanel3 = jPanel3;
+    }
+
+    public JPanel getjPanel5() {
+        return jPanel5;
+    }
+
+    public void setjPanel5(JPanel jPanel5) {
+        this.jPanel5 = jPanel5;
+    }
+
+    public JSeparator getjSeparator2() {
+        return jSeparator2;
+    }
+
+    public void setjSeparator2(JSeparator jSeparator2) {
+        this.jSeparator2 = jSeparator2;
+    }
+
+    public JSeparator getjSeparator4() {
+        return jSeparator4;
+    }
+
+    public void setjSeparator4(JSeparator jSeparator4) {
+        this.jSeparator4 = jSeparator4;
+    }
+
+    public JPanel getPnlCenter() {
+        return pnlCenter;
+    }
+
+    public void setPnlCenter(JPanel pnlCenter) {
+        this.pnlCenter = pnlCenter;
+    }
+
+    public JPanel getPnlCerrarSesion() {
+        return pnlCerrarSesion;
+    }
+
+    public void setPnlCerrarSesion(JPanel pnlCerrarSesion) {
+        this.pnlCerrarSesion = pnlCerrarSesion;
+    }
+
+    public JPanel getPnlLeft() {
+        return pnlLeft;
+    }
+
+    public void setPnlLeft(JPanel pnlLeft) {
+        this.pnlLeft = pnlLeft;
+    }
+
+    public JPanel getPnlNorth() {
+        return pnlNorth;
+    }
+
+    public void setPnlNorth(JPanel pnlNorth) {
+        this.pnlNorth = pnlNorth;
+    }
+
+    public JPanel getPnlSur() {
+        return pnlSur;
+    }
+
+    public void setPnlSur(JPanel pnlSur) {
+        this.pnlSur = pnlSur;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOkEscanear;
@@ -410,11 +603,16 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblEscanear;
     private javax.swing.JLabel lblNombre;
@@ -422,6 +620,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel panelEscanear;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JPanel pnlCenter;
+    private javax.swing.JPanel pnlCerrarSesion;
     private javax.swing.JPanel pnlEscanear;
     private javax.swing.JPanel pnlLeft;
     private javax.swing.JPanel pnlNorth;
