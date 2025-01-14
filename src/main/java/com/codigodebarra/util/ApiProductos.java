@@ -19,14 +19,19 @@ public class ApiProductos {
 
     public Producto consumirApi(String codigo_barra) {
         //Traer el archivo de los productos encontrados
+        Long timeStart = System.currentTimeMillis();
         cache = objetoCache.cargarCacheDesdeArchivo();
+        Long endTime = System.currentTimeMillis();
+        System.out.println("Tiempo en traer los valores del json: " + (endTime - timeStart) + " ms");
+
         Producto producto = new Producto();
         try {
 
             if (cache.containsKey(codigo_barra)) {
-
+                Long timeStart2 = System.currentTimeMillis();
                 JSONObject product = cache.get(codigo_barra).getJSONObject("product");
-
+                //Long timeend2 = System.currentTimeMillis();
+                //System.out.println("Tiempo en traer los datos de tipo producto JSON" + (timeend2 - time2) + " ms");
                 // Obtener imagen del producto
                 //Crear un vector que almacene las abreviaturas de los idiomas, para ahorrar líneas de código
                 String[] idiomas = {"es", "en", "fr"};
@@ -48,15 +53,11 @@ public class ApiProductos {
                     imagenURL = "No se encontró la imagen";
                 }
 
-                //Obtener información y mostrarla
-                System.out.println("====== INFORMACIÓN ======");
-                System.out.println("Codigo de barras: " + codigo_barra);
-                System.out.println("Producto: " + product.optString("product_name"));
-                System.out.println("Marca: " + product.optString("brands"));
-                System.out.println("Cantidad: " + product.optString("quantity"));
-                System.out.println("Imagen: " + imagenURL);
                 JOptionPane.showMessageDialog(null, "Está en el if");
-
+                Long timeEnd2 = System.currentTimeMillis();
+                
+                
+                System.out.println("Tiempo en setearlos valores de la api " + (timeEnd2 - timeStart2) + " ms");
                 producto.setCodigo_barra(codigo_barra);
                 producto.setNombre(product.optString("product_name"));
                 producto.setContenido(product.optString("quantity"));
@@ -114,7 +115,7 @@ public class ApiProductos {
                 }
                 //             
                 producto.setCodigo_barra(codigo_barra);
-                
+
                 producto.setNombre(product.optString("product_name"));
                 producto.setContenido(product.optString("quantity"));
                 producto.setCompania(product.optString("brands"));

@@ -1,0 +1,172 @@
+{
+    "7840042000117": {
+        "product": {"selected_images": {
+            "nutrition": {
+                "small": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/nutrition_en.9.200.jpg"},
+                "thumb": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/nutrition_en.9.100.jpg"},
+                "display": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/nutrition_en.9.400.jpg"}
+            },
+            "front": {
+                "small": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/front_en.7.200.jpg"},
+                "thumb": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/front_en.7.100.jpg"},
+                "display": {"en": "https://images.openfoodfacts.org/images/products/784/004/200/0117/front_en.7.400.jpg"}
+            }
+        }},
+        "code": "7840042000117",
+        "status_verbose": "product found",
+        "status": 1
+    },
+    "7802215501968": {
+        "product": {
+            "brands": "Costa",
+            "quantity": "180 g / 6.3 oz",
+            "selected_images": {
+                "nutrition": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_fr.5.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_es.11.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_fr.5.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_es.11.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_fr.5.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/nutrition_es.11.400.jpg"
+                    }
+                },
+                "ingredients": {
+                    "small": {"es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/ingredients_es.10.200.jpg"},
+                    "thumb": {"es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/ingredients_es.10.100.jpg"},
+                    "display": {"es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/ingredients_es.10.400.jpg"}
+                },
+                "front": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_fr.3.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_es.9.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_fr.3.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_es.9.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_fr.3.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/780/221/550/1968/front_es.9.400.jpg"
+                    }
+                }
+            },
+            "product_name": "Costa Soda"
+        },
+        "code": "7802215501968",
+        "status_verbose": "product found",
+        "status": 1
+    },
+    "7501073841338": {
+        "product": {
+            "brands": "",
+            "quantity": "",
+            "selected_images": {
+                "nutrition": {
+                    "small": {"es": "https://images.openfoodfacts.org/images/products/750/107/384/1338/nutrition_es.4.200.jpg"},
+                    "thumb": {"es": "https://images.openfoodfacts.org/images/products/750/107/384/1338/nutrition_es.4.100.jpg"},
+                    "display": {"es": "https://images.openfoodfacts.org/images/products/750/107/384/1338/nutrition_es.4.400.jpg"}
+                },
+                "front": {
+                    "small": {"es": "https://images.openfoodfacts.org/images/products/750/107/384/1338/front_es.6.200.jpg"},
+                    "thumb": {"es": "https://images.openfoodfacts.org/images/products/750/107/384/1338/front_es.6.100.jpg"},
+                    "display": {"es": "https://images.openfoodfacts.org/images/products/750/107/384/1338/front_es.6.400.jpg"}
+                }
+            },
+            "product_name": ""
+        },
+        "code": "7501073841338",
+        "status_verbose": "product found",
+        "status": 1
+    },
+    "7501011123588": {
+        "product": {
+            "brands": "Doritos",
+            "quantity": "61 gr",
+            "selected_images": {
+                "nutrition": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_fr.28.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_es.24.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_fr.28.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_es.24.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_fr.28.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/nutrition_es.24.400.jpg"
+                    }
+                },
+                "ingredients": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_fr.7.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_es.21.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_fr.7.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_es.21.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_fr.7.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/ingredients_es.21.400.jpg"
+                    }
+                },
+                "front": {
+                    "small": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_fr.4.200.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_es.30.200.jpg"
+                    },
+                    "thumb": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_fr.4.100.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_es.30.100.jpg"
+                    },
+                    "display": {
+                        "fr": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_fr.4.400.jpg",
+                        "es": "https://images.openfoodfacts.org/images/products/750/101/112/3588/front_es.30.400.jpg"
+                    }
+                }
+            },
+            "product_name": "doritos nacho"
+        },
+        "code": "7501011123588",
+        "status_verbose": "product found",
+        "status": 1
+    },
+    "7506174512217": {
+        "product": {
+            "quantity": "288g",
+            "selected_images": {"front": {
+                "small": {"es": "https://images.openfoodfacts.org/images/products/750/617/451/2217/front_es.3.200.jpg"},
+                "thumb": {"es": "https://images.openfoodfacts.org/images/products/750/617/451/2217/front_es.3.100.jpg"},
+                "display": {"es": "https://images.openfoodfacts.org/images/products/750/617/451/2217/front_es.3.400.jpg"}
+            }},
+            "product_name": "MilkyWay"
+        },
+        "code": "7506174512217",
+        "status_verbose": "product found",
+        "status": 1
+    },
+    "7506460100760": {
+        "code": "7506460100760",
+        "status_verbose": "product not found",
+        "status": 0
+    },
+    "7501198355581": {
+        "product": {
+            "selected_images": {"front": {
+                "small": {"fr": "https://images.openfoodfacts.org/images/products/750/119/835/5581/front_fr.3.200.jpg"},
+                "thumb": {"fr": "https://images.openfoodfacts.org/images/products/750/119/835/5581/front_fr.3.100.jpg"},
+                "display": {"fr": "https://images.openfoodfacts.org/images/products/750/119/835/5581/front_fr.3.400.jpg"}
+            }},
+            "product_name": "Dr.peper"
+        },
+        "code": "7501198355581",
+        "status_verbose": "product found",
+        "status": 1
+    }
+}

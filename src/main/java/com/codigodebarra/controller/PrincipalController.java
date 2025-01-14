@@ -122,19 +122,25 @@ public final class PrincipalController implements ActionListener {
     }
 
     public void escanearCodigo() throws MalformedURLException {
+        long startTime = System.currentTimeMillis();
 
         //Traido de la api, o más rápido de la caché
         Producto productoApi = api.consumirApi(vistaIp.getTxtCodigoEscanear().getText());
-
+        long endTime = System.currentTimeMillis();
+        System.out.println("Tiempo de consulta a la API: " + (endTime - startTime) + " ms");
         //Pero la información más detallada, se traerá de la bd
+        long startTimeA = System.currentTimeMillis();
         Producto producto_bd = productoDao.selectByCodeProduct(vistaIp.getTxtCodigoEscanear().getText());
-
+        long endTimeA = System.currentTimeMillis();
+        System.out.println("Tiempo de consulta a la BD: " + (endTimeA - startTimeA) + " ms");
+        
+        
         if (productoApi.getCodigo_barra() != null) {
 
             System.out.println("Funciono la api");
             //Corregir porque a la primera llamada aparecen los text field con --
             if (productoApi.getNombre().isEmpty()) {
-
+                
                 if (producto_bd == null) {
                     vistaInfo.getTxtNombreProd().setEditable(true);
                     vistaInfo.getTxtNombreProd().setText("--");
@@ -157,11 +163,11 @@ public final class PrincipalController implements ActionListener {
             //Si en caso el producto no retorna el nombre de la compania
             if (productoApi.getCompania().isEmpty()) {
                 if (producto_bd == null) {
-                    vistaInfo.getTxtContenidoProd().setEditable(true);
+                    vistaInfo.getTxtCompaniaProd().setEditable(true);
                     vistaInfo.getTxtCompaniaProd().setText("--");
                 } else {
                     vistaInfo.getTxtCompaniaProd().setEditable(false);
-                    vistaInfo.getTxtCantidadProd().setText(producto_bd.getNombre());
+                    vistaInfo.getTxtCompaniaProd().setText(producto_bd.getNombre());
                 }
             } else {
                 //Si en caso se haga cambios al resultado dado de la API
