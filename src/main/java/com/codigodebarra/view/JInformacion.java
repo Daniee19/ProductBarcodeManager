@@ -60,9 +60,11 @@ public class JInformacion extends javax.swing.JDialog {
         jPanel2.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 87, 300, 220));
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 109, 35));
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 96, 35));
 
         lblPreguntar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

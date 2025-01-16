@@ -3,64 +3,42 @@ package com.codigodebarra.util;
 import com.codigodebarra.model.Producto;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JOptionPane;
-import org.json.JSONObject;
 
 public class ApiProductos {
 
     Cache objetoCache = new Cache();
-ObjectMapper om = new ObjectMapper();
-    //Map<String, JSONObject> cachee = new ConcurrentHashMap<>();
+    ObjectMapper om = new ObjectMapper();
     Map<String, JsonNode> cache = new ConcurrentHashMap<>();
 
     public Producto consumirApi(String codigo_barra) {
-        //Traer el archivo de los productos encontrados
-
+        //Traer el archivo cache de los productos encontrados
         cache = objetoCache.cargarCacheDesdeArchivo();
 
-        Producto producto = new Producto();
+        Producto p = new Producto();
         try {
 
             if (cache.containsKey(codigo_barra)) {
-
-                JsonNode productNode = cache.get(codigo_barra).path("product");
-                
-                
-                // Obtener imagen del producto
-                //Crear un vector que almacene las abreviaturas de los idiomas, para ahorrar líneas de código
-                String[] idiomas = {"es", "en", "fr"};
-
-                JsonNode display = productNode.path("selected_images")
-                        .path("front").path("display");
-
-                String imagenURL = "";
-
-                for (String idioma : idiomas) {
-                    imagenURL = display.path(idioma).asText();
-                    if (!imagenURL.isBlank()) {
-                        break; //Si encuentra una URL termina el bucle
-                    }
-                }
-                if (imagenURL.isBlank()) {
-                    imagenURL = "No se encontró la imagen";
-                }
+                JsonNode productNode = cache.get(codigo_barra);
+                /*OBTENER LA URL DE LA IMAGEN*/
+                String imagenURL = obtenerImagen(productNode);
 
                 JOptionPane.showMessageDialog(null, "Está en el if");
-
-                producto.setNombre(productNode.path("product_name").asText());
-                producto.setContenido(productNode.path("quantity").asText());
-                producto.setCompania(productNode.path("brands").asText());
-                producto.setImagenURL(imagenURL);
+                p.setCodigo_barra(codigo_barra);
+                p.setNombre(productNode.path("product_name").asText());
+                p.setContenido(productNode.path("quantity").asText());
+                p.setCompania(productNode.path("brands").asText());
+                p.setImagenURL(imagenURL);
 
             } else {
-                // Llama a la API, guarda en cache ##############################
-
                 //Llamar a la API
                 URL url = new URL("https://world.openfoodfacts.org/api/v0/product/" + codigo_barra + ".json?fields=product_name,brands,quantity,selected_images");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -76,108 +54,48 @@ ObjectMapper om = new ObjectMapper();
                 }
                 br.close();
 
-                //=============================================================
-                //=============================================================
                 //Usar Jackson para mapear la respuesta al objeto
-                
-                //producto = om.readValue(response.toString(), Producto.class);
+                //Convierte un JSON en texto, a un árbol de nodos para que se pueda navegar o manipularlo.
+                //Estamos deserializando, para poder trabajar con una clase JsonNode
                 JsonNode rootNode = om.readTree(response.toString());
+                //Nos ubicamos en el nivel del product
                 JsonNode productNode = rootNode.path("product");
-                String nombre = productNode.path("product_name").asText(); //retorna el valor que hay en la clave product_name
-                String compania = productNode.path("brands").asText();
-                String contenido = productNode.path("quantity").asText();
-
-                System.out.println("========= INFO =========");
-                System.out.println("Nombre: " + nombre);
-                System.out.println("Compania: " + compania);
-                System.out.println("Contenido: " + contenido);
-                //System.out.println("ImagenURL: " + producto.getImagenURL());
-                System.out.println("========= END - INFO =========");
-                producto.setCodigo_barra(codigo_barra);
+                String imagenURL = obtenerImagen(productNode);
 
                 cache.put(codigo_barra, productNode);
-                //******
-                //|v Nop
-                //cache.put(codigo_barra, jsonResponse); //Esto es importante porque asignamos el codigo con el valor encontrado de la api
+                //Esto es importante porque asignamos el codigo con el valor encontrado de la api
                 ////Esto es importante para guardarlo en el archivo json
-                objetoCache.guardarCacheEnArchivo(cache); //Guardamos ese mapa que será, posteriormente un jsonObject que se almacenará al archivo
+                objetoCache.guardarCacheEnArchivo(cache); //Guardamos ese mapa que será, posteriormente un jsonNode que se almacenará al archivo
                 //
-                
-
-                //
-                String[] idiomas = {"es", "en", "fr"};
-
-                JsonNode display = productNode.path("selected_images")
-                        .path("front").path("display");
-
-                String imagenURL = "";
-
-                for (String idioma : idiomas) {
-                    imagenURL = display.path(idioma).asText();
-                    if (!imagenURL.isBlank()) {
-                        break; //Si encuentra una URL termina el bucle
-                    }
-                }
-                if (imagenURL.isBlank()) {
-                    imagenURL = "No se encontró la imagen";
-                }
-
-                producto.setNombre(productNode.path("product_name").asText());
-                producto.setContenido(productNode.path("quantity").asText());
-                producto.setCompania(productNode.path("brands").asText());
-                producto.setImagenURL(imagenURL);
-                //=============================================================
-                /**
-                 * * UTILIZAR Jackson, en lugar del JSONObject como tal /*
-                 * Procesar JSON
-                 */
-                //Convertir la respuesta en un objeto JSON
-//                JSONObject jsonResponse = new JSONObject(response.toString());
-//                /**
-//                 * Asignamos al Map "cache", la llave que se escaneó o ingresó
-//                 * en el textField. Y su valor que es el valor encontrado de ese
-//                 * código de barra pero en tipo JSON.
-//                 */
-//                if (jsonResponse.getInt("status") != 0) {
-//                    cache.put(codigo_barra, jsonResponse); //Esto es importante porque asignamos el codigo con el valor encontrado de la api
-//                    ////Esto es importante para guardarlo en el archivo json
-
-//                    objetoCache.guardarCacheEnArchivo(cache); //Guardamos ese mapa que será, posteriormente un jsonObject que se almacenará al archivo
-//                    JSONObject product = cache.get(codigo_barra).getJSONObject("product");
-//
-//                    //
-//                    String[] idiomas = {"es", "en", "fr"};
-//
-//                    //Establecer una dirección donde se encuentra la imagen
-//                    JSONObject display = product.getJSONObject("selected_images")
-//                            .getJSONObject("front")
-//                            .getJSONObject("display");
-//
-//                    String imagenURL = "";
-//
-//                    for (String idioma : idiomas) {
-//                        imagenURL = display.optString(idioma);
-//                        if (!imagenURL.isBlank()) {
-//                            break; //Si encuentra una URL termina el bucle
-//                        }
-//                    }
-//                    if (imagenURL.isBlank()) {
-//                        imagenURL = "No se encontró la imagen";
-//                    }
-//                    //             
-//                    producto.setCodigo_barra(codigo_barra);
-//
-//                    producto.setNombre(product.optString("product_name"));
-//                    producto.setContenido(product.optString("quantity"));
-//                    producto.setCompania(product.optString("brands"));
-//                    producto.setImagenURL(imagenURL);
-//                    System.out.println("En el apiProducts: " + producto);
-//                }
-                //=============================================================
+                p.setCodigo_barra(codigo_barra);
+                p.setNombre(productNode.path("product_name").asText());
+                p.setContenido(productNode.path("quantity").asText());
+                p.setCompania(productNode.path("brands").asText());
+                p.setImagenURL(imagenURL);
             }
-        } catch (Exception e) {
+        } catch (HeadlessException | IOException e) {
             System.out.println("Error al consumir la API: " + e.getMessage());
         }
-        return producto;
+        return p;
+    }
+
+    public String obtenerImagen(JsonNode productNode) {
+        String[] idiomas = {"es", "en", "fr", "it"};
+
+        JsonNode display = productNode.path("selected_images")
+                .path("front").path("display");
+
+        String imagenURL = "";
+
+        for (String idioma : idiomas) {
+            imagenURL = display.path(idioma).asText();
+            if (!imagenURL.isBlank()) {
+                break; //Si encuentra una URL termina el bucle
+            }
+        }
+        if (imagenURL.isBlank()) {
+            imagenURL = "No se encontró la imagen";
+        }
+        return imagenURL;
     }
 }

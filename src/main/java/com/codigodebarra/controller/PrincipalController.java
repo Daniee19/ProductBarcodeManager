@@ -131,10 +131,10 @@ public final class PrincipalController implements ActionListener {
         long endTime = System.currentTimeMillis();
         System.out.println("Tiempo de consulta a la API: " + (endTime - startTime) + " ms");
         //Pero la información más detallada, se traerá de la bd
-        long startTimeA = System.currentTimeMillis();
+        //long startTimeA = System.currentTimeMillis();
         Producto producto_bd = productoDao.selectByCodeProduct(vistaIp.getTxtCodigoEscanear().getText());
-        long endTimeA = System.currentTimeMillis();
-        System.out.println("Tiempo de consulta a la BD: " + (endTimeA - startTimeA) + " ms");
+        //long endTimeA = System.currentTimeMillis();
+        //System.out.println("Tiempo de consulta a la BD: " + (endTimeA - startTimeA) + " ms");
         
         if (productoApi.getCodigo_barra() != null) {
             

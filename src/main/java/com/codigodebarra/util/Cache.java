@@ -8,39 +8,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import org.json.JSONObject;
 
 public class Cache {
 
     ObjectMapper om = new ObjectMapper();
-    JSONObject cache_existente = new JSONObject();
     public static final String CACHE_FILE = "cache.json";
     Map<String, JsonNode> cache = new HashMap<>();
 
     public void guardarCacheEnArchivo(Map<String, JsonNode> cache) {
-        //Es un JSONObject, el acepta pares clave valor.
-
-        /**
-         * El .entrySet, lo que hace es devolver todos los pares Clave, Valor.
-         * Pero no es porque lo haga de la nada, no. Sino es que cache es una
-         * variable tipo map que previamente ha leído todos la información que
-         * había en el archivo cache, más la nueva información encontrada.
-         * Recordar: El key es el código de barra del producto, y el valor es el
-         * JSONObject del producto (El valor encontrado en formato JSON).
-         */
+        //om.valueToTree(), lo que hace es convertir el tipo Map, (JAVA), a formato JsonNode
+        //Formato clave, valor, es decir para poder trabajar con el archivo JSON, como tal. (traer los valores, etc).
         JsonNode rootNode = om.valueToTree(cache);
-//        for (Map.Entry<String, JsonNode> entry : cache.entrySet()) {
-//            //Lo que hace es agregar todos los pares Clave, Valor, al JSONObject
-//            cache_existente.put(entry.getKey(), entry.getValue());
-//        }
+        //Va a agregar toda la información del cache, e incluso con el nuevo registro agregado al Map
         rootNode.fieldNames().forEachRemaining(key -> cache.put(key, rootNode.get(key)));
         //Escribir el JSON actualizado en el archivo
         try (FileWriter file = new FileWriter(CACHE_FILE)) {
-            //file.write(cache.toString(4));
+            //El writeValue convierte el objecto JAVA (MAP) a JSON
             om.writerWithDefaultPrettyPrinter().writeValue(file, cache);
 
-        } catch (IOException e) {
-            System.out.println("Error al guardar el caché: " + e.getMessage());
+        } catch (IOException ome) {
+            System.out.println("Error al guardar el caché: " + ome.getMessage());
         }
 
     } //FIN DEL MÉTODO GUARDAR
@@ -54,11 +41,10 @@ public class Cache {
                 sb.append(linea);
             }
 
-            //JSONObject jsonCache = new JSONObject(sb.toString());
             JsonNode rootNode = om.readTree(sb.toString());
 
             //Hasta aquí hemos recorrido todos los elementos del archivo JSON
-            //Asignamos a la variable "cache", todas las llaves y sus valores
+            //Asignamos a la variable "cache", todas las claves con sus valores
             rootNode.fieldNames().forEachRemaining(key -> cache.put(key, rootNode.get(key)));
 
         } catch (IOException e) {
