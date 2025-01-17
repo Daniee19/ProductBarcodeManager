@@ -128,8 +128,7 @@ public class LoginController implements ActionListener {
             }
         });
 
-        // =====================
-//  PANEL PARA INGRESAR
+        //PANEL PARA INGRESAR
         vistaLogin.getPnlIngresar().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {

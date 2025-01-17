@@ -25,7 +25,7 @@ public class Cache {
         try (FileWriter file = new FileWriter(CACHE_FILE)) {
             //El writeValue convierte el objecto JAVA (MAP) a JSON
             om.writerWithDefaultPrettyPrinter().writeValue(file, cache);
-
+            
         } catch (IOException ome) {
             System.out.println("Error al guardar el caché: " + ome.getMessage());
         }
