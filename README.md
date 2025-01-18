@@ -41,7 +41,7 @@ cantidad decimal(6,2) not null default 0,
 importe decimal(8,2) not null default 0
 );
 ```
-##Referencias
+## Referencias
 ### Project Data
 ![image](https://github.com/user-attachments/assets/cc4e79c0-06fc-438f-94c9-d0495c1a62a9)
 <br/>
