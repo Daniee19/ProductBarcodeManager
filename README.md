@@ -43,6 +43,7 @@ importe decimal(8,2) not null default 0
 ```
 ## Project Data
 ![image](https://github.com/user-attachments/assets/cc4e79c0-06fc-438f-94c9-d0495c1a62a9)
+<br/>
 This project uses data from [Open Food Facts](https://world.openfoodfacts.org), an open database of food products.  
 The data is available under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/).  
 If you make modifications to the data used, these must be shared under the same terms of the ODbL.
