@@ -7,30 +7,28 @@ import com.codigodebarra.model.Usuario;
 import com.codigodebarra.view.JInterfazPrincipal;
 import com.codigodebarra.view.JLogin;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JOptionPane;
 
-public class LoginController implements ActionListener {
+public class LoginController {
 
     JLogin vistaLogin;
     UsuarioDao usuarioDao = new UsuarioDaoImpl();
-    Disenio d = new Disenio();
+    //Disenio d = new Disenio();
     int xMouse, yMouse;
 
     public LoginController(JLogin vistaLogin) {
         this.vistaLogin = vistaLogin;
         this.vistaLogin.setVisible(true);
         this.vistaLogin.setLocationRelativeTo(null);
-        d.getDesignWindows();
+        Disenio.getDesignWindows();
         acciones();
     }
 
     public void acciones() {
-        //Opciones de la pestaña
+        //Opciones de la Tabbed Pane
         vistaLogin.getPnlBarraOpciones().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent event) {
@@ -54,6 +52,16 @@ public class LoginController implements ActionListener {
             public void mouseClicked(MouseEvent event) {
                 System.exit(0);
             }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaLogin.getPnlXLogin().setBackground(new Color(254, 57, 57));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaLogin.getPnlXLogin().setBackground(new Color(51, 51, 51));
+            }
         });
 
         vistaLogin.getPnlFSLogin().addMouseListener(new MouseAdapter() {
@@ -66,31 +74,7 @@ public class LoginController implements ActionListener {
                     vistaLogin.setExtendedState(vistaLogin.NORMAL);
                 }
             }
-        });
 
-        vistaLogin.getPnlMinusLogin().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent event) {
-                if ((vistaLogin.getExtendedState() == vistaLogin.NORMAL) || (vistaLogin.getExtendedState() == vistaLogin.MAXIMIZED_BOTH)) {
-                    vistaLogin.setExtendedState(vistaLogin.HIDE_ON_CLOSE);
-                }
-            }
-        });
-
-        vistaLogin.getPnlXLogin().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaLogin.getPnlXLogin().setBackground(new Color(254, 57, 57));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaLogin.getPnlXLogin().setBackground(new Color(51, 51, 51));
-            }
-            //107, 104, 105
-        });
-
-        vistaLogin.getPnlFSLogin().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent event) {
                 vistaLogin.getPnlFSLogin().setBackground(new Color(95, 92, 93));
@@ -104,6 +88,13 @@ public class LoginController implements ActionListener {
 
         vistaLogin.getPnlMinusLogin().addMouseListener(new MouseAdapter() {
             @Override
+            public void mouseClicked(MouseEvent event) {
+                if ((vistaLogin.getExtendedState() == vistaLogin.NORMAL) || (vistaLogin.getExtendedState() == vistaLogin.MAXIMIZED_BOTH)) {
+                    vistaLogin.setExtendedState(vistaLogin.HIDE_ON_CLOSE);
+                }
+            }
+
+            @Override
             public void mouseEntered(MouseEvent event) {
                 vistaLogin.getPnlMinusLogin().setBackground(new Color(95, 92, 93));
             }
@@ -112,6 +103,7 @@ public class LoginController implements ActionListener {
             public void mouseExited(MouseEvent event) {
                 vistaLogin.getPnlMinusLogin().setBackground(new Color(51, 51, 51));
             }
+
         });
 
         vistaLogin.getPnlIngresar().addMouseListener(new MouseAdapter() {
@@ -126,10 +118,7 @@ public class LoginController implements ActionListener {
                 vistaLogin.getPnlIngresar().setBackground(new Color(255, 204, 102));
                 vistaLogin.getLblIngresar().setForeground(Color.black);
             }
-        });
 
-        //PANEL PARA INGRESAR
-        vistaLogin.getPnlIngresar().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
                 //Cuando se de click en el panel de "Ingresar"
@@ -138,9 +127,7 @@ public class LoginController implements ActionListener {
 
                 evaluarLogin(nombreUsuario, password);
             }
-
         });
-
     }
 
     public void evaluarLogin(String nombreUsuario, char[] contrasenia) {
@@ -169,11 +156,6 @@ public class LoginController implements ActionListener {
             JOptionPane.showMessageDialog(null, "Ingrese los campos para iniciar sesión");
 
         }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
     }
 
 }

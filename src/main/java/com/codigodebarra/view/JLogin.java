@@ -66,7 +66,7 @@ public class JLogin extends javax.swing.JFrame {
         pnlBarraOpciones.setLayout(new java.awt.BorderLayout());
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         pnlMinusLogin.setBackground(new java.awt.Color(51, 51, 51));
         pnlMinusLogin.setForeground(new java.awt.Color(51, 51, 51));

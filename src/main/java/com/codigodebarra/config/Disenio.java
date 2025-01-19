@@ -2,7 +2,7 @@ package com.codigodebarra.config;
 
 public class Disenio {
 
-    public void getDesignWindows() {
+    public static void getDesignWindows() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {

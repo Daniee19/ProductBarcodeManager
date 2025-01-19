@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -27,13 +28,12 @@ import javax.swing.JOptionPane;
 public final class PrincipalController implements ActionListener {
 
     JInterfazPrincipal vistaIp;
-    Disenio d = new Disenio();
-    //JEscanear vistaEscaner;
     JInformacion vistaInfo;
     ProductoDao productoDao;
     ApiProductos api;
     Producto productoGlobal;
     Usuario usuario;
+    int xMouse, yMouse;
 
     public PrincipalController(JInterfazPrincipal vistaIp, Usuario usuario) {
         this.vistaIp = vistaIp;
@@ -45,20 +45,8 @@ public final class PrincipalController implements ActionListener {
         vistaInfo = new JInformacion(vistaIp, true);
         productoDao = new ProductoDaoImpl();
         api = new ApiProductos();
-        d.getDesignWindows();
-        ocultarPestaniasDelPanel();
+        Disenio.getDesignWindows();
         acciones();
-
-    }
-
-    public void ocultarPestaniasDelPanel() {
-        vistaIp.getjTabbedPane1().setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
-            @Override
-            protected int calculateTabAreaHeight(int tabPlacement, int runCount, int maxTabHeight) {
-                return 0; // Ocultar las pestañas
-            }
-        });
-
     }
 
     public void bienvenida(Usuario usuario) {
@@ -66,58 +54,9 @@ public final class PrincipalController implements ActionListener {
     }
 
     public void acciones() {
-
+        configuracionTabbedPane();
         //Menu lateral - > paneles
-        vistaIp.getPnlPrincipal().addMouseListener(new MouseAdapter() {
-
-            @Override
-            public void mouseClicked(MouseEvent event) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(0);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlPrincipal().setBackground(new Color(220,220,220));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaIp.getPnlPrincipal().setBackground(new Color(255, 255, 255));
-            }
-        });
-        vistaIp.getPnlEscanear().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent event) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(1);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlEscanear().setBackground(new Color(220,220,220));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaIp.getPnlEscanear().setBackground(new Color(255, 255, 255));
-            }
-        });
-
-        vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent event) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(2);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlInventario().setBackground(new Color(220,220,220));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
-            }
-        });
+        navegacionTabbedPane();
 
         vistaIp.getBtnOkEscanear().addActionListener(this);
         vistaInfo.getBtnCancelar().addActionListener(this);
@@ -153,20 +92,171 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getPnlCerrarSesion().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
-                vistaIp.dispose();
 
-                JLogin login = new JLogin();
-                LoginController lc = new LoginController(login);
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar sesión?");
+                /**
+                 * -1: Clic en la x | 0: Si | 1: Cancelar | 2: No
+                 */
+                if (respuesta == 0) {
+                    vistaIp.dispose();
+                    JLogin login = new JLogin();
+                    LoginController lc = new LoginController(login);
+                }
             }
 
             @Override
             public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlCerrarSesion().setBackground(new Color(220,220,220));
+                vistaIp.getPnlCerrarSesion().setBackground(new Color(220, 220, 220));
             }
 
             @Override
             public void mouseExited(MouseEvent event) {
                 vistaIp.getPnlCerrarSesion().setBackground(new Color(255, 255, 255));
+            }
+        });
+    }
+
+    private void configuracionTabbedPane() {
+        //Ocultar las pestañas del TabbedPane
+        vistaIp.getjTabbedPane1().setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
+            @Override
+            protected int calculateTabAreaHeight(int tabPlacement, int runCount, int maxTabHeight) {
+                return 0; // Ocultar las pestañas
+            }
+        });
+
+        vistaIp.getPnlBarraDeOpciones().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent event) {
+                xMouse = event.getX();
+                yMouse = event.getY();
+            }
+        });
+
+        vistaIp.getPnlBarraDeOpciones().addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent event) {
+                int x = event.getXOnScreen();
+                int y = event.getYOnScreen();
+
+                vistaIp.setLocation(x - xMouse, y - yMouse);
+            }
+        });
+
+        vistaIp.getPnlXLogin().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar sesión?");
+                if (respuesta == 0) {
+                    vistaIp.dispose();
+                    JLogin login = new JLogin();
+                    LoginController lc = new LoginController(login);
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlXLogin().setBackground(new Color(254, 57, 57));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlXLogin().setBackground(new Color(51, 51, 51));
+            }
+        });
+
+        vistaIp.getPnlFSLogin().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                if (vistaIp.getExtendedState() != vistaIp.MAXIMIZED_BOTH) {
+                    vistaIp.setExtendedState(vistaIp.MAXIMIZED_BOTH);
+//                  vistaLogin.getPnlAll().setMaximumSize(vistaLogin.getMaximumSize());
+                } else {
+                    vistaIp.setExtendedState(vistaIp.NORMAL);
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlFSLogin().setBackground(new Color(95, 92, 93));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlFSLogin().setBackground(new Color(51, 51, 51));
+            }
+        });
+
+        vistaIp.getPnlMinusLogin().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                if ((vistaIp.getExtendedState() == vistaIp.NORMAL) || (vistaIp.getExtendedState() == vistaIp.MAXIMIZED_BOTH)) {
+                    vistaIp.setExtendedState(vistaIp.HIDE_ON_CLOSE);
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlMinusLogin().setBackground(new Color(95, 92, 93));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlMinusLogin().setBackground(new Color(51, 51, 51));
+            }
+
+        });
+    }
+
+    private void navegacionTabbedPane() {
+        vistaIp.getPnlPrincipal().addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(0);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlPrincipal().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlPrincipal().setBackground(new Color(255, 255, 255));
+            }
+        });
+        vistaIp.getPnlEscanear().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(1);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlEscanear().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlEscanear().setBackground(new Color(255, 255, 255));
+            }
+        });
+
+        vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(2);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlInventario().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
             }
         });
     }
@@ -303,6 +393,7 @@ public final class PrincipalController implements ActionListener {
 
         // Redimensionar la imagen
         Image img = imagen.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        //Volver a crear la imagen pero con la escala actualizada
         imagen = new ImageIcon(img);
 
         // Asignar la imagen al JLabel

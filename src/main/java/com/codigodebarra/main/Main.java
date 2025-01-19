@@ -8,8 +8,6 @@ import com.codigodebarra.view.JLogin;
 public class Main {
 
     public static void main(String[] args) {
-//        JEscanear vista = new JEscanear();
-//        ProductoController pcontroller = new ProductoController(vista);
         JLogin vistaLogin = new JLogin();
         LoginController lcontroller = new LoginController(vistaLogin);
     }

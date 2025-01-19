@@ -3,8 +3,10 @@ package com.codigodebarra.view;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class JInterfazPrincipal extends javax.swing.JFrame {
@@ -20,7 +22,13 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         pnlNorth = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        pnlBarraDeOpciones = new javax.swing.JPanel();
+        pnlMinusLogin = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        pnlFSLogin = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        pnlXLogin = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
         pnlLeft = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         pnlPrincipal = new javax.swing.JPanel();
@@ -55,12 +63,13 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaProductos = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -68,27 +77,92 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlNorth.setBackground(new java.awt.Color(51, 51, 51));
         pnlNorth.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlNorth.setMaximumSize(new java.awt.Dimension(32767, 40));
-        pnlNorth.setPreferredSize(new java.awt.Dimension(1065, 40));
+        pnlNorth.setPreferredSize(new java.awt.Dimension(1065, 50));
+        pnlNorth.setLayout(new java.awt.BorderLayout());
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("LA CANASTA");
+        pnlBarraDeOpciones.setBackground(new java.awt.Color(51, 51, 51));
 
-        javax.swing.GroupLayout pnlNorthLayout = new javax.swing.GroupLayout(pnlNorth);
-        pnlNorth.setLayout(pnlNorthLayout);
-        pnlNorthLayout.setHorizontalGroup(
-            pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlNorthLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1354, Short.MAX_VALUE))
+        pnlMinusLogin.setBackground(new java.awt.Color(51, 51, 51));
+        pnlMinusLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlMinusLogin.setPreferredSize(new java.awt.Dimension(56, 50));
+
+        jLabel15.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel15.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/minus.png"))); // NOI18N
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout pnlMinusLoginLayout = new javax.swing.GroupLayout(pnlMinusLogin);
+        pnlMinusLogin.setLayout(pnlMinusLoginLayout);
+        pnlMinusLoginLayout.setHorizontalGroup(
+            pnlMinusLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
         );
-        pnlNorthLayout.setVerticalGroup(
-            pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlNorthLayout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addGap(0, 24, Short.MAX_VALUE))
+        pnlMinusLoginLayout.setVerticalGroup(
+            pnlMinusLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        pnlFSLogin.setBackground(new java.awt.Color(51, 51, 51));
+        pnlFSLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlFSLogin.setPreferredSize(new java.awt.Dimension(56, 50));
+
+        jLabel14.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel14.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/full_screen.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnlFSLoginLayout = new javax.swing.GroupLayout(pnlFSLogin);
+        pnlFSLogin.setLayout(pnlFSLoginLayout);
+        pnlFSLoginLayout.setHorizontalGroup(
+            pnlFSLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+        );
+        pnlFSLoginLayout.setVerticalGroup(
+            pnlFSLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnlXLogin.setBackground(new java.awt.Color(51, 51, 51));
+        pnlXLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel13.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel13.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/x.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnlXLoginLayout = new javax.swing.GroupLayout(pnlXLogin);
+        pnlXLogin.setLayout(pnlXLoginLayout);
+        pnlXLoginLayout.setHorizontalGroup(
+            pnlXLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+        );
+        pnlXLoginLayout.setVerticalGroup(
+            pnlXLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout pnlBarraDeOpcionesLayout = new javax.swing.GroupLayout(pnlBarraDeOpciones);
+        pnlBarraDeOpciones.setLayout(pnlBarraDeOpcionesLayout);
+        pnlBarraDeOpcionesLayout.setHorizontalGroup(
+            pnlBarraDeOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBarraDeOpcionesLayout.createSequentialGroup()
+                .addContainerGap(1522, Short.MAX_VALUE)
+                .addComponent(pnlMinusLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlFSLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlXLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        pnlBarraDeOpcionesLayout.setVerticalGroup(
+            pnlBarraDeOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBarraDeOpcionesLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(pnlBarraDeOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlFSLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlXLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlMinusLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        pnlNorth.add(pnlBarraDeOpciones, java.awt.BorderLayout.PAGE_END);
 
         jPanel1.add(pnlNorth, java.awt.BorderLayout.NORTH);
 
@@ -264,7 +338,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(814, Short.MAX_VALUE))
+                .addContainerGap(826, Short.MAX_VALUE))
         );
 
         panelPrincipal.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -397,7 +471,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         panelInventario.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -408,7 +482,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaProductos);
 
         panelInventario.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -423,7 +497,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 803, Short.MAX_VALUE)
+            .addGap(0, 815, Short.MAX_VALUE)
         );
 
         panelInventario.add(jPanel6, java.awt.BorderLayout.LINE_START);
@@ -439,7 +513,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 803, Short.MAX_VALUE)
+            .addGap(0, 815, Short.MAX_VALUE)
         );
 
         panelInventario.add(jPanel7, java.awt.BorderLayout.LINE_END);
@@ -624,14 +698,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.txtCodigoEscanear = txtCodigoEscanear;
     }
 
-    public JLabel getjLabel7() {
-        return jLabel7;
-    }
-
-    public void setjLabel7(JLabel jLabel7) {
-        this.jLabel7 = jLabel7;
-    }
-
     public JLabel getjLabel8() {
         return jLabel8;
     }
@@ -728,6 +794,134 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.panelInventario = panelInventario;
     }
 
+    public JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    public void setjLabel11(JLabel jLabel11) {
+        this.jLabel11 = jLabel11;
+    }
+
+    public JLabel getjLabel12() {
+        return jLabel12;
+    }
+
+    public void setjLabel12(JLabel jLabel12) {
+        this.jLabel12 = jLabel12;
+    }
+
+    public JLabel getjLabel13() {
+        return jLabel13;
+    }
+
+    public void setjLabel13(JLabel jLabel13) {
+        this.jLabel13 = jLabel13;
+    }
+
+    public JLabel getjLabel14() {
+        return jLabel14;
+    }
+
+    public void setjLabel14(JLabel jLabel14) {
+        this.jLabel14 = jLabel14;
+    }
+
+    public JLabel getjLabel15() {
+        return jLabel15;
+    }
+
+    public void setjLabel15(JLabel jLabel15) {
+        this.jLabel15 = jLabel15;
+    }
+
+    public JLabel getjLabel6() {
+        return jLabel6;
+    }
+
+    public void setjLabel6(JLabel jLabel6) {
+        this.jLabel6 = jLabel6;
+    }
+
+    public JPanel getjPanel4() {
+        return jPanel4;
+    }
+
+    public void setjPanel4(JPanel jPanel4) {
+        this.jPanel4 = jPanel4;
+    }
+
+    public JPanel getjPanel6() {
+        return jPanel6;
+    }
+
+    public void setjPanel6(JPanel jPanel6) {
+        this.jPanel6 = jPanel6;
+    }
+
+    public JPanel getjPanel7() {
+        return jPanel7;
+    }
+
+    public void setjPanel7(JPanel jPanel7) {
+        this.jPanel7 = jPanel7;
+    }
+
+    public JPanel getjPanel8() {
+        return jPanel8;
+    }
+
+    public void setjPanel8(JPanel jPanel8) {
+        this.jPanel8 = jPanel8;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JPanel getPnlBarraDeOpciones() {
+        return pnlBarraDeOpciones;
+    }
+
+    public void setPnlBarraDeOpciones(JPanel pnlBarraDeOpciones) {
+        this.pnlBarraDeOpciones = pnlBarraDeOpciones;
+    }
+
+    public JPanel getPnlFSLogin() {
+        return pnlFSLogin;
+    }
+
+    public void setPnlFSLogin(JPanel pnlFSLogin) {
+        this.pnlFSLogin = pnlFSLogin;
+    }
+
+    public JPanel getPnlMinusLogin() {
+        return pnlMinusLogin;
+    }
+
+    public void setPnlMinusLogin(JPanel pnlMinusLogin) {
+        this.pnlMinusLogin = pnlMinusLogin;
+    }
+
+    public JPanel getPnlXLogin() {
+        return pnlXLogin;
+    }
+
+    public void setPnlXLogin(JPanel pnlXLogin) {
+        this.pnlXLogin = pnlXLogin;
+    }
+
+    public JTable getTablaProductos() {
+        return tablaProductos;
+    }
+
+    public void setTablaProductos(JTable tablaProductos) {
+        this.tablaProductos = tablaProductos;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOkEscanear;
@@ -735,12 +929,14 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -756,20 +952,24 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblEscanear;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrincipal;
     private javax.swing.JPanel panelEscanear;
     private javax.swing.JPanel panelInventario;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel pnlBarraDeOpciones;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlCerrarSesion;
     private javax.swing.JPanel pnlEscanear;
+    private javax.swing.JPanel pnlFSLogin;
     private javax.swing.JPanel pnlInventario;
     private javax.swing.JPanel pnlLeft;
+    private javax.swing.JPanel pnlMinusLogin;
     private javax.swing.JPanel pnlNorth;
     private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JPanel pnlXLogin;
+    private javax.swing.JTable tablaProductos;
     private javax.swing.JTextField txtCodigoEscanear;
     // End of variables declaration//GEN-END:variables
 }
