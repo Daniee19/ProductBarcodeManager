@@ -1,3 +1,4 @@
+## Database
 ```sql
 Create database tiendita;
 use tiendita;
@@ -41,7 +42,13 @@ cantidad decimal(6,2) not null default 0,
 importe decimal(8,2) not null default 0
 );
 ```
-### Referencias
+## References
+### Project Data
+![image](https://github.com/user-attachments/assets/cc4e79c0-06fc-438f-94c9-d0495c1a62a9)
+<br/>
+This project uses data from [Open Food Facts](https://world.openfoodfacts.org), an open database of food products.  
+The data is available under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/).  
+### Icons
 <a target="_blank" href="https://icons8.com/icon/32244/barcode-reader">Escáner de código de barras 2 Filled</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a> </br>
 <a target="_blank" href="https://icons8.com/icon/6483/multiply">X</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
 <a target="_blank" href="https://icons8.com/icon/85458/minus">Menos</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
