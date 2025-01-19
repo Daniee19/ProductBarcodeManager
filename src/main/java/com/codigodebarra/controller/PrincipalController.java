@@ -24,6 +24,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public final class PrincipalController implements ActionListener {
 
@@ -33,6 +34,7 @@ public final class PrincipalController implements ActionListener {
     ApiProductos api;
     Producto productoGlobal;
     Usuario usuario;
+    DefaultTableModel modelo;
     int xMouse, yMouse;
 
     public PrincipalController(JInterfazPrincipal vistaIp, Usuario usuario) {
@@ -46,18 +48,31 @@ public final class PrincipalController implements ActionListener {
         productoDao = new ProductoDaoImpl();
         api = new ApiProductos();
         Disenio.getDesignWindows();
+        modelo = new DefaultTableModel();
         acciones();
+
     }
 
     public void bienvenida(Usuario usuario) {
         vistaIp.getLblNombre().setText(String.format("%s, %s", usuario.getApellido(), usuario.getNombre()));
     }
 
+    private void disenioTabla() {
+        
+        String[] tituloColumnas = {"s"};
+        
+        
+        
+        
+        
+        
+    }
+
     public void acciones() {
         configuracionTabbedPane();
         //Menu lateral - > paneles
         navegacionTabbedPane();
-
+        disenioTabla();
         vistaIp.getBtnOkEscanear().addActionListener(this);
         vistaInfo.getBtnCancelar().addActionListener(this);
 
@@ -89,31 +104,7 @@ public final class PrincipalController implements ActionListener {
                 }
             }
         });
-        vistaIp.getPnlCerrarSesion().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent event) {
 
-                int respuesta = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar sesión?");
-                /**
-                 * -1: Clic en la x | 0: Si | 1: Cancelar | 2: No
-                 */
-                if (respuesta == 0) {
-                    vistaIp.dispose();
-                    JLogin login = new JLogin();
-                    LoginController lc = new LoginController(login);
-                }
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlCerrarSesion().setBackground(new Color(220, 220, 220));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaIp.getPnlCerrarSesion().setBackground(new Color(255, 255, 255));
-            }
-        });
     }
 
     private void configuracionTabbedPane() {
@@ -124,7 +115,7 @@ public final class PrincipalController implements ActionListener {
                 return 0; // Ocultar las pestañas
             }
         });
-
+        //Barra superior
         vistaIp.getPnlBarraDeOpciones().addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent event) {
@@ -257,6 +248,31 @@ public final class PrincipalController implements ActionListener {
             @Override
             public void mouseExited(MouseEvent event) {
                 vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
+            }
+        });
+        vistaIp.getPnlCerrarSesion().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event) {
+
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar sesión?");
+                /**
+                 * -1: Clic en la x | 0: Si | 1: Cancelar | 2: No
+                 */
+                if (respuesta == 0) {
+                    vistaIp.dispose();
+                    JLogin login = new JLogin();
+                    LoginController lc = new LoginController(login);
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlCerrarSesion().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlCerrarSesion().setBackground(new Color(255, 255, 255));
             }
         });
     }

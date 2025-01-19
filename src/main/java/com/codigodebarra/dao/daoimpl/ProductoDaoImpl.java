@@ -34,6 +34,7 @@ public class ProductoDaoImpl implements ProductoDao {
             ps.setInt(1, id);
 
             rs = ps.executeQuery();
+
             if (rs.next()) {
                 p = new Producto();
 
@@ -68,6 +69,7 @@ public class ProductoDaoImpl implements ProductoDao {
             ps = conn.prepareStatement(sql.toString());
 
             rs = ps.executeQuery();
+
             while (rs.next()) {
                 Producto p = new Producto();
 
