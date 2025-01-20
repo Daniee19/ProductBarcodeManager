@@ -59,14 +59,11 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         panelInventario = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        pnlInventarioTitulo = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProductos = new javax.swing.JTable();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        pnlIzquierdaOperacionesProducto = new javax.swing.JPanel();
+        pnlOperacionesProducto = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -98,12 +95,18 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 1453));
         setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(51, 255, 51));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.setMinimumSize(new java.awt.Dimension(1080, 910));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         pnlNorth.setBackground(new java.awt.Color(51, 51, 51));
         pnlNorth.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -111,7 +114,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlNorth.setPreferredSize(new java.awt.Dimension(1065, 50));
         pnlNorth.setLayout(new java.awt.BorderLayout());
 
-        pnlBarraDeOpciones.setBackground(new java.awt.Color(51, 51, 51));
+        pnlBarraDeOpciones.setBackground(new java.awt.Color(255, 204, 0));
 
         pnlMinusLogin.setBackground(new java.awt.Color(51, 51, 51));
         pnlMinusLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -178,7 +181,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlBarraDeOpcionesLayout.setHorizontalGroup(
             pnlBarraDeOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBarraDeOpcionesLayout.createSequentialGroup()
-                .addContainerGap(1522, Short.MAX_VALUE)
+                .addContainerGap(1513, Short.MAX_VALUE)
                 .addComponent(pnlMinusLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlFSLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,10 +200,17 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         pnlNorth.add(pnlBarraDeOpciones, java.awt.BorderLayout.PAGE_END);
 
-        jPanel1.add(pnlNorth, java.awt.BorderLayout.NORTH);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 1526;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(pnlNorth, gridBagConstraints);
 
         pnlLeft.setBackground(new java.awt.Color(51, 51, 51));
         pnlLeft.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pnlLeft.setPreferredSize(new java.awt.Dimension(200, 300));
         pnlLeft.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tienda_icono.jpg"))); // NOI18N
@@ -301,9 +311,14 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         pnlLeft.add(pnlInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 200, 40));
 
-        jPanel1.add(pnlLeft, java.awt.BorderLayout.WEST);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipady = 540;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(pnlLeft, gridBagConstraints);
 
-        pnlCenter.setLayout(new java.awt.GridLayout(1, 0));
+        pnlCenter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
@@ -328,8 +343,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1490, Short.MAX_VALUE)
-            .addComponent(jSeparator1)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1540, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,39 +357,19 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                 .addGap(0, 35, Short.MAX_VALUE))
         );
 
-        panelPrincipal.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+        panelPrincipal.add(jPanel3, java.awt.BorderLayout.NORTH);
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel5.setPreferredSize(new java.awt.Dimension(753, 100));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Bienvenido(a), ");
+        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 14, -1, 60));
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 613, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(707, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(826, Short.MAX_VALUE))
-        );
+        jPanel5.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 28, 613, 33));
 
         panelPrincipal.add(jPanel5, java.awt.BorderLayout.CENTER);
 
@@ -385,84 +382,38 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setForeground(new java.awt.Color(240, 240, 240));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("ESCANEAR");
         jLabel4.setAutoscrolls(true);
         jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 29;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(300, 620, 0, 0);
-        jPanel2.add(jLabel4, gridBagConstraints);
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 230, -1));
 
         txtCodigoEscanear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtCodigoEscanear.setBorder(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 336;
-        gridBagConstraints.ipady = 15;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 530, 0, 560);
-        jPanel2.add(txtCodigoEscanear, gridBagConstraints);
+        jPanel2.add(txtCodigoEscanear, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 400, 40));
 
         btnOkEscanear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnOkEscanear.setText("OK");
         btnOkEscanear.setAutoscrolls(true);
         btnOkEscanear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnOkEscanear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.ipadx = 8;
-        gridBagConstraints.ipady = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 710, 453, 0);
-        jPanel2.add(btnOkEscanear, gridBagConstraints);
+        jPanel2.add(btnOkEscanear, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 490, 90, 30));
 
         jSeparator4.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator4.setForeground(new java.awt.Color(153, 153, 153));
         jSeparator4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jSeparator4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.ipadx = 399;
-        gridBagConstraints.ipady = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 530, 0, 560);
-        jPanel2.add(jSeparator4, gridBagConstraints);
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 450, 398, 14));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escanear_codigo_barra.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 10;
-        gridBagConstraints.ipady = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(310, 10, 0, 0);
-        jPanel2.add(jLabel9, gridBagConstraints);
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 300, 60, 70));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel6.setText("CÓDIGO");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 18;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(340, 660, 0, 0);
-        jPanel2.add(jLabel6, gridBagConstraints);
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 330, 170, -1));
 
         panelEscanear.add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -470,100 +421,42 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         panelEscanear.getAccessibleContext().setAccessibleDescription("");
 
         panelInventario.setBackground(new java.awt.Color(255, 255, 255));
+        panelInventario.setPreferredSize(new java.awt.Dimension(1900, 2000));
         panelInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new java.awt.GridBagLayout());
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setText("Selecciona el producto para realizar operaciones");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 30;
-        gridBagConstraints.ipady = 15;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(1, 60, 0, 0);
-        jPanel4.add(jLabel12, gridBagConstraints);
+        pnlInventarioTitulo.setBackground(new java.awt.Color(255, 255, 255));
+        pnlInventarioTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        pnlInventarioTitulo.setLayout(new java.awt.GridLayout(2, 0));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Inventario de productos");
         jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 36;
-        gridBagConstraints.ipady = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 559);
-        jPanel4.add(jLabel11, gridBagConstraints);
+        pnlInventarioTitulo.add(jLabel11);
 
-        panelInventario.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("                Selecciona el producto para realizar operaciones");
+        pnlInventarioTitulo.add(jLabel12);
 
-        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
+        panelInventario.add(pnlInventarioTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
 
-            }
-        ));
-        jScrollPane1.setViewportView(tablaProductos);
+        pnlIzquierdaOperacionesProducto.setBackground(new java.awt.Color(255, 255, 102));
+        pnlIzquierdaOperacionesProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelInventario.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 890, 800));
-
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel7.setForeground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 815, Short.MAX_VALUE)
-        );
-
-        panelInventario.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1390, 100, -1, -1));
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.setName(""); // NOI18N
-        jPanel8.setPreferredSize(new java.awt.Dimension(1490, 80));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1490, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
-        );
-
-        panelInventario.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 915, -1, -1));
-
-        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlOperacionesProducto.setBackground(new java.awt.Color(51, 153, 255));
+        pnlOperacionesProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Buscar producto");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 160, 30));
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 160, 30));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 72, 140, 30));
-        jPanel6.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 72, 140, 30));
+        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 140, 30));
+        jPanel6.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 140, 30));
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -575,47 +468,48 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 80, 30));
+        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 80, 30));
 
         jLabel17.setText("Columna");
-        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, -1));
+        jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
 
         jLabel18.setText("Valor");
-        jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 40, -1));
+        jPanel6.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 40, -1));
 
-        jPanel17.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 170));
+        pnlOperacionesProducto.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 170));
 
+        jPanel11.setBackground(new java.awt.Color(204, 102, 0));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel19.setText("Gestión del producto");
-        jPanel11.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 190, 30));
+        jPanel11.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 190, 30));
 
         jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
-        jPanel11.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 270, 40));
+        jPanel11.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 270, 40));
 
         jTextField3.setBorder(javax.swing.BorderFactory.createTitledBorder("Marca"));
-        jPanel11.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 270, 40));
+        jPanel11.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 270, 40));
 
         jTextField4.setBorder(javax.swing.BorderFactory.createTitledBorder("Contenido"));
-        jPanel11.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 270, 40));
+        jPanel11.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 270, 40));
 
         jSpinner1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel11.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 120, 30));
-        jPanel11.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 120, 30));
+        jPanel11.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 120, 30));
+        jPanel11.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 120, 30));
 
         jLabel20.setText("Precio");
-        jPanel11.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        jPanel11.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
 
         jLabel21.setText("Cantidad");
-        jPanel11.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 60, -1));
+        jPanel11.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 60, -1));
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -634,8 +528,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 340, 110, 30));
-        jPanel11.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 280, 20));
+        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 110, 30));
+        jPanel11.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 280, 20));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -654,7 +548,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 340, 110, 30));
+        jPanel11.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 110, 30));
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -673,7 +567,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 380, 110, 30));
+        jPanel11.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 110, 30));
 
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -692,40 +586,69 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, 110, 30));
+        jPanel11.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 110, 30));
 
-        jPanel17.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 460, 460));
+        pnlOperacionesProducto.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 420, 430));
 
         jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel22.setText("Se descargará la información de los elementos actuales de la tabla");
-        jPanel16.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, -1));
+        jPanel16.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel23.setText("Descargar información");
-        jPanel16.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 170, -1));
+        jPanel16.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 170, -1));
 
         jLabel24.setBackground(new java.awt.Color(255, 255, 255));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("PDF");
         jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel16.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 50, 40));
+        jPanel16.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 50, 40));
 
         jLabel25.setBackground(new java.awt.Color(255, 255, 255));
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel25.setText("Excel");
         jLabel25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel16.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 50, 40));
+        jPanel16.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 50, 40));
 
-        jPanel17.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 460, 120));
+        pnlOperacionesProducto.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 420, 120));
 
-        panelInventario.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 460, 790));
+        pnlIzquierdaOperacionesProducto.add(pnlOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 420, 790));
+
+        panelInventario.add(pnlIzquierdaOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 480, 830));
+
+        jPanel8.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tablaProductos);
+
+        jPanel8.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 890, 790));
+
+        panelInventario.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 96, 1020, 830));
 
         jTabbedPane1.addTab("tab3", panelInventario);
 
-        pnlCenter.add(jTabbedPane1);
+        pnlCenter.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 1000));
 
-        jPanel1.add(pnlCenter, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipady = -20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel1.add(pnlCenter, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -1029,11 +952,11 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     }
 
     public JPanel getjPanel4() {
-        return jPanel4;
+        return pnlInventarioTitulo;
     }
 
     public void setjPanel4(JPanel jPanel4) {
-        this.jPanel4 = jPanel4;
+        this.pnlInventarioTitulo = jPanel4;
     }
 
     public JPanel getjPanel6() {
@@ -1045,11 +968,11 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     }
 
     public JPanel getjPanel7() {
-        return jPanel7;
+        return pnlIzquierdaOperacionesProducto;
     }
 
     public void setjPanel7(JPanel jPanel7) {
-        this.jPanel7 = jPanel7;
+        this.pnlIzquierdaOperacionesProducto = jPanel7;
     }
 
     public JPanel getjPanel8() {
@@ -1149,13 +1072,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
@@ -1181,9 +1101,12 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEscanear;
     private javax.swing.JPanel pnlFSLogin;
     private javax.swing.JPanel pnlInventario;
+    private javax.swing.JPanel pnlInventarioTitulo;
+    private javax.swing.JPanel pnlIzquierdaOperacionesProducto;
     private javax.swing.JPanel pnlLeft;
     private javax.swing.JPanel pnlMinusLogin;
     private javax.swing.JPanel pnlNorth;
+    private javax.swing.JPanel pnlOperacionesProducto;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JPanel pnlXLogin;
     private javax.swing.JTable tablaProductos;

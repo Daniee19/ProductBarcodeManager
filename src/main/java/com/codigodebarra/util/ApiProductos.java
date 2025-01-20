@@ -35,7 +35,7 @@ public class ApiProductos {
                 p.setCodigo_barra(codigo_barra);
                 p.setNombre(productNode.path("product_name").asText());
                 p.setContenido(productNode.path("quantity").asText());
-                p.setCompania(productNode.path("brands").asText());
+                p.setMarca(productNode.path("brands").asText());
                 p.setImagenURL(imagenURL);
 
             } else {
@@ -70,7 +70,7 @@ public class ApiProductos {
                 p.setCodigo_barra(codigo_barra);
                 p.setNombre(productNode.path("product_name").asText());
                 p.setContenido(productNode.path("quantity").asText());
-                p.setCompania(productNode.path("brands").asText());
+                p.setMarca(productNode.path("brands").asText());
                 p.setImagenURL(imagenURL);
             }
         } catch (HeadlessException | IOException e) {

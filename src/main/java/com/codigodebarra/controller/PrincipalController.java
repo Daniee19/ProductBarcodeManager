@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public final class PrincipalController implements ActionListener {
-
+    
     JInterfazPrincipal vistaIp;
     JInformacion vistaInfo;
     ProductoDao productoDao;
@@ -35,39 +35,47 @@ public final class PrincipalController implements ActionListener {
     Producto productoGlobal;
     Usuario usuario;
     DefaultTableModel modelo;
+    
     int xMouse, yMouse;
-
+    
     public PrincipalController(JInterfazPrincipal vistaIp, Usuario usuario) {
         this.vistaIp = vistaIp;
         //Se necesita que la vistaIp ya haya sida creada
         bienvenida(usuario);
         this.vistaIp.setVisible(true);
         this.vistaIp.setLocationRelativeTo(null);
-
+        
         vistaInfo = new JInformacion(vistaIp, true);
         productoDao = new ProductoDaoImpl();
         api = new ApiProductos();
         Disenio.getDesignWindows();
         modelo = new DefaultTableModel();
         acciones();
-
+        
     }
-
+    
     public void bienvenida(Usuario usuario) {
         vistaIp.getLblNombre().setText(String.format("%s, %s", usuario.getApellido(), usuario.getNombre()));
     }
-
+    
     private void disenioTabla() {
         
-        String[] tituloColumnas = {"s"};
+        String[] tituloColumnas = {"Cod. Barra", "Nombre", "Marca", "Contenido", "Precio", "Cantidad"};
         
+        modelo.setColumnIdentifiers(tituloColumnas);
         
+        vistaIp.getTablaProductos().setModel(modelo);
+
+        //=============
+        List<Producto> productos = productoDao.selectAll();
         
-        
-        
+        for (Producto p : productos) {
+            Object[] fila = {p.getCodigo_barra(), p.getNombre(), p.getMarca(), p.getContenido(), p.getPrecio(), p.getCantidad()};
+            modelo.addRow(fila);
+        }
         
     }
-
+    
     public void acciones() {
         configuracionTabbedPane();
         //Menu lateral - > paneles
@@ -78,7 +86,7 @@ public final class PrincipalController implements ActionListener {
 
         //Se hace esto porque queremos detallar más en el uso específico del botón aceptar
         vistaInfo.getBtnAceptar().addActionListener(new ActionListener() {
-
+            
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Ayudará a separar la lógica del botón
@@ -97,16 +105,16 @@ public final class PrincipalController implements ActionListener {
                         System.out.println("Se agregó el producto, mira la bd");
                         productoDao.updateQuantityAfterInsert(idObtenido);
                         vistaInfo.dispose();
-
+                        
                     } else {
                         System.out.println("No se agregó");
                     }
                 }
             }
         });
-
+        
     }
-
+    
     private void configuracionTabbedPane() {
         //Ocultar las pestañas del TabbedPane
         vistaIp.getjTabbedPane1().setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
@@ -123,17 +131,17 @@ public final class PrincipalController implements ActionListener {
                 yMouse = event.getY();
             }
         });
-
+        
         vistaIp.getPnlBarraDeOpciones().addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent event) {
                 int x = event.getXOnScreen();
                 int y = event.getYOnScreen();
-
+                
                 vistaIp.setLocation(x - xMouse, y - yMouse);
             }
         });
-
+        
         vistaIp.getPnlXLogin().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
@@ -144,18 +152,18 @@ public final class PrincipalController implements ActionListener {
                     LoginController lc = new LoginController(login);
                 }
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent event) {
                 vistaIp.getPnlXLogin().setBackground(new Color(254, 57, 57));
             }
-
+            
             @Override
             public void mouseExited(MouseEvent event) {
                 vistaIp.getPnlXLogin().setBackground(new Color(51, 51, 51));
             }
         });
-
+        
         vistaIp.getPnlFSLogin().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
@@ -166,18 +174,18 @@ public final class PrincipalController implements ActionListener {
                     vistaIp.setExtendedState(vistaIp.NORMAL);
                 }
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent event) {
                 vistaIp.getPnlFSLogin().setBackground(new Color(95, 92, 93));
             }
-
+            
             @Override
             public void mouseExited(MouseEvent event) {
                 vistaIp.getPnlFSLogin().setBackground(new Color(51, 51, 51));
             }
         });
-
+        
         vistaIp.getPnlMinusLogin().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
@@ -185,33 +193,33 @@ public final class PrincipalController implements ActionListener {
                     vistaIp.setExtendedState(vistaIp.HIDE_ON_CLOSE);
                 }
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent event) {
                 vistaIp.getPnlMinusLogin().setBackground(new Color(95, 92, 93));
             }
-
+            
             @Override
             public void mouseExited(MouseEvent event) {
                 vistaIp.getPnlMinusLogin().setBackground(new Color(51, 51, 51));
             }
-
+            
         });
     }
-
+    
     private void navegacionTabbedPane() {
         vistaIp.getPnlPrincipal().addMouseListener(new MouseAdapter() {
-
+            
             @Override
             public void mouseClicked(MouseEvent event) {
                 vistaIp.getjTabbedPane1().setSelectedIndex(0);
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent event) {
                 vistaIp.getPnlPrincipal().setBackground(new Color(220, 220, 220));
             }
-
+            
             @Override
             public void mouseExited(MouseEvent event) {
                 vistaIp.getPnlPrincipal().setBackground(new Color(255, 255, 255));
@@ -222,29 +230,29 @@ public final class PrincipalController implements ActionListener {
             public void mouseClicked(MouseEvent event) {
                 vistaIp.getjTabbedPane1().setSelectedIndex(1);
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent event) {
                 vistaIp.getPnlEscanear().setBackground(new Color(220, 220, 220));
             }
-
+            
             @Override
             public void mouseExited(MouseEvent event) {
                 vistaIp.getPnlEscanear().setBackground(new Color(255, 255, 255));
             }
         });
-
+        
         vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
                 vistaIp.getjTabbedPane1().setSelectedIndex(2);
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent event) {
                 vistaIp.getPnlInventario().setBackground(new Color(220, 220, 220));
             }
-
+            
             @Override
             public void mouseExited(MouseEvent event) {
                 vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
@@ -253,7 +261,7 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getPnlCerrarSesion().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
-
+                
                 int respuesta = JOptionPane.showConfirmDialog(null, "¿Deseas cerrar sesión?");
                 /**
                  * -1: Clic en la x | 0: Si | 1: Cancelar | 2: No
@@ -264,19 +272,19 @@ public final class PrincipalController implements ActionListener {
                     LoginController lc = new LoginController(login);
                 }
             }
-
+            
             @Override
             public void mouseEntered(MouseEvent event) {
                 vistaIp.getPnlCerrarSesion().setBackground(new Color(220, 220, 220));
             }
-
+            
             @Override
             public void mouseExited(MouseEvent event) {
                 vistaIp.getPnlCerrarSesion().setBackground(new Color(255, 255, 255));
             }
         });
     }
-
+    
     public void escanearCodigo() throws MalformedURLException {
         long startTime = System.currentTimeMillis();
 
@@ -291,11 +299,11 @@ public final class PrincipalController implements ActionListener {
         //System.out.println("Tiempo de consulta a la BD: " + (endTimeA - startTimeA) + " ms");
 
         if (productoApi.getCodigo_barra() != null) {
-
+            
             System.out.println("Funciono la api");
             //Corregir porque a la primera llamada aparecen los text field con --
             if (productoApi.getNombre().isEmpty()) {
-
+                
                 if (producto_bd == null) {
                     vistaInfo.getTxtNombreProd().setEditable(true);
                     vistaInfo.getTxtNombreProd().setText("--");
@@ -305,7 +313,7 @@ public final class PrincipalController implements ActionListener {
                 }
             } else {
                 vistaInfo.getTxtNombreProd().setEditable(false);
-
+                
                 if (producto_bd == null) {
                     vistaInfo.getTxtNombreProd().setText(productoApi.getNombre());
                 } else {
@@ -316,7 +324,7 @@ public final class PrincipalController implements ActionListener {
 
             //==========================================
             //Si en caso el producto no retorna el nombre de la compania
-            if (productoApi.getCompania().isEmpty()) {
+            if (productoApi.getMarca().isEmpty()) {
                 if (producto_bd == null) {
                     vistaInfo.getTxtCompaniaProd().setEditable(true);
                     vistaInfo.getTxtCompaniaProd().setText("--");
@@ -328,14 +336,14 @@ public final class PrincipalController implements ActionListener {
                 //Si en caso se haga cambios al resultado dado de la API
                 vistaInfo.getTxtCompaniaProd().setEditable(false);
                 if (producto_bd == null) {
-                    vistaInfo.getTxtCompaniaProd().setText(productoApi.getCompania());
+                    vistaInfo.getTxtCompaniaProd().setText(productoApi.getMarca());
                 } else {
-                    vistaInfo.getTxtCompaniaProd().setText(producto_bd.getCompania());
+                    vistaInfo.getTxtCompaniaProd().setText(producto_bd.getMarca());
                 }
             }
-
+            
             if (productoApi.getContenido().isEmpty()) {
-
+                
                 if (producto_bd == null) {
                     vistaInfo.getTxtContenidoProd().setEditable(true);
                     vistaInfo.getTxtContenidoProd().setText("--");
@@ -392,15 +400,15 @@ public final class PrincipalController implements ActionListener {
             vistaInfo.getLblCodigoBarra().setText(productoApi.getCodigo_barra());
             vistaInfo.setLocationRelativeTo(null);
             vistaInfo.setVisible(true);
-
+            
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró el producto");
             System.out.println("No funciono la api");
         }
-
+        
         vistaIp.getTxtCodigoEscanear().setText("");
     }
-
+    
     public void cargarImagenPorURL(String url_imagen) throws MalformedURLException {
         URL url = new URL(url_imagen);
 
@@ -416,7 +424,7 @@ public final class PrincipalController implements ActionListener {
         vistaInfo.getLblImagen().setIcon(imagen);
         vistaInfo.getLblImagen().setText("");
     }
-
+    
     public void obtenerPDF() {
         Barras ba = new Barras();
         List<Producto> productos = productoDao.selectAll();
@@ -425,11 +433,11 @@ public final class PrincipalController implements ActionListener {
             ba.generarCodBarras(ps.getCodigo_barra(), "EAN-13");
         }
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vistaIp.getBtnOkEscanear()) {
-
+            
             try {
                 escanearCodigo();
             } catch (MalformedURLException ex) {
@@ -441,5 +449,5 @@ public final class PrincipalController implements ActionListener {
             vistaInfo.dispose();
         }
     }
-
+    
 }

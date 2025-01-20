@@ -43,7 +43,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
-                p.setCompania(rs.getString("compania"));
+                p.setMarca(rs.getString("marca"));
                 p.setContenido(rs.getString("contenido"));
                 p.setImagenURL(rs.getString("imagenURL"));
             }
@@ -78,7 +78,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
-                p.setCompania(rs.getString("compania"));
+                p.setMarca(rs.getString("marca"));
                 p.setContenido(rs.getString("contenido"));
                 p.setImagenURL(rs.getString("imagenURL"));
                 productos.add(p);
@@ -99,7 +99,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto.nombre, ")
                 .append("producto.precio, ")
                 .append("producto.cantidad, ")
-                .append("producto.compania, ")
+                .append("producto.marca, ")
                 .append("producto.contenido, ")
                 .append("producto.imagenURL ")
                 .append(") values (")
@@ -112,7 +112,7 @@ public class ProductoDaoImpl implements ProductoDao {
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
             ps.setInt(4, producto.getCantidad());
-            ps.setString(5, producto.getCompania());
+            ps.setString(5, producto.getMarca());
             ps.setString(6, producto.getContenido());
             ps.setString(7, producto.getImagenURL());
 
@@ -158,7 +158,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
-                p.setCompania(rs.getString("compania"));
+                p.setMarca(rs.getString("marca"));
                 p.setContenido(rs.getString("contenido"));
                 p.setImagenURL(rs.getString("imagenURL"));
 

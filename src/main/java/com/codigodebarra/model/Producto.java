@@ -9,10 +9,10 @@ public class Producto {
 
     String codigo_barra;
     String nombre;
-    String compania;
+    String marca;
     String contenido;
     String imagenURL;
-    
+
     double precio;
     int cantidad;
 
@@ -59,12 +59,12 @@ public class Producto {
         this.cantidad = cantidad;
     }
 
-    public String getCompania() {
-        return compania;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setCompania(String compania) {
-        this.compania = compania;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     public String getContenido() {
@@ -85,7 +85,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", codigo_barra=" + codigo_barra + ", nombre=" + nombre + ", compania=" + compania + ", contenido=" + contenido + ", imagenURL=" + imagenURL + ", precio=" + precio + ", cantidad=" + cantidad + '}';
+        return "Producto{" + "id=" + id + ", codigo_barra=" + codigo_barra + ", nombre=" + nombre + ", compania=" + marca + ", contenido=" + contenido + ", imagenURL=" + imagenURL + ", precio=" + precio + ", cantidad=" + cantidad + '}';
     }
 
 }
