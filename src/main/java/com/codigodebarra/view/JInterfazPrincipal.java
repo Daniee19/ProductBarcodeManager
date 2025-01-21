@@ -41,6 +41,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlInventario = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         pnlCenter = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelPrincipal = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -95,24 +96,25 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        pnlTablaProductos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 1453));
         setUndecorated(true);
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 51));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(1080, 910));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         pnlNorth.setBackground(new java.awt.Color(51, 51, 51));
         pnlNorth.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pnlNorth.setMaximumSize(new java.awt.Dimension(32767, 40));
         pnlNorth.setPreferredSize(new java.awt.Dimension(1065, 50));
-        pnlNorth.setLayout(new java.awt.BorderLayout());
+        pnlNorth.setLayout(new java.awt.CardLayout());
 
         pnlBarraDeOpciones.setBackground(new java.awt.Color(255, 204, 0));
 
@@ -181,7 +183,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlBarraDeOpcionesLayout.setHorizontalGroup(
             pnlBarraDeOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBarraDeOpcionesLayout.createSequentialGroup()
-                .addContainerGap(1513, Short.MAX_VALUE)
+                .addContainerGap(1510, Short.MAX_VALUE)
                 .addComponent(pnlMinusLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlFSLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,19 +200,12 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                     .addComponent(pnlMinusLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        pnlNorth.add(pnlBarraDeOpciones, java.awt.BorderLayout.PAGE_END);
+        pnlNorth.add(pnlBarraDeOpciones, "card2");
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 1526;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(pnlNorth, gridBagConstraints);
+        jPanel1.add(pnlNorth, java.awt.BorderLayout.NORTH);
 
         pnlLeft.setBackground(new java.awt.Color(51, 51, 51));
         pnlLeft.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        pnlLeft.setPreferredSize(new java.awt.Dimension(200, 300));
         pnlLeft.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tienda_icono.jpg"))); // NOI18N
@@ -311,14 +306,13 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         pnlLeft.add(pnlInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 200, 40));
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipady = 540;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(pnlLeft, gridBagConstraints);
+        jPanel1.add(pnlLeft, java.awt.BorderLayout.LINE_START);
 
-        pnlCenter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlCenter.setBackground(new java.awt.Color(51, 255, 255));
+        pnlCenter.setLayout(new java.awt.GridBagLayout());
+
+        jPanel4.setBackground(new java.awt.Color(204, 0, 0));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
@@ -343,10 +337,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1540, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 310, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,9 +363,9 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 14, -1, 60));
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jPanel5.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 28, 613, 33));
+        jPanel5.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 28, 570, 33));
 
-        panelPrincipal.add(jPanel5, java.awt.BorderLayout.CENTER);
+        panelPrincipal.add(jPanel5, java.awt.BorderLayout.LINE_START);
 
         jTabbedPane1.addTab("tab1", panelPrincipal);
 
@@ -422,7 +416,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         panelInventario.setBackground(new java.awt.Color(255, 255, 255));
         panelInventario.setPreferredSize(new java.awt.Dimension(1900, 2000));
-        panelInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelInventario.setLayout(new java.awt.GridBagLayout());
 
         pnlInventarioTitulo.setBackground(new java.awt.Color(255, 255, 255));
         pnlInventarioTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -440,7 +434,13 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel12.setText("                Selecciona el producto para realizar operaciones");
         pnlInventarioTitulo.add(jLabel12);
 
-        panelInventario.add(pnlInventarioTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 410;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        panelInventario.add(pnlInventarioTitulo, gridBagConstraints);
 
         pnlIzquierdaOperacionesProducto.setBackground(new java.awt.Color(255, 255, 102));
         pnlIzquierdaOperacionesProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -611,14 +611,20 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel16.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 50, 40));
 
-        pnlOperacionesProducto.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 420, 120));
+        pnlOperacionesProducto.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 420, 110));
 
-        pnlIzquierdaOperacionesProducto.add(pnlOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 420, 790));
+        pnlIzquierdaOperacionesProducto.add(pnlOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 780));
 
-        panelInventario.add(pnlIzquierdaOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 96, 480, 830));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 43, 0);
+        panelInventario.add(pnlIzquierdaOperacionesProducto, gridBagConstraints);
 
-        jPanel8.setBackground(new java.awt.Color(255, 102, 102));
-        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlTablaProductos.setBackground(new java.awt.Color(255, 102, 102));
+        pnlTablaProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -633,24 +639,26 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaProductos);
 
-        jPanel8.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 890, 790));
-
-        panelInventario.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 96, 1020, 830));
-
-        jTabbedPane1.addTab("tab3", panelInventario);
-
-        pnlCenter.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1540, 1000));
+        pnlTablaProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 880, 790));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipady = -20;
+        gridBagConstraints.ipadx = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        jPanel1.add(pnlCenter, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 43, 110);
+        panelInventario.add(pnlTablaProductos, gridBagConstraints);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        jTabbedPane1.addTab("tab3", panelInventario);
+
+        jPanel4.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 1480, 960));
+
+        pnlCenter.add(jPanel4, new java.awt.GridBagConstraints());
+
+        jPanel1.add(pnlCenter, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -976,11 +984,11 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     }
 
     public JPanel getjPanel8() {
-        return jPanel8;
+        return pnlTablaProductos;
     }
 
     public void setjPanel8(JPanel jPanel8) {
-        this.jPanel8 = jPanel8;
+        this.pnlTablaProductos = jPanel8;
     }
 
     public JScrollPane getjScrollPane1() {
@@ -1074,9 +1082,9 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -1108,6 +1116,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlNorth;
     private javax.swing.JPanel pnlOperacionesProducto;
     private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JPanel pnlTablaProductos;
     private javax.swing.JPanel pnlXLogin;
     private javax.swing.JTable tablaProductos;
     private javax.swing.JTextField txtCodigoEscanear;
