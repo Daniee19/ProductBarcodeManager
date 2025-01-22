@@ -1,10 +1,12 @@
 package com.codigodebarra.view;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -18,7 +20,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         pnlNorth = new javax.swing.JPanel();
@@ -67,35 +68,36 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlOperacionesProducto = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel10 = new javax.swing.JPanel();
+        cbNombresColumnasProd = new javax.swing.JComboBox<>();
+        txtValorProd = new javax.swing.JTextField();
+        pnlBuscarProd = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
+        txtNombreGP = new javax.swing.JTextField();
+        txtMarcaGP = new javax.swing.JTextField();
+        txtContenidoGP = new javax.swing.JTextField();
+        spnPrecioGP = new javax.swing.JSpinner();
+        spnCantidadGP = new javax.swing.JSpinner();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
+        pnlAgregarGP = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jPanel13 = new javax.swing.JPanel();
+        pnlActualizarGP = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
-        jPanel14 = new javax.swing.JPanel();
+        pnlEliminarGP = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
-        jPanel15 = new javax.swing.JPanel();
+        pnlLimpiarGP = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
+        txtCodBarraGP = new javax.swing.JTextField();
         jPanel16 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
+        lblPdfProd = new javax.swing.JLabel();
+        lblExcelProd = new javax.swing.JLabel();
         pnlTablaProductos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable();
@@ -103,7 +105,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 1453));
         setUndecorated(true);
-        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
+        getContentPane().setLayout(new javax.swing.OverlayLayout(getContentPane()));
 
         jPanel1.setBackground(new java.awt.Color(51, 255, 51));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,7 +185,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlBarraDeOpcionesLayout.setHorizontalGroup(
             pnlBarraDeOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBarraDeOpcionesLayout.createSequentialGroup()
-                .addContainerGap(1510, Short.MAX_VALUE)
+                .addContainerGap(1682, Short.MAX_VALUE)
                 .addComponent(pnlMinusLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(pnlFSLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -206,6 +208,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         pnlLeft.setBackground(new java.awt.Color(51, 51, 51));
         pnlLeft.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        pnlLeft.setMinimumSize(new java.awt.Dimension(200, 0));
         pnlLeft.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tienda_icono.jpg"))); // NOI18N
@@ -306,10 +309,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         pnlLeft.add(pnlInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 200, 40));
 
-        jPanel1.add(pnlLeft, java.awt.BorderLayout.LINE_START);
+        jPanel1.add(pnlLeft, java.awt.BorderLayout.WEST);
 
         pnlCenter.setBackground(new java.awt.Color(51, 255, 255));
-        pnlCenter.setLayout(new java.awt.GridBagLayout());
+        pnlCenter.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel4.setBackground(new java.awt.Color(204, 0, 0));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -317,7 +320,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
 
-        panelPrincipal.setBackground(new java.awt.Color(255, 204, 153));
+        panelPrincipal.setBackground(new java.awt.Color(255, 102, 102));
         panelPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         panelPrincipal.setLayout(new java.awt.BorderLayout());
         panelPrincipal.add(jSeparator3, java.awt.BorderLayout.PAGE_END);
@@ -340,7 +343,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 310, Short.MAX_VALUE))
+                .addGap(0, 481, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,7 +419,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         panelInventario.setBackground(new java.awt.Color(255, 255, 255));
         panelInventario.setPreferredSize(new java.awt.Dimension(1900, 2000));
-        panelInventario.setLayout(new java.awt.GridBagLayout());
+        panelInventario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlInventarioTitulo.setBackground(new java.awt.Color(255, 255, 255));
         pnlInventarioTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -434,13 +437,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel12.setText("                Selecciona el producto para realizar operaciones");
         pnlInventarioTitulo.add(jLabel12);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 410;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        panelInventario.add(pnlInventarioTitulo, gridBagConstraints);
+        panelInventario.add(pnlInventarioTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 0, 1490, 71));
 
         pnlIzquierdaOperacionesProducto.setBackground(new java.awt.Color(255, 255, 102));
         pnlIzquierdaOperacionesProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -454,28 +451,30 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel7.setText("Buscar producto");
         jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 160, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 140, 30));
-        jPanel6.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 140, 30));
+        cbNombresColumnasProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel6.add(cbNombresColumnasProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 140, 30));
 
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        txtValorProd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jPanel6.add(txtValorProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 140, 30));
+
+        pnlBuscarProd.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Buscar");
         jLabel16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlBuscarProdLayout = new javax.swing.GroupLayout(pnlBuscarProd);
+        pnlBuscarProd.setLayout(pnlBuscarProdLayout);
+        pnlBuscarProdLayout.setHorizontalGroup(
+            pnlBuscarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlBuscarProdLayout.setVerticalGroup(
+            pnlBuscarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel6.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 80, 30));
+        jPanel6.add(pnlBuscarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 80, 30));
 
         jLabel17.setText("Columna");
         jPanel6.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
@@ -492,103 +491,106 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel19.setText("Gestión del producto");
         jPanel11.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 190, 30));
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
-        jPanel11.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 270, 40));
+        txtNombreGP.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
+        jPanel11.add(txtNombreGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 140, 40));
 
-        jTextField3.setBorder(javax.swing.BorderFactory.createTitledBorder("Marca"));
-        jPanel11.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 270, 40));
+        txtMarcaGP.setBorder(javax.swing.BorderFactory.createTitledBorder("Marca"));
+        jPanel11.add(txtMarcaGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 140, 40));
 
-        jTextField4.setBorder(javax.swing.BorderFactory.createTitledBorder("Contenido"));
-        jPanel11.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 270, 40));
+        txtContenidoGP.setBorder(javax.swing.BorderFactory.createTitledBorder("Contenido"));
+        jPanel11.add(txtContenidoGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 300, 40));
 
-        jSpinner1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel11.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 120, 30));
-        jPanel11.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 120, 30));
+        spnPrecioGP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel11.add(spnPrecioGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 140, 30));
+        jPanel11.add(spnCantidadGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 140, 30));
 
         jLabel20.setText("Precio");
-        jPanel11.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
+        jPanel11.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
 
         jLabel21.setText("Cantidad");
-        jPanel11.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 60, -1));
+        jPanel11.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 60, -1));
 
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        pnlAgregarGP.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("Agregar");
         jLabel26.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlAgregarGPLayout = new javax.swing.GroupLayout(pnlAgregarGP);
+        pnlAgregarGP.setLayout(pnlAgregarGPLayout);
+        pnlAgregarGPLayout.setHorizontalGroup(
+            pnlAgregarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
         );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlAgregarGPLayout.setVerticalGroup(
+            pnlAgregarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 110, 30));
-        jPanel11.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 280, 20));
+        jPanel11.add(pnlAgregarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 110, 30));
+        jPanel11.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 300, 20));
 
-        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        pnlActualizarGP.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel27.setText("Actualizar");
         jLabel27.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlActualizarGPLayout = new javax.swing.GroupLayout(pnlActualizarGP);
+        pnlActualizarGP.setLayout(pnlActualizarGPLayout);
+        pnlActualizarGPLayout.setHorizontalGroup(
+            pnlActualizarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
         );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlActualizarGPLayout.setVerticalGroup(
+            pnlActualizarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 110, 30));
+        jPanel11.add(pnlActualizarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 110, 30));
 
-        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
+        pnlEliminarGP.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setText("Eliminar");
         jLabel28.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlEliminarGPLayout = new javax.swing.GroupLayout(pnlEliminarGP);
+        pnlEliminarGP.setLayout(pnlEliminarGPLayout);
+        pnlEliminarGPLayout.setHorizontalGroup(
+            pnlEliminarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
         );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlEliminarGPLayout.setVerticalGroup(
+            pnlEliminarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 110, 30));
+        jPanel11.add(pnlEliminarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 110, 30));
 
-        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+        pnlLimpiarGP.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel29.setText("Limpiar");
         jLabel29.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnlLimpiarGPLayout = new javax.swing.GroupLayout(pnlLimpiarGP);
+        pnlLimpiarGP.setLayout(pnlLimpiarGPLayout);
+        pnlLimpiarGPLayout.setHorizontalGroup(
+            pnlLimpiarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
         );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnlLimpiarGPLayout.setVerticalGroup(
+            pnlLimpiarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 110, 30));
+        jPanel11.add(pnlLimpiarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 110, 30));
 
-        pnlOperacionesProducto.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 420, 430));
+        txtCodBarraGP.setBorder(javax.swing.BorderFactory.createTitledBorder("Cod. de barra"));
+        jPanel11.add(txtCodBarraGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 300, 40));
+
+        pnlOperacionesProducto.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 420, 440));
 
         jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -599,33 +601,28 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel23.setText("Descargar información");
         jPanel16.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 170, -1));
 
-        jLabel24.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("PDF");
-        jLabel24.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel16.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 50, 40));
+        lblPdfProd.setBackground(new java.awt.Color(255, 255, 255));
+        lblPdfProd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPdfProd.setText("PDF");
+        lblPdfProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel16.add(lblPdfProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 50, 40));
 
-        jLabel25.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel25.setText("Excel");
-        jLabel25.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel16.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 50, 40));
+        lblExcelProd.setBackground(new java.awt.Color(255, 255, 255));
+        lblExcelProd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblExcelProd.setText("Excel");
+        lblExcelProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel16.add(lblExcelProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 50, 40));
 
-        pnlOperacionesProducto.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 420, 110));
+        pnlOperacionesProducto.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 420, 120));
 
         pnlIzquierdaOperacionesProducto.add(pnlOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 780));
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 43, 0);
-        panelInventario.add(pnlIzquierdaOperacionesProducto, gridBagConstraints);
+        panelInventario.add(pnlIzquierdaOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 71, 420, 790));
 
         pnlTablaProductos.setBackground(new java.awt.Color(255, 102, 102));
         pnlTablaProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tablaProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -639,22 +636,15 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaProductos);
 
-        pnlTablaProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 880, 790));
+        pnlTablaProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 950, 790));
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 20;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 43, 110);
-        panelInventario.add(pnlTablaProductos, gridBagConstraints);
+        panelInventario.add(pnlTablaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 71, 1020, -1));
 
         jTabbedPane1.addTab("tab3", panelInventario);
 
-        jPanel4.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, 0, 1480, 960));
+        jPanel4.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1650, 910));
 
-        pnlCenter.add(jPanel4, new java.awt.GridBagConstraints());
+        pnlCenter.add(jPanel4);
 
         jPanel1.add(pnlCenter, java.awt.BorderLayout.CENTER);
 
@@ -1038,11 +1028,293 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     public void setTablaProductos(JTable tablaProductos) {
         this.tablaProductos = tablaProductos;
     }
+
+    public JComboBox<String> getCbNombresColumnasProd() {
+        return cbNombresColumnasProd;
+    }
+
+    public void setCbNombresColumnasProd(JComboBox<String> cbNombresColumnasProd) {
+        this.cbNombresColumnasProd = cbNombresColumnasProd;
+    }
+
+    public JLabel getjLabel16() {
+        return jLabel16;
+    }
+
+    public void setjLabel16(JLabel jLabel16) {
+        this.jLabel16 = jLabel16;
+    }
+
+    public JLabel getjLabel17() {
+        return jLabel17;
+    }
+
+    public void setjLabel17(JLabel jLabel17) {
+        this.jLabel17 = jLabel17;
+    }
+
+    public JLabel getjLabel18() {
+        return jLabel18;
+    }
+
+    public void setjLabel18(JLabel jLabel18) {
+        this.jLabel18 = jLabel18;
+    }
+
+    public JLabel getjLabel19() {
+        return jLabel19;
+    }
+
+    public void setjLabel19(JLabel jLabel19) {
+        this.jLabel19 = jLabel19;
+    }
+
+    public JLabel getjLabel20() {
+        return jLabel20;
+    }
+
+    public void setjLabel20(JLabel jLabel20) {
+        this.jLabel20 = jLabel20;
+    }
+
+    public JLabel getjLabel21() {
+        return jLabel21;
+    }
+
+    public void setjLabel21(JLabel jLabel21) {
+        this.jLabel21 = jLabel21;
+    }
+
+    public JLabel getjLabel22() {
+        return jLabel22;
+    }
+
+    public void setjLabel22(JLabel jLabel22) {
+        this.jLabel22 = jLabel22;
+    }
+
+    public JLabel getjLabel23() {
+        return jLabel23;
+    }
+
+    public void setjLabel23(JLabel jLabel23) {
+        this.jLabel23 = jLabel23;
+    }
+
+    public JLabel getjLabel26() {
+        return jLabel26;
+    }
+
+    public void setjLabel26(JLabel jLabel26) {
+        this.jLabel26 = jLabel26;
+    }
+
+    public JLabel getjLabel27() {
+        return jLabel27;
+    }
+
+    public void setjLabel27(JLabel jLabel27) {
+        this.jLabel27 = jLabel27;
+    }
+
+    public JLabel getjLabel28() {
+        return jLabel28;
+    }
+
+    public void setjLabel28(JLabel jLabel28) {
+        this.jLabel28 = jLabel28;
+    }
+
+    public JLabel getjLabel29() {
+        return jLabel29;
+    }
+
+    public void setjLabel29(JLabel jLabel29) {
+        this.jLabel29 = jLabel29;
+    }
+
+    public JLabel getjLabel7() {
+        return jLabel7;
+    }
+
+    public void setjLabel7(JLabel jLabel7) {
+        this.jLabel7 = jLabel7;
+    }
+
+    public JPanel getjPanel11() {
+        return jPanel11;
+    }
+
+    public void setjPanel11(JPanel jPanel11) {
+        this.jPanel11 = jPanel11;
+    }
+
+    public JPanel getjPanel16() {
+        return jPanel16;
+    }
+
+    public void setjPanel16(JPanel jPanel16) {
+        this.jPanel16 = jPanel16;
+    }
+
+    public JSeparator getjSeparator2() {
+        return jSeparator2;
+    }
+
+    public void setjSeparator2(JSeparator jSeparator2) {
+        this.jSeparator2 = jSeparator2;
+    }
+
+    public JLabel getLblExcelProd() {
+        return lblExcelProd;
+    }
+
+    public void setLblExcelProd(JLabel lblExcelProd) {
+        this.lblExcelProd = lblExcelProd;
+    }
+
+    public JLabel getLblPdfProd() {
+        return lblPdfProd;
+    }
+
+    public void setLblPdfProd(JLabel lblPdfProd) {
+        this.lblPdfProd = lblPdfProd;
+    }
+
+    public JPanel getPnlActualizarGP() {
+        return pnlActualizarGP;
+    }
+
+    public void setPnlActualizarGP(JPanel pnlActualizarGP) {
+        this.pnlActualizarGP = pnlActualizarGP;
+    }
+
+    public JPanel getPnlAgregarGP() {
+        return pnlAgregarGP;
+    }
+
+    public void setPnlAgregarGP(JPanel pnlAgregarGP) {
+        this.pnlAgregarGP = pnlAgregarGP;
+    }
+
+    public JPanel getPnlBuscarProd() {
+        return pnlBuscarProd;
+    }
+
+    public void setPnlBuscarProd(JPanel pnlBuscarProd) {
+        this.pnlBuscarProd = pnlBuscarProd;
+    }
+
+    public JPanel getPnlEliminarGP() {
+        return pnlEliminarGP;
+    }
+
+    public void setPnlEliminarGP(JPanel pnlEliminarGP) {
+        this.pnlEliminarGP = pnlEliminarGP;
+    }
+
+    public JPanel getPnlInventarioTitulo() {
+        return pnlInventarioTitulo;
+    }
+
+    public void setPnlInventarioTitulo(JPanel pnlInventarioTitulo) {
+        this.pnlInventarioTitulo = pnlInventarioTitulo;
+    }
+
+    public JPanel getPnlIzquierdaOperacionesProducto() {
+        return pnlIzquierdaOperacionesProducto;
+    }
+
+    public void setPnlIzquierdaOperacionesProducto(JPanel pnlIzquierdaOperacionesProducto) {
+        this.pnlIzquierdaOperacionesProducto = pnlIzquierdaOperacionesProducto;
+    }
+
+    public JPanel getPnlLimpiarGP() {
+        return pnlLimpiarGP;
+    }
+
+    public void setPnlLimpiarGP(JPanel pnlLimpiarGP) {
+        this.pnlLimpiarGP = pnlLimpiarGP;
+    }
+
+    public JPanel getPnlOperacionesProducto() {
+        return pnlOperacionesProducto;
+    }
+
+    public void setPnlOperacionesProducto(JPanel pnlOperacionesProducto) {
+        this.pnlOperacionesProducto = pnlOperacionesProducto;
+    }
+
+    public JPanel getPnlTablaProductos() {
+        return pnlTablaProductos;
+    }
+
+    public void setPnlTablaProductos(JPanel pnlTablaProductos) {
+        this.pnlTablaProductos = pnlTablaProductos;
+    }
+
+    public JSpinner getSpnCantidadGP() {
+        return spnCantidadGP;
+    }
+
+    public void setSpnCantidadGP(JSpinner spnCantidadGP) {
+        this.spnCantidadGP = spnCantidadGP;
+    }
+
+    public JSpinner getSpnPrecioGP() {
+        return spnPrecioGP;
+    }
+
+    public void setSpnPrecioGP(JSpinner spnPrecioGP) {
+        this.spnPrecioGP = spnPrecioGP;
+    }
+
+    public JTextField getTxtCodBarraGP() {
+        return txtCodBarraGP;
+    }
+
+    public void setTxtCodBarraGP(JTextField txtCodBarraGP) {
+        this.txtCodBarraGP = txtCodBarraGP;
+    }
+
+    public JTextField getTxtContenidoGP() {
+        return txtContenidoGP;
+    }
+
+    public void setTxtContenidoGP(JTextField txtContenidoGP) {
+        this.txtContenidoGP = txtContenidoGP;
+    }
+
+    public JTextField getTxtMarcaGP() {
+        return txtMarcaGP;
+    }
+
+    public void setTxtMarcaGP(JTextField txtMarcaGP) {
+        this.txtMarcaGP = txtMarcaGP;
+    }
+
+    public JTextField getTxtNombreGP() {
+        return txtNombreGP;
+    }
+
+    public void setTxtNombreGP(JTextField txtNombreGP) {
+        this.txtNombreGP = txtNombreGP;
+    }
+
+    public JTextField getTxtValorProd() {
+        return txtValorProd;
+    }
+
+    public void setTxtValorProd(JTextField txtValorProd) {
+        this.txtValorProd = txtValorProd;
+    }
+
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOkEscanear;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbNombresColumnasProd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1059,8 +1331,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -1073,12 +1343,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1090,35 +1355,43 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblEscanear;
+    private javax.swing.JLabel lblExcelProd;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblPdfProd;
     private javax.swing.JLabel lblPrincipal;
     private javax.swing.JPanel panelEscanear;
     private javax.swing.JPanel panelInventario;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel pnlActualizarGP;
+    private javax.swing.JPanel pnlAgregarGP;
     private javax.swing.JPanel pnlBarraDeOpciones;
+    private javax.swing.JPanel pnlBuscarProd;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlCerrarSesion;
+    private javax.swing.JPanel pnlEliminarGP;
     private javax.swing.JPanel pnlEscanear;
     private javax.swing.JPanel pnlFSLogin;
     private javax.swing.JPanel pnlInventario;
     private javax.swing.JPanel pnlInventarioTitulo;
     private javax.swing.JPanel pnlIzquierdaOperacionesProducto;
     private javax.swing.JPanel pnlLeft;
+    private javax.swing.JPanel pnlLimpiarGP;
     private javax.swing.JPanel pnlMinusLogin;
     private javax.swing.JPanel pnlNorth;
     private javax.swing.JPanel pnlOperacionesProducto;
     private javax.swing.JPanel pnlPrincipal;
     private javax.swing.JPanel pnlTablaProductos;
     private javax.swing.JPanel pnlXLogin;
+    private javax.swing.JSpinner spnCantidadGP;
+    private javax.swing.JSpinner spnPrecioGP;
     private javax.swing.JTable tablaProductos;
+    private javax.swing.JTextField txtCodBarraGP;
     private javax.swing.JTextField txtCodigoEscanear;
+    private javax.swing.JTextField txtContenidoGP;
+    private javax.swing.JTextField txtMarcaGP;
+    private javax.swing.JTextField txtNombreGP;
+    private javax.swing.JTextField txtValorProd;
     // End of variables declaration//GEN-END:variables
 }

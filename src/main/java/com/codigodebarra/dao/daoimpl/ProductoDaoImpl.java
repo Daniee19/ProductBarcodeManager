@@ -134,7 +134,7 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public Producto selectByCodeProduct(String codigo_barra) {
+    public Producto findByCodeProduct(String codigo_barra) {
         Producto p = null;
 
         StringBuilder sql = new StringBuilder();
@@ -191,4 +191,185 @@ public class ProductoDaoImpl implements ProductoDao {
         }
         return estado;
     }
+
+    @Override
+    public List<Producto> findByName(String name) {
+        List<Producto> productos = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("Select ")
+                .append("* ")
+                .append("from ")
+                .append("producto ")
+                .append("where ")
+                .append("nombre = ?");
+        try {
+            Connection conn = con.getConexion();
+            ps = conn.prepareStatement(sql.toString());
+            ps.setString(1, name);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+
+                p.setId(rs.getInt("id_producto"));
+                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setNombre(rs.getString("nombre"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setCantidad(rs.getInt("cantidad"));
+                p.setMarca(rs.getString("marca"));
+                p.setContenido(rs.getString("contenido"));
+                p.setImagenURL(rs.getString("imagenURL"));
+                productos.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al momento de consultar por nombre: " + e.getMessage());
+        }
+        return productos;
+    }
+
+    @Override
+    public List<Producto> findByBrand(String brand) {
+        List<Producto> productos = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("Select ")
+                .append("* ")
+                .append("from ")
+                .append("producto ")
+                .append("where ")
+                .append("marca = ?");
+        try {
+            Connection conn = con.getConexion();
+            ps = conn.prepareStatement(sql.toString());
+            ps.setString(1, brand);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+
+                p.setId(rs.getInt("id_producto"));
+                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setNombre(rs.getString("nombre"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setCantidad(rs.getInt("cantidad"));
+                p.setMarca(rs.getString("marca"));
+                p.setContenido(rs.getString("contenido"));
+                p.setImagenURL(rs.getString("imagenURL"));
+                productos.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al momento de consultar por marca: " + e.getMessage());
+        }
+        return productos;
+    }
+
+    @Override
+    public List<Producto> findByContent(String content) {
+        List<Producto> productos = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("Select ")
+                .append("* ")
+                .append("from ")
+                .append("producto ")
+                .append("where ")
+                .append("contenido = ?");
+        try {
+            Connection conn = con.getConexion();
+            ps = conn.prepareStatement(sql.toString());
+            ps.setString(1, content);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+
+                p.setId(rs.getInt("id_producto"));
+                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setNombre(rs.getString("nombre"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setCantidad(rs.getInt("cantidad"));
+                p.setMarca(rs.getString("marca"));
+                p.setContenido(rs.getString("contenido"));
+                p.setImagenURL(rs.getString("imagenURL"));
+                productos.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al momento de consultar por contenido: " + e.getMessage());
+        }
+        return productos;
+    }
+
+    @Override
+    public List<Producto> findByPrice(String price) {
+        List<Producto> productos = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("Select ")
+                .append("* ")
+                .append("from ")
+                .append("producto ")
+                .append("where ")
+                .append("precio = ?");
+        try {
+            Connection conn = con.getConexion();
+            ps = conn.prepareStatement(sql.toString());
+            ps.setString(1, price);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+
+                p.setId(rs.getInt("id_producto"));
+                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setNombre(rs.getString("nombre"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setCantidad(rs.getInt("cantidad"));
+                p.setMarca(rs.getString("marca"));
+                p.setContenido(rs.getString("contenido"));
+                p.setImagenURL(rs.getString("imagenURL"));
+                productos.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al momento de consultar por precio: " + e.getMessage());
+        }
+        return productos;
+    }
+
+    @Override
+    public List<Producto> findByQuantity(String quantity) {
+        List<Producto> productos = new ArrayList<>();
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("Select ")
+                .append("* ")
+                .append("from ")
+                .append("producto ")
+                .append("where ")
+                .append("cantidad = ?");
+        try {
+            Connection conn = con.getConexion();
+            ps = conn.prepareStatement(sql.toString());
+            ps.setString(1, quantity);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Producto p = new Producto();
+
+                p.setId(rs.getInt("id_producto"));
+                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setNombre(rs.getString("nombre"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setCantidad(rs.getInt("cantidad"));
+                p.setMarca(rs.getString("marca"));
+                p.setContenido(rs.getString("contenido"));
+                p.setImagenURL(rs.getString("imagenURL"));
+                productos.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al momento de consultar por cantidad: " + e.getMessage());
+        }
+        return productos;
+    }
+
 }
