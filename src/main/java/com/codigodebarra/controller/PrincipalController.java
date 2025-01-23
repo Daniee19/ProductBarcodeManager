@@ -24,6 +24,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 public final class PrincipalController implements ActionListener {
@@ -145,14 +147,119 @@ public final class PrincipalController implements ActionListener {
     }
 
     public void acciones() {
+        //Configuración en el TabbedPane y en el la barra para poder deslizar la ventana, e incluso la adioión de paneles
         configuracionTabbedPane();
         //Menu lateral - > paneles
         navegacionTabbedPane();
+        //Tabla
         disenioTabla();
+        //Boton en info al encontrar el producto
+        pnlAgregarOActualizaProducto();
+        //Agregar producto
+        gestionProductoIp();
         vistaIp.getBtnOkEscanear().addActionListener(this);
         vistaInfo.getBtnCancelar().addActionListener(this);
 
-        //Se hace esto porque queremos detallar más en el uso específico del botón aceptar
+    }
+
+    public void alternarPanelesGP(boolean valor) {
+        vistaIp.getPnlAgregarGP().setEnabled(valor);
+        vistaIp.getPnlActualizarGP().setEnabled(!valor);
+        vistaIp.getPnlEliminarGP().setEnabled(!valor);
+        vistaIp.getPnlLimpiarGP().setEnabled(!valor);
+        if (valor == true) {
+            vistaIp.getPnlAgregarGP().setBackground(new Color(200, 200, 200));
+            vistaIp.getPnlActualizarGP().setBackground(new Color(80, 80, 80));
+            vistaIp.getPnlEliminarGP().setBackground(new Color(80, 80, 80));
+            vistaIp.getPnlLimpiarGP().setBackground(new Color(80, 80, 80));
+        } else {
+            vistaIp.getPnlAgregarGP().setBackground(new Color(80, 80, 80));
+            vistaIp.getPnlActualizarGP().setBackground(new Color(200, 200, 200));
+            vistaIp.getPnlEliminarGP().setBackground(new Color(200, 200, 200));
+            vistaIp.getPnlLimpiarGP().setBackground(new Color(200, 200, 200));
+
+        }
+
+    }
+
+    public void gestionProductoIp() {
+
+        vistaIp.getTablaProductos().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    
+                    int fila = vistaIp.getTablaProductos().getSelectedRow();
+                    
+                    if(fila != -1){
+                        int codBarra = (int) vistaIp.getTablaProductos().getValueAt(fila, 0);
+                        String nombre = (String) vistaIp.getTablaProductos().getValueAt(fila, 1);
+                        String marca = (String) vistaIp.getTablaProductos().getValueAt(fila, 2);
+                        String contenido = (String) vistaIp.getTablaProductos().getValueAt(fila, 3);
+                        double precio = (double) vistaIp.getTablaProductos().getValueAt(fila, 4);
+                        int cantidad = (int) vistaIp.getTablaProductos().getValueAt(fila, 5);
+                        
+                    }
+                }
+            }
+
+        });
+
+        
+
+        if (true) {
+            alternarPanelesGP(true);
+
+            //Agregar producto
+            vistaIp.getPnlAgregarGP().addMouseListener(new MouseAdapter() {
+
+                @Override
+                public void mouseClicked(MouseEvent ev) {
+                    String codigoB = vistaIp.getTxtCodBarraGP().getText();
+                    String nombreP = vistaIp.getTxtNombreGP().getText();
+                    String marcaP = vistaIp.getTxtMarcaGP().getText();
+                    String contenidoP = vistaIp.getTxtContenidoGP().getText();
+                    double precioP = ((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue();
+                    int cantidadP = (int) vistaIp.getSpnCantidadGP().getValue();
+
+                    Producto p = new Producto();
+                    p.setCodigo_barra(codigoB);
+                    p.setNombre(nombreP);
+                    p.setMarca(marcaP);
+                    p.setContenido(contenidoP);
+                    p.setPrecio(precioP);
+                    p.setCantidad(cantidadP);
+
+                    if (productoDao.insert(p) != 0) {
+                        System.out.println("Se agregó exitosamente");
+                    } else {
+                        System.out.println("Error en la inserción del producto, desde GP");
+                    }
+                    List<Producto> productos = productoDao.selectAll();
+                    mostrarElementosEnTabla(productos);
+                    vistaIp.getTxtCodBarraGP().setText("");
+                    vistaIp.getTxtNombreGP().setText("");
+                    vistaIp.getTxtMarcaGP().setText("");
+                    vistaIp.getTxtContenidoGP().setText("");
+                    vistaIp.getSpnPrecioGP().setValue(0);
+                    vistaIp.getSpnCantidadGP().setValue(0);
+                }
+            });
+        } else {
+            //Si en caso se seleccione el valor de una fila de la tabla
+            alternarPanelesGP(false);
+            //Eliminar
+            vistaIp.getPnlEliminarGP().addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent ev) {
+                    int fila = vistaIp.getTablaProductos().getSelectedRow();
+                    modelo.removeRow(fila);
+                }
+            });
+        }
+    }
+
+    public void pnlAgregarOActualizaProducto() {
         vistaInfo.getBtnAceptar().addActionListener(new ActionListener() {
 
             @Override
@@ -180,7 +287,6 @@ public final class PrincipalController implements ActionListener {
                 }
             }
         });
-
     }
 
     private void configuracionTabbedPane() {
