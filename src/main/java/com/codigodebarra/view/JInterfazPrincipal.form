@@ -66,7 +66,7 @@
             <Container class="javax.swing.JPanel" name="pnlBarraDeOpciones">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="cc" red="ff" type="rgb"/>
+                  <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -477,7 +477,7 @@
             <Container class="javax.swing.JPanel" name="jPanel4">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="cc" type="rgb"/>
+                  <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
               </Properties>
 
@@ -505,7 +505,7 @@
                     <Container class="javax.swing.JPanel" name="panelPrincipal">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="66" green="66" red="ff" type="rgb"/>
+                          <Color blue="33" green="33" red="33" type="rgb"/>
                         </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -843,7 +843,7 @@
                                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                   <Color blue="0" green="0" red="0" type="rgb"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="                Selecciona el producto para realizar operaciones"/>
+                                <Property name="text" type="java.lang.String" value="   Selecciona el producto para realizar operaciones"/>
                               </Properties>
                             </Component>
                           </SubComponents>
@@ -867,12 +867,12 @@
                             <Container class="javax.swing.JPanel" name="pnlOperacionesProducto">
                               <Properties>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                  <Color blue="ff" green="99" red="33" type="rgb"/>
+                                  <Color blue="66" green="66" red="66" type="rgb"/>
                                 </Property>
                               </Properties>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="0" y="0" width="420" height="780"/>
+                                  <AbsoluteConstraints x="0" y="0" width="420" height="790"/>
                                 </Constraint>
                               </Constraints>
 
@@ -993,11 +993,6 @@
                                   </SubComponents>
                                 </Container>
                                 <Container class="javax.swing.JPanel" name="jPanel11">
-                                  <Properties>
-                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                                      <Color blue="0" green="66" red="cc" type="rgb"/>
-                                    </Property>
-                                  </Properties>
                                   <Constraints>
                                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                       <AbsoluteConstraints x="0" y="190" width="420" height="440"/>
@@ -1346,7 +1341,7 @@
                         <Container class="javax.swing.JPanel" name="pnlTablaProductos">
                           <Properties>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="66" green="66" red="ff" type="rgb"/>
+                              <Color blue="cc" green="cc" red="cc" type="rgb"/>
                             </Property>
                           </Properties>
                           <Constraints>

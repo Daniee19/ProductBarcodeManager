@@ -118,7 +118,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlNorth.setPreferredSize(new java.awt.Dimension(1065, 50));
         pnlNorth.setLayout(new java.awt.CardLayout());
 
-        pnlBarraDeOpciones.setBackground(new java.awt.Color(255, 204, 0));
+        pnlBarraDeOpciones.setBackground(new java.awt.Color(51, 51, 51));
 
         pnlMinusLogin.setBackground(new java.awt.Color(51, 51, 51));
         pnlMinusLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -314,13 +314,13 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlCenter.setBackground(new java.awt.Color(51, 255, 255));
         pnlCenter.setLayout(new java.awt.GridLayout(1, 0));
 
-        jPanel4.setBackground(new java.awt.Color(204, 0, 0));
+        jPanel4.setBackground(new java.awt.Color(51, 51, 51));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
 
-        panelPrincipal.setBackground(new java.awt.Color(255, 102, 102));
+        panelPrincipal.setBackground(new java.awt.Color(51, 51, 51));
         panelPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         panelPrincipal.setLayout(new java.awt.BorderLayout());
         panelPrincipal.add(jSeparator3, java.awt.BorderLayout.PAGE_END);
@@ -434,7 +434,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setText("                Selecciona el producto para realizar operaciones");
+        jLabel12.setText("   Selecciona el producto para realizar operaciones");
         pnlInventarioTitulo.add(jLabel12);
 
         panelInventario.add(pnlInventarioTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 0, 1490, 71));
@@ -442,7 +442,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlIzquierdaOperacionesProducto.setBackground(new java.awt.Color(255, 255, 102));
         pnlIzquierdaOperacionesProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlOperacionesProducto.setBackground(new java.awt.Color(51, 153, 255));
+        pnlOperacionesProducto.setBackground(new java.awt.Color(102, 102, 102));
         pnlOperacionesProducto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -484,7 +484,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         pnlOperacionesProducto.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 170));
 
-        jPanel11.setBackground(new java.awt.Color(204, 102, 0));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -615,11 +614,11 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         pnlOperacionesProducto.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 420, 120));
 
-        pnlIzquierdaOperacionesProducto.add(pnlOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 780));
+        pnlIzquierdaOperacionesProducto.add(pnlOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 790));
 
         panelInventario.add(pnlIzquierdaOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 71, 420, 790));
 
-        pnlTablaProductos.setBackground(new java.awt.Color(255, 102, 102));
+        pnlTablaProductos.setBackground(new java.awt.Color(204, 204, 204));
         pnlTablaProductos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

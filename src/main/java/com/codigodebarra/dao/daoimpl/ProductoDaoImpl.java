@@ -134,6 +134,29 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
+    public boolean updateQuantityAfterInsert(int id) {
+        boolean estado = false;
+        StringBuilder sql = new StringBuilder();
+        sql.append("Update ")
+                .append("producto")
+                .append(" set ")
+                .append("cantidad = cantidad +1")
+                .append(" where ")
+                .append("id_producto = ?");
+        try {
+            Connection conn = con.getConexion();
+            ps = conn.prepareStatement(sql.toString());
+            ps.setInt(1, id);
+
+            ps.executeUpdate();
+            estado = true;
+        } catch (SQLException e) {
+            System.out.println("Error al momento de consultar: " + e.getMessage());
+        }
+        return estado;
+    }
+
+    @Override
     public Producto findByCodeProduct(String codigo_barra) {
         Producto p = null;
 
@@ -167,29 +190,6 @@ public class ProductoDaoImpl implements ProductoDao {
             System.out.println("Error al momento de consultar por codigo de barra: " + e.getMessage());
         }
         return p;
-    }
-
-    @Override
-    public boolean updateQuantityAfterInsert(int id) {
-        boolean estado = false;
-        StringBuilder sql = new StringBuilder();
-        sql.append("Update ")
-                .append("producto")
-                .append(" set ")
-                .append("cantidad = cantidad +1")
-                .append(" where ")
-                .append("id_producto = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
-            ps.setInt(1, id);
-
-            ps.executeUpdate();
-            estado = true;
-        } catch (SQLException e) {
-            System.out.println("Error al momento de consultar: " + e.getMessage());
-        }
-        return estado;
     }
 
     @Override
@@ -371,5 +371,4 @@ public class ProductoDaoImpl implements ProductoDao {
         }
         return productos;
     }
-
 }
