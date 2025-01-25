@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -105,12 +107,14 @@ public final class PrincipalController implements ActionListener {
         List<Producto> productos = productoDao.selectAll();
 
         mostrarElementosEnTabla(productos);
-        //=============
-        informacionBusqueda(productos);
+        //============= Referencia: ComboBox y TextField de busqueda
+        informacionBusqueda();
     }
 
-    public void informacionBusqueda(List<Producto> productos) {
+    public void informacionBusqueda() {
         vistaIp.getPnlBuscarProd().addMouseListener(new MouseAdapter() {
+            List<Producto> productos = productoDao.selectAll();
+
             @Override
             public void mouseClicked(MouseEvent e) {
                 int nombreColumna = vistaIp.getCbNombresColumnasProd().getSelectedIndex();
@@ -182,112 +186,148 @@ public final class PrincipalController implements ActionListener {
     public void gestionProductoIp() {
         //Por default, los paneles en la gestión de producto deben estar así
         alternarPanelesGP(true);
+
+        MouseAdapter ma = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent ev) {
+                String codigoB = vistaIp.getTxtCodBarraGP().getText();
+
+                //Lógica para agregar producto
+                if (!codigoB.isEmpty()) {
+                    if (productoDao.findByCodeProduct(codigoB) == null) {
+                        String nombreP = vistaIp.getTxtNombreGP().getText();
+                        String marcaP = vistaIp.getTxtMarcaGP().getText();
+                        String contenidoP = vistaIp.getTxtContenidoGP().getText();
+                        double precioP = ((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue();
+                        int cantidadP = (int) vistaIp.getSpnCantidadGP().getValue();
+
+                        Producto p = new Producto();
+                        p.setCodigo_barra(codigoB);
+                        p.setNombre(nombreP);
+                        p.setMarca(marcaP);
+                        p.setContenido(contenidoP);
+                        p.setPrecio(precioP);
+                        p.setCantidad(cantidadP);
+
+                        if (productoDao.insert(p) != 0) {
+                            System.out.println("Se agregó exitosamente");
+                        } else {
+                            System.out.println("Error en la inserción del producto, desde GP");
+                        }
+                        List<Producto> productos = productoDao.selectAll();
+                        mostrarElementosEnTabla(productos);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se aceptan códigos de barras duplicados");
+                    }
+                    limpiezaTextFieldsGP();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Agregue un valor para el código de barra");
+                }
+
+            }
+        }; // Fin del mouseAdapter
+        vistaIp.getPnlAgregarGP().addMouseListener(ma);
+
+        //Esta logica funcionará si en todo cas se selecciona o se deselecciona una fila de la tabla
         vistaIp.getTablaProductos().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            Producto pr = null;
 
             //Se ejecutará cuando escuche un cambio en la tabla
             @Override
             public void valueChanged(ListSelectionEvent e) {
-
                 if (!e.getValueIsAdjusting()) {
 
                     int fila = vistaIp.getTablaProductos().getSelectedRow();
 
                     //Si en caso selecciona una fila
                     if (fila != -1) {
+
                         alternarPanelesGP(false);
-                        String codBarra = (String) vistaIp.getTablaProductos().getValueAt(fila, 0);
-                        System.out.println("El codigo de barra de la fila es: "+codBarra);
-                        String nombre = (String) vistaIp.getTablaProductos().getValueAt(fila, 1);
-                        String marca = (String) vistaIp.getTablaProductos().getValueAt(fila, 2);
-                        String contenido = (String) vistaIp.getTablaProductos().getValueAt(fila, 3);
-                        double precio = (double) vistaIp.getTablaProductos().getValueAt(fila, 4);
-                        int cantidad = (int) vistaIp.getTablaProductos().getValueAt(fila, 5);
+                        vistaIp.getPnlAgregarGP().removeMouseListener(ma);
 
-                        pr = new Producto();
-                        //Mostrar valores en los textFields
-                        vistaIp.getTxtCodBarraGP().setText(codBarra);
-                        vistaIp.getTxtNombreGP().setText(nombre);
-                        vistaIp.getTxtMarcaGP().setText(marca);
-                        vistaIp.getTxtContenidoGP().setText(contenido);
-                        vistaIp.getSpnPrecioGP().setValue(precio);
-                        vistaIp.getSpnCantidadGP().setValue(cantidad);
-
+                        String codBarra = mostrarValoresFilaSelecionada(fila);
+                        //============================================================
                         //Metodos accion
-                        //Eliminar
-                        if (vistaIp.getPnlEliminarGP().isEnabled() == true && vistaIp.getPnlLimpiarGP().isEnabled() == true && vistaIp.getPnlActualizarGP().isEnabled() == true) {
-                            vistaIp.getPnlEliminarGP().addMouseListener(new MouseAdapter() {
-                                @Override
-                                public void mouseClicked(MouseEvent ev) {
-                                    int fila = vistaIp.getTablaProductos().getSelectedRow();
-                                    if (fila != -1) {
-                                        modelo.removeRow(fila);
-                                        if (productoDao.deleteByCodeBar(codBarra)) {
-                                            System.out.println("Elemento eliminado");
-                                        } else {
-                                            System.out.println("Fila no eliminada");
-                                        }
+                        //============================================================
+                        /**
+                         * Cada vez que se seleccione una fila de la tabla, se
+                         * ejecuta el valueChanged, creandose así varios
+                         * mouseListener, esto dependiendo de la cantidad de
+                         * veces que seleccione las filas de la tabla.
+                         */
+                        /**
+                         * Para ello, se tienen que eliminar todos los
+                         * mouseListener creados, para solo tener uno solo, al
+                         * momento de realizar el click al panel que desee.
+                         */
+                        //1. Eliminar
+                        for (MouseListener ml : vistaIp.getPnlEliminarGP().getMouseListeners()) {
+                            vistaIp.getPnlEliminarGP().removeMouseListener(ml);
+                        }
+                        vistaIp.getPnlEliminarGP().addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent ev) {
+                                int fila = vistaIp.getTablaProductos().getSelectedRow();
+                                if (fila != -1) {
+                                    modelo.removeRow(fila);
+                                    if (productoDao.deleteByCodeBar(codBarra)) {
+                                        System.out.println("Elemento eliminado");
+                                    } else {
+                                        System.out.println("Fila no eliminada");
                                     }
                                 }
-                            });
-
-                            vistaIp.getPnlLimpiarGP().addMouseListener(new MouseAdapter() {
-                                @Override
-                                public void mouseClicked(MouseEvent ev) {
-                                    limpiezaTextFieldsGP();
-                                }
-                            });
-                        } else {
-                            JOptionPane.showMessageDialog(null, "HAZ HECHO CLICK EN UN CAMPO DESHABILITADO");
+                            }
+                        });
+                        // 2. Limpiar
+                        for (MouseListener ml : vistaIp.getPnlLimpiarGP().getMouseListeners()) {
+                            vistaIp.getPnlLimpiarGP().removeMouseListener(ml);
                         }
-                        //Si en caso se seleccione una fila
+                        vistaIp.getPnlLimpiarGP().addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent ev) {
+                                limpiezaTextFieldsGP();
+                            }
+                        });
+                        // 3. Actualizar
+                        for (MouseListener ml : vistaIp.getPnlActualizarGP().getMouseListeners()) {
+                            vistaIp.getPnlActualizarGP().removeMouseListener(ml);
+                        }
+                        vistaIp.getPnlActualizarGP().addMouseListener(new MouseAdapter() {
+                            @Override
+                            public void mouseClicked(MouseEvent ev) {
+                                //Código de actualizar
+                                JOptionPane.showMessageDialog(null, "Se actualizará");
+                            }
+                        });
                     } else {
                         alternarPanelesGP(true);
-                        if (vistaIp.getPnlAgregarGP().isEnabled() == true) {
-                            //Agregar producto
-                            vistaIp.getPnlAgregarGP().addMouseListener(new MouseAdapter() {
-
-                                @Override
-                                public void mouseClicked(MouseEvent ev) {
-                                    String codigoB = vistaIp.getTxtCodBarraGP().getText();
-                                    if (!codigoB.isEmpty()) {
-                                        if (productoDao.findByCodeProduct(codigoB) == null) {
-                                            String nombreP = vistaIp.getTxtNombreGP().getText();
-                                            String marcaP = vistaIp.getTxtMarcaGP().getText();
-                                            String contenidoP = vistaIp.getTxtContenidoGP().getText();
-                                            double precioP = ((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue();
-                                            int cantidadP = (int) vistaIp.getSpnCantidadGP().getValue();
-
-                                            Producto p = new Producto();
-                                            p.setCodigo_barra(codigoB);
-                                            p.setNombre(nombreP);
-                                            p.setMarca(marcaP);
-                                            p.setContenido(contenidoP);
-                                            p.setPrecio(precioP);
-                                            p.setCantidad(cantidadP);
-
-                                            if (productoDao.insert(p) != 0) {
-                                                System.out.println("Se agregó exitosamente");
-                                            } else {
-                                                System.out.println("Error en la inserción del producto, desde GP");
-                                            }
-                                            List<Producto> productos = productoDao.selectAll();
-                                            mostrarElementosEnTabla(productos);
-                                        } else {
-                                            JOptionPane.showMessageDialog(null, "No se aceptan códigos de barras duplicados");
-                                        }
-                                        limpiezaTextFieldsGP();
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, "Agregue un valor para el código de barra");
-                                    }
-
-                                }
-                            });
-                        }
-                    }
+                        //Agregar producto
+                        vistaIp.getPnlAgregarGP().addMouseListener(ma);
+                    } //Fin en caso se seleccione o no una fila de la tabla
                 }
-            }
+            }//Fin del ValueChanged
         });
+
+    } // Fin de la GP
+
+    public String mostrarValoresFilaSelecionada(int fila) {
+        String codBarra = (String) vistaIp.getTablaProductos().getValueAt(fila, 0);
+        System.out.println("El codigo de barra de la fila es: " + codBarra);
+        String nombre = (String) vistaIp.getTablaProductos().getValueAt(fila, 1);
+        String marca = (String) vistaIp.getTablaProductos().getValueAt(fila, 2);
+        String contenido = (String) vistaIp.getTablaProductos().getValueAt(fila, 3);
+        double precio = (double) vistaIp.getTablaProductos().getValueAt(fila, 4);
+        int cantidad = (int) vistaIp.getTablaProductos().getValueAt(fila, 5);
+
+        Producto pr = new Producto();
+        //Mostrar valores en los textFields
+        vistaIp.getTxtCodBarraGP().setText(codBarra);
+        vistaIp.getTxtNombreGP().setText(nombre);
+        vistaIp.getTxtMarcaGP().setText(marca);
+        vistaIp.getTxtContenidoGP().setText(contenido);
+        vistaIp.getSpnPrecioGP().setValue(precio);
+        vistaIp.getSpnCantidadGP().setValue(cantidad);
+
+        return codBarra;
     }
 
     public void limpiezaTextFieldsGP() {
