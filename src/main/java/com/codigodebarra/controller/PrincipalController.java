@@ -164,6 +164,7 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getPnlActualizarGP().setEnabled(!valor);
         vistaIp.getPnlEliminarGP().setEnabled(!valor);
         vistaIp.getPnlLimpiarGP().setEnabled(!valor);
+
         if (valor == true) {
             vistaIp.getPnlAgregarGP().setBackground(new Color(255, 255, 255));
             vistaIp.getPnlActualizarGP().setBackground(new Color(200, 200, 200));
@@ -196,6 +197,7 @@ public final class PrincipalController implements ActionListener {
                     if (fila != -1) {
                         alternarPanelesGP(false);
                         String codBarra = (String) vistaIp.getTablaProductos().getValueAt(fila, 0);
+                        System.out.println("El codigo de barra de la fila es: "+codBarra);
                         String nombre = (String) vistaIp.getTablaProductos().getValueAt(fila, 1);
                         String marca = (String) vistaIp.getTablaProductos().getValueAt(fila, 2);
                         String contenido = (String) vistaIp.getTablaProductos().getValueAt(fila, 3);
@@ -213,59 +215,75 @@ public final class PrincipalController implements ActionListener {
 
                         //Metodos accion
                         //Eliminar
-                        vistaIp.getPnlEliminarGP().addMouseListener(new MouseAdapter() {
-                            @Override
-                            public void mouseClicked(MouseEvent ev) {
-                                int fila = vistaIp.getTablaProductos().getSelectedRow();
-                                if (fila != -1) {
-                                    modelo.removeRow(fila);
+                        if (vistaIp.getPnlEliminarGP().isEnabled() == true && vistaIp.getPnlLimpiarGP().isEnabled() == true && vistaIp.getPnlActualizarGP().isEnabled() == true) {
+                            vistaIp.getPnlEliminarGP().addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent ev) {
+                                    int fila = vistaIp.getTablaProductos().getSelectedRow();
+                                    if (fila != -1) {
+                                        modelo.removeRow(fila);
+                                        if (productoDao.deleteByCodeBar(codBarra)) {
+                                            System.out.println("Elemento eliminado");
+                                        } else {
+                                            System.out.println("Fila no eliminada");
+                                        }
+                                    }
                                 }
-                            }
-                        });
-                        vistaIp.getPnlLimpiarGP().addMouseListener(new MouseAdapter() {
-                            @Override
-                            public void mouseClicked(MouseEvent ev) {
-                                limpiezaTextFieldsGP();
-                            }
-                        });
+                            });
+
+                            vistaIp.getPnlLimpiarGP().addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent ev) {
+                                    limpiezaTextFieldsGP();
+                                }
+                            });
+                        } else {
+                            JOptionPane.showMessageDialog(null, "HAZ HECHO CLICK EN UN CAMPO DESHABILITADO");
+                        }
                         //Si en caso se seleccione una fila
                     } else {
                         alternarPanelesGP(true);
+                        if (vistaIp.getPnlAgregarGP().isEnabled() == true) {
+                            //Agregar producto
+                            vistaIp.getPnlAgregarGP().addMouseListener(new MouseAdapter() {
 
-                        //Agregar producto
-                        vistaIp.getPnlAgregarGP().addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent ev) {
+                                    String codigoB = vistaIp.getTxtCodBarraGP().getText();
+                                    if (!codigoB.isEmpty()) {
+                                        if (productoDao.findByCodeProduct(codigoB) == null) {
+                                            String nombreP = vistaIp.getTxtNombreGP().getText();
+                                            String marcaP = vistaIp.getTxtMarcaGP().getText();
+                                            String contenidoP = vistaIp.getTxtContenidoGP().getText();
+                                            double precioP = ((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue();
+                                            int cantidadP = (int) vistaIp.getSpnCantidadGP().getValue();
 
-                            @Override
-                            public void mouseClicked(MouseEvent ev) {
-                                String codigoB = vistaIp.getTxtCodBarraGP().getText();
-                                if (productoDao.findByCodeProduct(codigoB) != null && !codigoB.equals("")) {
-                                    String nombreP = vistaIp.getTxtNombreGP().getText();
-                                    String marcaP = vistaIp.getTxtMarcaGP().getText();
-                                    String contenidoP = vistaIp.getTxtContenidoGP().getText();
-                                    double precioP = ((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue();
-                                    int cantidadP = (int) vistaIp.getSpnCantidadGP().getValue();
+                                            Producto p = new Producto();
+                                            p.setCodigo_barra(codigoB);
+                                            p.setNombre(nombreP);
+                                            p.setMarca(marcaP);
+                                            p.setContenido(contenidoP);
+                                            p.setPrecio(precioP);
+                                            p.setCantidad(cantidadP);
 
-                                    Producto p = new Producto();
-                                    p.setCodigo_barra(codigoB);
-                                    p.setNombre(nombreP);
-                                    p.setMarca(marcaP);
-                                    p.setContenido(contenidoP);
-                                    p.setPrecio(precioP);
-                                    p.setCantidad(cantidadP);
-
-                                    if (productoDao.insert(p) != 0) {
-                                        System.out.println("Se agregó exitosamente");
+                                            if (productoDao.insert(p) != 0) {
+                                                System.out.println("Se agregó exitosamente");
+                                            } else {
+                                                System.out.println("Error en la inserción del producto, desde GP");
+                                            }
+                                            List<Producto> productos = productoDao.selectAll();
+                                            mostrarElementosEnTabla(productos);
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "No se aceptan códigos de barras duplicados");
+                                        }
+                                        limpiezaTextFieldsGP();
                                     } else {
-                                        System.out.println("Error en la inserción del producto, desde GP");
+                                        JOptionPane.showMessageDialog(null, "Agregue un valor para el código de barra");
                                     }
-                                    List<Producto> productos = productoDao.selectAll();
-                                    mostrarElementosEnTabla(productos);
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "No se aceptan códigos de barras duplicados");
+
                                 }
-                                limpiezaTextFieldsGP();
-                            }
-                        });
+                            });
+                        }
                     }
                 }
             }

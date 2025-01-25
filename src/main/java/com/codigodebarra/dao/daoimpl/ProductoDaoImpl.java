@@ -371,4 +371,30 @@ public class ProductoDaoImpl implements ProductoDao {
         }
         return productos;
     }
+
+    @Override
+    public boolean deleteByCodeBar(String codigo_barra) {
+        boolean estado = false;
+        StringBuilder sql = new StringBuilder();
+        sql.append("Delete ")
+                .append("from ")
+                .append("producto ")
+                .append("where ")
+                .append("codigo_barra = ?");
+        try {
+            Connection conn = con.getConexion();
+            ps = conn.prepareStatement(sql.toString());
+            ps.setString(1, codigo_barra);
+            ps.executeUpdate();
+            estado = true;
+        } catch (SQLException e) {
+            System.out.println("Error al eliminar producto, por el codigo de barra: " + e.getMessage());
+        }
+        return estado;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

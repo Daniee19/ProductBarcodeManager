@@ -18,4 +18,6 @@ public interface ProductoDao extends Dao<Producto> {
     public List<Producto> findByQuantity(String quantity);
 
     public boolean updateQuantityAfterInsert(int id);
+
+    public boolean deleteByCodeBar(String codigo_barra);
 }
