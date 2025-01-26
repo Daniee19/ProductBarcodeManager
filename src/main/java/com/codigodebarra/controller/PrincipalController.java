@@ -11,7 +11,9 @@ import com.codigodebarra.view.JInformacion;
 import com.codigodebarra.view.JInterfazPrincipal;
 import com.codigodebarra.view.JLogin;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Image;
+import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -25,10 +27,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public final class PrincipalController implements ActionListener {
 
@@ -96,6 +101,41 @@ public final class PrincipalController implements ActionListener {
 
         vistaIp.getTablaProductos().setModel(modelo);
 
+        /**
+         * Se usa el new DefaultTableCellRenderer para crear un objeto que nos
+         * permita modificar el diseño de las celdas de una tabla Se puede usar
+         * solo el setDefautlRenderer para asignar un nuevo defaultTable de
+         * manera que no necesite una configuración avanzada.
+        *
+         */
+        vistaIp.getTablaProductos().getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
+
+            /**
+             * En caso que haya limitaciones, o quisieses hacer algún metodo
+             * dependiendo de la acción Se necesita sobreescribir este metodo
+             * para hacer modificaciones Es una modificación más avanzada,
+             * debido a la restricción que hay con el cambio de color, por el
+             * opaque(null) -> Lo cual hace que el color del fondo no se muestre
+             * por ser un label (Esa es la configuración de la renderización del
+             * JLabel).
+             */
+            /**
+             * Por lo tanto, el getTableCellRendererComponent, permite
+             * personalizar de manera más específica, a parte de lo que
+             * DefautlTableCellRenderer ofrece por defecto.
+             */
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+                Component c = super.getTableCellRendererComponent(vistaIp.getTablaProductos(), value, isSelected, hasFocus, row, column);
+                c.setBackground(new Color(70,70,70));
+                c.setForeground(Color.WHITE);
+                //Retorna el componente personalizado (el JLabel)
+                return c;
+            }
+        });
+        //==============
+
         vistaIp.getCbNombresColumnasProd().addItem("<Seleccione un campo>");
         //Ponemos los nombres de las columnas, al combobox para hacer busquedas
         for (String i : tituloColumnas) {
@@ -113,10 +153,10 @@ public final class PrincipalController implements ActionListener {
 
     public void informacionBusqueda() {
         vistaIp.getPnlBuscarProd().addMouseListener(new MouseAdapter() {
-            List<Producto> productos = productoDao.selectAll();
 
             @Override
             public void mouseClicked(MouseEvent e) {
+                List<Producto> productos = productoDao.selectAll();
                 int nombreColumna = vistaIp.getCbNombresColumnasProd().getSelectedIndex();
 
                 switch (nombreColumna) {
@@ -126,7 +166,7 @@ public final class PrincipalController implements ActionListener {
                     }
                     case 1 -> {
                         Producto p = null;
-                        if (vistaIp.getTxtValorProd().getText() == null) {
+                        if (vistaIp.getTxtValorProd().getText() == null || vistaIp.getTxtValorProd().getText().equals("")) {
                             modelo.setNumRows(0);
                         } else {
                             p = productoDao.findByCodeProduct(vistaIp.getTxtValorProd().getText());

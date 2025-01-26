@@ -14,12 +14,13 @@ public class ProductoDaoImpl implements ProductoDao {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public ProductoDaoImpl() {
-        con = new Conexion();
-    }
-
+//    public ProductoDaoImpl() {
+//        con = new Conexion();
+//    }
     @Override
     public Producto select(int id) {
+        //Solucionado
+        con = new Conexion();
         Producto p = null;
         StringBuilder sql = new StringBuilder();
         sql.append("Select ")
@@ -28,11 +29,9 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto")
                 .append(" where")
                 .append("id_producto = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
-            ps.setInt(1, id);
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
 
+            ps.setInt(1, id);
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -57,6 +56,7 @@ public class ProductoDaoImpl implements ProductoDao {
 
     @Override
     public List<Producto> selectAll() {
+        con = new Conexion();
         List<Producto> productos = new ArrayList<>();
         StringBuilder sql = new StringBuilder();
         sql.append("Select ")
@@ -64,11 +64,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append(" from ")
                 .append("producto");
 
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
-
-            rs = ps.executeQuery();
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString()); ResultSet rs = ps.executeQuery();) {
 
             while (rs.next()) {
                 Producto p = new Producto();
@@ -91,7 +87,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public int insert(Producto producto) {
+    public int insert(Producto producto
+    ) {
+        con = new Conexion();
         int id_obtenido_producto = 0;
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO ").append(" producto ")
@@ -105,9 +103,9 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append(") values (")
                 .append("?,?,?,?,?,?,?")
                 .append(")");
-        try {
-            Connection conn = con.getConexion(); //Llamar a la variable, la cual ya pasó por el DriverManager...
-            ps = conn.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+
+        //Llamar a la variable, la cual ya pasó por el DriverManager...
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);) {
             ps.setString(1, producto.getCodigo_barra());
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
@@ -134,7 +132,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public boolean updateQuantityAfterInsert(int id) {
+    public boolean updateQuantityAfterInsert(int id
+    ) {
+        con = new Conexion();
         boolean estado = false;
         StringBuilder sql = new StringBuilder();
         sql.append("Update ")
@@ -143,11 +143,9 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("cantidad = cantidad +1")
                 .append(" where ")
                 .append("id_producto = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
-            ps.setInt(1, id);
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
 
+            ps.setInt(1, id);
             ps.executeUpdate();
             estado = true;
         } catch (SQLException e) {
@@ -157,7 +155,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public Producto findByCodeProduct(String codigo_barra) {
+    public Producto findByCodeProduct(String codigo_barra
+    ) {
+        con = new Conexion();
         Producto p = null;
 
         StringBuilder sql = new StringBuilder();
@@ -167,9 +167,8 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto ")
                 .append("where ")
                 .append("codigo_barra = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
+
             ps.setString(1, codigo_barra);
 
             rs = ps.executeQuery();
@@ -193,7 +192,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public List<Producto> findByName(String name) {
+    public List<Producto> findByName(String name
+    ) {
+        con = new Conexion();
         List<Producto> productos = new ArrayList<>();
 
         StringBuilder sql = new StringBuilder();
@@ -203,9 +204,8 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto ")
                 .append("where ")
                 .append("nombre = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
+
             ps.setString(1, name);
 
             rs = ps.executeQuery();
@@ -229,7 +229,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public List<Producto> findByBrand(String brand) {
+    public List<Producto> findByBrand(String brand
+    ) {
+        con = new Conexion();
         List<Producto> productos = new ArrayList<>();
 
         StringBuilder sql = new StringBuilder();
@@ -239,9 +241,8 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto ")
                 .append("where ")
                 .append("marca = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
+
             ps.setString(1, brand);
 
             rs = ps.executeQuery();
@@ -265,7 +266,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public List<Producto> findByContent(String content) {
+    public List<Producto> findByContent(String content
+    ) {
+        con = new Conexion();
         List<Producto> productos = new ArrayList<>();
 
         StringBuilder sql = new StringBuilder();
@@ -275,9 +278,8 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto ")
                 .append("where ")
                 .append("contenido = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
+
             ps.setString(1, content);
 
             rs = ps.executeQuery();
@@ -301,7 +303,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public List<Producto> findByPrice(String price) {
+    public List<Producto> findByPrice(String price
+    ) {
+        con = new Conexion();
         List<Producto> productos = new ArrayList<>();
 
         StringBuilder sql = new StringBuilder();
@@ -311,9 +315,8 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto ")
                 .append("where ")
                 .append("precio = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
+
             ps.setString(1, price);
 
             rs = ps.executeQuery();
@@ -337,7 +340,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public List<Producto> findByQuantity(String quantity) {
+    public List<Producto> findByQuantity(String quantity
+    ) {
+        con = new Conexion();
         List<Producto> productos = new ArrayList<>();
 
         StringBuilder sql = new StringBuilder();
@@ -347,9 +352,8 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto ")
                 .append("where ")
                 .append("cantidad = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
+
             ps.setString(1, quantity);
 
             rs = ps.executeQuery();
@@ -373,7 +377,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public boolean deleteByCodeBar(String codigo_barra) {
+    public boolean deleteByCodeBar(String codigo_barra
+    ) {
+        con = new Conexion();
         boolean estado = false;
         StringBuilder sql = new StringBuilder();
         sql.append("Delete ")
@@ -381,9 +387,8 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto ")
                 .append("where ")
                 .append("codigo_barra = ?");
-        try {
-            Connection conn = con.getConexion();
-            ps = conn.prepareStatement(sql.toString());
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
+
             ps.setString(1, codigo_barra);
             ps.executeUpdate();
             estado = true;
@@ -394,7 +399,8 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(int id
+    ) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

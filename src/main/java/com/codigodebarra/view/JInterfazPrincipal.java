@@ -602,17 +602,17 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         lblPdfProd.setBackground(new java.awt.Color(255, 255, 255));
         lblPdfProd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblPdfProd.setText("PDF");
+        lblPdfProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pdf.png"))); // NOI18N
         lblPdfProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel16.add(lblPdfProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 50, 40));
+        jPanel16.add(lblPdfProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 50, 50));
 
         lblExcelProd.setBackground(new java.awt.Color(255, 255, 255));
         lblExcelProd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblExcelProd.setText("Excel");
+        lblExcelProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
         lblExcelProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel16.add(lblExcelProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 50, 40));
+        jPanel16.add(lblExcelProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 50, 50));
 
-        pnlOperacionesProducto.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 420, 120));
+        pnlOperacionesProducto.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 420, 130));
 
         pnlIzquierdaOperacionesProducto.add(pnlOperacionesProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 790));
 
@@ -624,15 +624,13 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         tablaProductos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
 
             }
         ));
+        tablaProductos.setShowGrid(false);
         jScrollPane1.setViewportView(tablaProductos);
 
         pnlTablaProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 950, 790));
