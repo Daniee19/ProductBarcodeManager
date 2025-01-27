@@ -322,8 +322,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         panelPrincipal.setBackground(new java.awt.Color(51, 51, 51));
         panelPrincipal.setForeground(new java.awt.Color(255, 255, 255));
-        panelPrincipal.setLayout(new java.awt.BorderLayout());
-        panelPrincipal.add(jSeparator3, java.awt.BorderLayout.PAGE_END);
+        panelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelPrincipal.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 876, 1650, -1));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -354,7 +354,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
                 .addGap(0, 35, Short.MAX_VALUE))
         );
 
-        panelPrincipal.add(jPanel3, java.awt.BorderLayout.NORTH);
+        panelPrincipal.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -368,7 +368,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         lblNombre.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jPanel5.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 28, 570, 33));
 
-        panelPrincipal.add(jPanel5, java.awt.BorderLayout.LINE_START);
+        panelPrincipal.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 92, 1650, 784));
 
         jTabbedPane1.addTab("tab1", panelPrincipal);
 

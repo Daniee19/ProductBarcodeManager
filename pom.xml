@@ -27,6 +27,12 @@
             <version>5.5.13.3</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>5.2.3</version> <!-- Actualiza según la versión estable más reciente -->
+        </dependency>
+
+        <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE170</version>
@@ -39,8 +45,20 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.15.2</version> <!-- Asegúrate de usar la última versión -->
+            <version>2.15.2</version> 
         </dependency>
+        <!-- JasperReports-->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.20.0</version> 
+        </dependency>
+        <dependency>
+            <groupId>org.jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.5.3</version> 
+        </dependency>
+
     </dependencies>
     <name>GestionDeProductosConCodigoDeBarras</name>
 
@@ -63,7 +81,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>
