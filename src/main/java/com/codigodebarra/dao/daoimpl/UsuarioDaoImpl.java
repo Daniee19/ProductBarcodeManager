@@ -17,10 +17,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     PreparedStatement ps;
     ResultSet rs;
-    Conexion con = new Conexion();
+    Conexion con = null;
 
     @Override
     public Usuario select(int id) {
+        con = new Conexion();
         Usuario usuario = null;
         StringBuilder sql = new StringBuilder();
         sql.append("Select ")
@@ -61,6 +62,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public List<Usuario> selectAll() {
+        con = new Conexion();
         List<Usuario> usuarios = new ArrayList<>();
         StringBuilder sql = new StringBuilder();
         sql.append("Select ")
@@ -98,6 +100,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public int insert(Usuario usuario) {
+        con = new Conexion();
         int id_obtenido_usuario = 0;
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO ").append(" usuario ")
@@ -145,7 +148,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public Usuario evaluarUsuario(String nombreUsuario, char[] contrasenia) {
-
+        con = new Conexion();
         Usuario usuario = null;
         StringBuilder sb = new StringBuilder();
         sb.append("Select ")
@@ -204,6 +207,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Usuario update(Usuario id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

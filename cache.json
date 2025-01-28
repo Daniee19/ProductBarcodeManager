@@ -137,6 +137,49 @@
       }
     }
   },
+  "7771701001865" : {
+    "brands" : "La Estrella,Chizitos",
+    "product_name" : "Chizitos",
+    "quantity" : "29 g",
+    "selected_images" : {
+      "front" : {
+        "display" : {
+          "aa" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_aa.3.400.jpg",
+          "es" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_es.19.400.jpg"
+        },
+        "small" : {
+          "aa" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_aa.3.200.jpg",
+          "es" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_es.19.200.jpg"
+        },
+        "thumb" : {
+          "aa" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_aa.3.100.jpg",
+          "es" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/front_es.19.100.jpg"
+        }
+      },
+      "ingredients" : {
+        "display" : {
+          "es" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/ingredients_es.20.400.jpg"
+        },
+        "small" : {
+          "es" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/ingredients_es.20.200.jpg"
+        },
+        "thumb" : {
+          "es" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/ingredients_es.20.100.jpg"
+        }
+      },
+      "nutrition" : {
+        "display" : {
+          "es" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/nutrition_es.21.400.jpg"
+        },
+        "small" : {
+          "es" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/nutrition_es.21.200.jpg"
+        },
+        "thumb" : {
+          "es" : "https://images.openfoodfacts.org/images/products/777/170/100/1865/nutrition_es.21.100.jpg"
+        }
+      }
+    }
+  },
   "7501000669509" : {
     "brands" : "Gamesa",
     "product_name" : "Barras de coco",

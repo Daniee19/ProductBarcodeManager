@@ -413,4 +413,43 @@ public class ProductoDaoImpl implements ProductoDao {
     ) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public Producto updateByCodeBar(Producto producto) {
+        con = new Conexion();
+        Producto p = null;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Update producto set ")
+                .append("nombre=?,")
+                .append("marca=?,")
+                .append("contenido=?,")
+                .append("precio=?,")
+                .append("cantidad=? ")
+                .append("where codigo_barra=?;");
+
+        try {
+            Connection conn = con.getConexion();
+            PreparedStatement ps = conn.prepareStatement(sb.toString());
+            ps.setString(1, producto.getNombre());
+            ps.setString(2, producto.getMarca());
+            ps.setString(3, producto.getContenido());
+            ps.setDouble(4, producto.getPrecio());
+            ps.setInt(5, producto.getCantidad());
+            ps.setString(6, producto.getCodigo_barra());
+
+            ps.executeUpdate();
+
+            System.out.println("Producto actualizado");
+        } catch (SQLException e) {
+            System.out.println("Error al actualizar producto: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    @Override
+    public Producto update(Producto id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

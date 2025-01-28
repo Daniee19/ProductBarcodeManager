@@ -19,5 +19,7 @@ public interface ProductoDao extends Dao<Producto> {
 
     public int updateQuantityAfterInsert(int id);
 
+    public Producto updateByCodeBar(Producto producto);
+
     public boolean deleteByCodeBar(String codigo_barra);
 }

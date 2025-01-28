@@ -19,7 +19,7 @@ public class JInformacion extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         txtNombreProd = new javax.swing.JTextField();
-        txtCompaniaProd = new javax.swing.JTextField();
+        txtMarcaProd = new javax.swing.JTextField();
         txtContenidoProd = new javax.swing.JTextField();
         txtCantidadProd = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -43,8 +43,8 @@ public class JInformacion extends javax.swing.JDialog {
         txtNombreProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
         jPanel1.add(txtNombreProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 220, -1));
 
-        txtCompaniaProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Marca"));
-        jPanel1.add(txtCompaniaProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 220, -1));
+        txtMarcaProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Marca"));
+        jPanel1.add(txtMarcaProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 220, -1));
 
         txtContenidoProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Contenido"));
         jPanel1.add(txtContenidoProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 120, 40));
@@ -156,12 +156,12 @@ public class JInformacion extends javax.swing.JDialog {
         this.txtCantidadProd = txtCantidadProd;
     }
 
-    public JTextField getTxtCompaniaProd() {
-        return txtCompaniaProd;
+    public JTextField getTxtMarcaProd() {
+        return txtMarcaProd;
     }
 
-    public void setTxtCompaniaProd(JTextField txtCompaniaProd) {
-        this.txtCompaniaProd = txtCompaniaProd;
+    public void setTxtMarcaProd(JTextField txtCompaniaProd) {
+        this.txtMarcaProd = txtCompaniaProd;
     }
 
     public JTextField getTxtContenidoProd() {
@@ -209,8 +209,8 @@ public class JInformacion extends javax.swing.JDialog {
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblPreguntar;
     private javax.swing.JTextField txtCantidadProd;
-    private javax.swing.JTextField txtCompaniaProd;
     private javax.swing.JTextField txtContenidoProd;
+    private javax.swing.JTextField txtMarcaProd;
     private javax.swing.JTextField txtNombreProd;
     // End of variables declaration//GEN-END:variables
 }

@@ -315,6 +315,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlCenter.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -499,8 +500,11 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         txtContenidoGP.setBorder(javax.swing.BorderFactory.createTitledBorder("Contenido"));
         jPanel11.add(txtContenidoGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 300, 40));
 
+        spnPrecioGP.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
         spnPrecioGP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel11.add(spnPrecioGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 140, 30));
+
+        spnCantidadGP.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         jPanel11.add(spnCantidadGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 140, 30));
 
         jLabel20.setText("Precio");
@@ -633,7 +637,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         tablaProductos.setShowGrid(false);
         jScrollPane1.setViewportView(tablaProductos);
 
-        pnlTablaProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 950, 790));
+        pnlTablaProductos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 960, 790));
 
         panelInventario.add(pnlTablaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 71, 1020, -1));
 

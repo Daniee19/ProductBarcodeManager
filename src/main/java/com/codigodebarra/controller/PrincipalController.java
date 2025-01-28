@@ -146,6 +146,29 @@ public final class PrincipalController implements ActionListener {
         mostrarElementosEnTabla(productos);
         //============= Referencia: ComboBox y TextField de busqueda
         informacionBusqueda();
+
+        //Hacer que se limpie las filas de la tabla que se encontraba seleccioanda, al hacer clic en los distintos paneles
+        vistaIp.getjPanel4().addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vistaIp.getTablaProductos().clearSelection();
+            }
+        });
+        vistaIp.getPanelInventario().addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vistaIp.getTablaProductos().clearSelection();
+            }
+        });
+        vistaIp.getPnlTablaProductos().addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vistaIp.getTablaProductos().clearSelection();
+            }
+        });
     }
 
     public void informacionBusqueda() {
@@ -332,7 +355,27 @@ public final class PrincipalController implements ActionListener {
                             @Override
                             public void mouseClicked(MouseEvent ev) {
                                 //Código de actualizar
-                                JOptionPane.showMessageDialog(null, "Se actualizará");
+                                int fila = vistaIp.getTablaProductos().getSelectedRow();
+                                if (fila > -1) {
+                                    modelo.setValueAt(vistaIp.getTxtNombreGP().getText(), fila, 1);
+                                    modelo.setValueAt(vistaIp.getTxtMarcaGP().getText(), fila, 2);
+                                    modelo.setValueAt(vistaIp.getTxtContenidoGP().getText(), fila, 3);
+                                    modelo.setValueAt(vistaIp.getSpnPrecioGP().getValue(), fila, 4);
+                                    modelo.setValueAt(vistaIp.getSpnCantidadGP().getValue(), fila, 5);
+
+                                    Producto p = new Producto();
+                                    p.setCodigo_barra(vistaIp.getTxtCodBarraGP().getText());
+                                    p.setNombre(vistaIp.getTxtNombreGP().getText());
+                                    p.setMarca(vistaIp.getTxtMarcaGP().getText());
+                                    p.setContenido(vistaIp.getTxtContenidoGP().getText());
+                                    p.setPrecio(((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue());
+                                    p.setCantidad(((Number) vistaIp.getSpnCantidadGP().getValue()).intValue());
+
+                                    productoDao.updateByCodeBar(p);
+                                    JOptionPane.showMessageDialog(null, "Producto actualizado");
+
+                                }
+                                limpiezaTextFieldsGP();
                             }
                         });
                     } else {
@@ -348,12 +391,11 @@ public final class PrincipalController implements ActionListener {
 
     public String mostrarValoresFilaSelecionada(int fila) {
         String codBarra = (String) vistaIp.getTablaProductos().getValueAt(fila, 0);
-        System.out.println("El codigo de barra de la fila es: " + codBarra);
         String nombre = (String) vistaIp.getTablaProductos().getValueAt(fila, 1);
         String marca = (String) vistaIp.getTablaProductos().getValueAt(fila, 2);
         String contenido = (String) vistaIp.getTablaProductos().getValueAt(fila, 3);
-        double precio = (double) vistaIp.getTablaProductos().getValueAt(fila, 4);
-        int cantidad = (int) vistaIp.getTablaProductos().getValueAt(fila, 5);
+        double precio = ((Number) vistaIp.getTablaProductos().getValueAt(fila, 4)).doubleValue();
+        int cantidad = ((Number) vistaIp.getTablaProductos().getValueAt(fila, 5)).intValue();
 
         Producto pr = new Producto();
         //Mostrar valores en los textFields
@@ -391,7 +433,23 @@ public final class PrincipalController implements ActionListener {
                 } else if (command.equals("agregar")) {
                     System.out.println("Se va a agregar");
 
+                    /**
+                     * El productoGlobal trae el objeto producto seteado con los
+                     * valores obtenidos de la API y se muestra en los
+                     * TextFields, pero en todo caso devuelve valores nulos, se
+                     * evalua con la bd (bueno eso es otra historia). Lo que
+                     * pasa es que se está trayendo los valores de la API
+                     * incluso con los valores vacíos, por ende se debe de leer
+                     * los texFields, cuando se de en el botón de agregar, para
+                     * setear los cambios del productoGobal y crear el producto.
+                     *
+                     */
+                    productoGlobal.setNombre(vistaInfo.getTxtNombreProd().getText());
+                    productoGlobal.setMarca(vistaInfo.getTxtMarcaProd().getText());
+                    productoGlobal.setContenido(vistaInfo.getTxtContenidoProd().getText());
+
                     int idObtenido = productoDao.insert(productoGlobal);
+
                     if (idObtenido > 0) {
                         productoDao.updateQuantityAfterInsert(idObtenido);
                         JOptionPane.showMessageDialog(null, "Producto agregado con éxito");
@@ -426,6 +484,7 @@ public final class PrincipalController implements ActionListener {
                 System.out.println("No existe en la base de datos");
                 vistaInfo.getLblPreguntar().setText("El producto es nuevo. ¿Desea agregarlo?");
                 vistaInfo.getBtnAceptar().setActionCommand("agregar");
+
                 this.productoGlobal = productoApi;
             }
             vistaInfo.getLblCodigoBarra().setText(productoApi.getCodigo_barra());
@@ -491,19 +550,19 @@ public final class PrincipalController implements ActionListener {
         //Si en caso el producto no retorna el nombre de la compania
         if (productoApi.getMarca().isEmpty()) {
             if (producto_bd == null) {
-                vistaInfo.getTxtCompaniaProd().setEditable(true);
-                vistaInfo.getTxtCompaniaProd().setText("--");
+                vistaInfo.getTxtMarcaProd().setEditable(true);
+                vistaInfo.getTxtMarcaProd().setText("--");
             } else {
-                vistaInfo.getTxtCompaniaProd().setEditable(false);
-                vistaInfo.getTxtCompaniaProd().setText(producto_bd.getNombre());
+                vistaInfo.getTxtMarcaProd().setEditable(false);
+                vistaInfo.getTxtMarcaProd().setText(producto_bd.getNombre());
             }
         } else {
             //Si en caso se haga cambios al resultado dado de la API
-            vistaInfo.getTxtCompaniaProd().setEditable(false);
+            vistaInfo.getTxtMarcaProd().setEditable(false);
             if (producto_bd == null) {
-                vistaInfo.getTxtCompaniaProd().setText(productoApi.getMarca());
+                vistaInfo.getTxtMarcaProd().setText(productoApi.getMarca());
             } else {
-                vistaInfo.getTxtCompaniaProd().setText(producto_bd.getMarca());
+                vistaInfo.getTxtMarcaProd().setText(producto_bd.getMarca());
             }
         }
 
