@@ -43,7 +43,7 @@ public class JInformacion extends javax.swing.JDialog {
         txtNombreProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Nombre"));
         jPanel1.add(txtNombreProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 220, -1));
 
-        txtCompaniaProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Compañía"));
+        txtCompaniaProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Marca"));
         jPanel1.add(txtCompaniaProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 220, -1));
 
         txtContenidoProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Contenido"));
@@ -70,10 +70,10 @@ public class JInformacion extends javax.swing.JDialog {
         lblPreguntar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jPanel2.add(lblPreguntar, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 313, 541, 41));
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel3.setBackground(new java.awt.Color(255, 204, 102));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Código de barras:");
+        jLabel2.setText("Código de barras");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 110, -1));
         jPanel3.add(lblCodigoBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 10, 220, 30));
 

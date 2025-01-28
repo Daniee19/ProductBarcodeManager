@@ -132,10 +132,9 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public boolean updateQuantityAfterInsert(int id
-    ) {
+    public int updateQuantityAfterInsert(int id) {
         con = new Conexion();
-        boolean estado = false;
+        int cantidad = -1;
         StringBuilder sql = new StringBuilder();
         sql.append("Update ")
                 .append("producto")
@@ -143,15 +142,26 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("cantidad = cantidad +1")
                 .append(" where ")
                 .append("id_producto = ?");
-        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
-
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            estado = true;
+        String obtenerCantidad = "Select cantidad from producto where id_producto=?";
+        //Se hace la consulta para actualizar la cantidad del producto, por medio de su id del producto
+        try (Connection conn = con.getConexion();) {
+            try (PreparedStatement ps = conn.prepareStatement(sql.toString());) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+            //Se ejecuta con respecto a la consulta para obtener la cantidad actualizada del producto
+            try (PreparedStatement ps2 = conn.prepareStatement(obtenerCantidad);) {
+                ps2.setInt(1, id);
+                try (ResultSet rs = ps2.executeQuery()) {
+                    if (rs.next()) {
+                        cantidad = rs.getInt("cantidad");
+                    }
+                }
+            }
         } catch (SQLException e) {
             System.out.println("Error al momento de consultar: " + e.getMessage());
         }
-        return estado;
+        return cantidad;
     }
 
     @Override
