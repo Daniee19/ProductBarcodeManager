@@ -3,10 +3,24 @@ package com.codigodebarra.dao.daoimpl;
 import com.codigodebarra.config.Conexion;
 import com.codigodebarra.dao.ProductoDao;
 import com.codigodebarra.model.Producto;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.AEADBadTagException;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 public class ProductoDaoImpl implements ProductoDao {
 
@@ -451,5 +465,37 @@ public class ProductoDaoImpl implements ProductoDao {
     @Override
     public Producto update(Producto id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public JasperPrint reportAllProducts() {
+        con = new Conexion();
+        Connection conn = con.getConexion();
+        //Obtener el archivo, de la siguiente ruta
+        File reporte = new File(getClass().getResource("/report/Producto.jasper").getFile());
+
+        if (!reporte.exists()) {
+            return null;
+        }
+
+        //Generar un archivo inputStream
+        try {
+            InputStream is = new BufferedInputStream(new FileInputStream(reporte.getAbsolutePath()));
+            if (is == null) {
+                System.out.println("El archivo reporte.jasper no se encuentra en el classpath.");
+            } else {
+                System.out.println("El archivo reporte.jasper fue encontrado correctamente.");
+            }
+            //Convertimos el archivo obtenido por medio del BufferedInputStream
+            JasperReport jr = (JasperReport) JRLoader.loadObject(is);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, conn);
+            return jp;
+        } catch (FileNotFoundException e) {
+            System.out.println("Error en realizar el reporte de todos los productos: " + e.getMessage());
+        } catch (JRException ex) {
+            Logger.getLogger(ProductoDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 }

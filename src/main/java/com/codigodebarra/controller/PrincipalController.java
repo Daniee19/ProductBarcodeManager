@@ -31,6 +31,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public final class PrincipalController implements ActionListener {
 
@@ -71,6 +73,9 @@ public final class PrincipalController implements ActionListener {
         pnlAgregarOActualizaProducto();
         //Agregar producto
         gestionProductoIp();
+        //Generar archivo PDF
+        generarPdfProductos();
+
         vistaIp.getBtnOkEscanear().addActionListener(this);
         vistaInfo.getBtnCancelar().addActionListener(this);
 
@@ -171,6 +176,16 @@ public final class PrincipalController implements ActionListener {
         });
     }
 
+    public void generarPdfProductos() {
+        vistaIp.getLblPdfProd().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JasperPrint jp = productoDao.reportAllProducts();
+                JasperViewer.viewReport(jp);
+            }
+        });
+    }
+
     public void informacionBusqueda() {
         vistaIp.getPnlBuscarProd().addMouseListener(new MouseAdapter() {
 
@@ -223,8 +238,11 @@ public final class PrincipalController implements ActionListener {
         });
     }
 
+    //True -> Panel agregar de GP
+    //False -> Los demás paneles de GP
     public void alternarPanelesGP(boolean valor) {
         vistaIp.getPnlAgregarGP().setEnabled(valor);
+        vistaIp.getTxtCodBarraGP().setEditable(valor);
         vistaIp.getPnlActualizarGP().setEnabled(!valor);
         vistaIp.getPnlEliminarGP().setEnabled(!valor);
         vistaIp.getPnlLimpiarGP().setEnabled(!valor);

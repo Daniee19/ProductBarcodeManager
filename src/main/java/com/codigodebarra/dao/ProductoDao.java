@@ -2,6 +2,7 @@ package com.codigodebarra.dao;
 
 import com.codigodebarra.model.Producto;
 import java.util.List;
+import net.sf.jasperreports.engine.JasperPrint;
 
 public interface ProductoDao extends Dao<Producto> {
 
@@ -22,4 +23,6 @@ public interface ProductoDao extends Dao<Producto> {
     public Producto updateByCodeBar(Producto producto);
 
     public boolean deleteByCodeBar(String codigo_barra);
+
+    public JasperPrint reportAllProducts();
 }
