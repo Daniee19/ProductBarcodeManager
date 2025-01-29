@@ -481,6 +481,7 @@ public class ProductoDaoImpl implements ProductoDao {
         //Generar un archivo inputStream
         try {
             InputStream is = new BufferedInputStream(new FileInputStream(reporte.getAbsolutePath()));
+            
             if (is == null) {
                 System.out.println("El archivo reporte.jasper no se encuentra en el classpath.");
             } else {
@@ -488,7 +489,9 @@ public class ProductoDaoImpl implements ProductoDao {
             }
             //Convertimos el archivo obtenido por medio del BufferedInputStream
             JasperReport jr = (JasperReport) JRLoader.loadObject(is);
+            
             JasperPrint jp = JasperFillManager.fillReport(jr, null, conn);
+            
             return jp;
         } catch (FileNotFoundException e) {
             System.out.println("Error en realizar el reporte de todos los productos: " + e.getMessage());

@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
@@ -176,12 +177,112 @@ public final class PrincipalController implements ActionListener {
         });
     }
 
+    public void popMenuVenta() {
+        //Se crean los items
+        JMenuItem gDetallePedido = new JMenuItem("Gestionar Detalle de Venta");
+        JMenuItem pedidos = new JMenuItem("Ver Ventas");
+
+        //Se agregan al popmenu
+        vistaIp.getPmVenta().add(gDetallePedido);
+        vistaIp.getPmVenta().add(pedidos);
+
+        //Se agrega al componente el cual al hacer clic derecho mostrará el popmenu con los items
+        vistaIp.getPnlVenta().setComponentPopupMenu(vistaIp.getPmVenta());
+
+        vistaIp.getPnlVenta().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
+                    vistaIp.getPmVenta().show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlVenta().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlVenta().setBackground(new Color(255, 255, 255));
+            }
+        });
+
+        //Acciones de los items
+        gDetallePedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(3);
+            }
+        });
+
+        pedidos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(4);
+                mostrarElementosEnTabla(productoDao.selectAll());
+            }
+        });
+    }
+
+    public void popMenuInventario() {
+        //Se crean los items
+        JMenuItem escanearProducto = new JMenuItem("Escanear Producto");
+        JMenuItem controlInventario = new JMenuItem("Gestionar Inventario");
+
+        //Se agregan al popmenu
+        vistaIp.getPmInventario().add(escanearProducto);
+        vistaIp.getPmInventario().add(controlInventario);
+
+        //Se agrega al componente el cual al hacer clic derecho mostrará el popmenu con los items
+        vistaIp.getPnlInventario().setComponentPopupMenu(vistaIp.getPmInventario());
+        //Configurar para mostrar el popmenu con el clic izquierdo y derecho
+        vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
+                    vistaIp.getPmInventario().show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlInventario().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
+            }
+        });
+        //Acciones de los items
+        escanearProducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(1);
+            }
+        });
+        controlInventario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(2);
+                mostrarElementosEnTabla(productoDao.selectAll());
+            }
+        });
+    }
+
     public void generarPdfProductos() {
         vistaIp.getLblPdfProd().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //Obtener el archivo jasper configurado
                 JasperPrint jp = productoDao.reportAllProducts();
-                JasperViewer.viewReport(jp);
+                //Codigo para que al cerrar la visualización no se cierre todo el sistema.
+                JasperViewer viewReport = new JasperViewer(jp, false);
+                viewReport.setDefaultCloseOperation(vistaIp.DISPOSE_ON_CLOSE);
+                viewReport.setVisible(true);
             }
         });
     }
@@ -737,41 +838,10 @@ public final class PrincipalController implements ActionListener {
                 vistaIp.getPnlPrincipal().setBackground(new Color(255, 255, 255));
             }
         });
-        vistaIp.getPnlEscanear().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent event) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(1);
-            }
+        popMenuInventario();
+        popMenuVenta();
+       
 
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlEscanear().setBackground(new Color(220, 220, 220));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaIp.getPnlEscanear().setBackground(new Color(255, 255, 255));
-            }
-        });
-
-        vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent event) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(2);
-                //Actualizar la tabla, cada vez que se quiera entrar a la sección de inventario
-                mostrarElementosEnTabla(productoDao.selectAll());
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlInventario().setBackground(new Color(220, 220, 220));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
-            }
-        });
         vistaIp.getPnlCerrarSesion().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
