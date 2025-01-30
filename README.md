@@ -26,11 +26,11 @@ rol varchar(20) not null
 create table pedido(
 id_pedido integer primary key not null auto_increment,
 id_usuario integer not null, foreign key(id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+fechaPedido timestamp default current_timestamp,
 subtotal decimal(8,2) not null default 0,
 descuento decimal(8,2) null default 0,
 total decimal(8,2) not null default 0,
-fechaPedido timestamp default current_timestamp,
-observaciones varchar(200) null
+observacion varchar(200) null
 );
 
 create table detalle_pedido(
