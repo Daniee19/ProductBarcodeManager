@@ -23,23 +23,25 @@ contrasenia blob,
 rol varchar(20) not null
 );
 
-create table pedido(
-id_pedido integer primary key not null auto_increment,
+create table venta(
+id_venta integer primary key not null auto_increment,
 id_usuario integer not null, foreign key(id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
-fechaPedido timestamp default current_timestamp,
+fechaVenta timestamp default current_timestamp,
 subtotal decimal(8,2) not null default 0,
 descuento decimal(8,2) null default 0,
 total decimal(8,2) not null default 0,
-observacion varchar(200) null
+metodo_pago enum('Tarjeta', 'Efectivo', 'Yape','Plin','Transacción', 'Fiado') not null,
+observacion varchar(220) null
 );
 
-create table detalle_pedido(
+create table detalle_venta(
 id_detalle integer primary key not null auto_increment,
-id_pedido integer not null, foreign key(id_pedido) REFERENCES pedido(id_pedido) ON DELETE CASCADE ON UPDATE CASCADE,
+id_venta integer not null, foreign key(id_venta) REFERENCES venta(id_venta) ON DELETE CASCADE ON UPDATE CASCADE,
 id_producto integer not null, foreign key(id_producto) REFERENCES producto(id_producto) ON DELETE CASCADE ON UPDATE CASCADE, 
 cantidad decimal(6,2) not null default 0,
 importe decimal(8,2) not null default 0
 );
+
 ```
 ## References
 ### Project Data
