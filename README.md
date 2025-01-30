@@ -9,7 +9,7 @@ codigo_barra varchar(20) not null unique,
 nombre varchar(60)  null,
 precio decimal(8,2)  null default 0,
 cantidad integer null default 0,
-compania varchar(50) null,
+marca varchar(50) null,
 contenido varchar(20) null,
 imagenURL varchar(200) null
 );
@@ -25,19 +25,18 @@ rol varchar(20) not null
 
 create table pedido(
 id_pedido integer primary key not null auto_increment,
-id_usuario integer not null, foreign key(id_usuario)
-REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
-descuento decimal(8,2) null default 0,
+id_usuario integer not null, foreign key(id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
 subtotal decimal(8,2) not null default 0,
-total decimal(8,2) not null default 0
+descuento decimal(8,2) null default 0,
+total decimal(8,2) not null default 0,
+fechaPedido timestamp default current_timestamp,
+observaciones varchar(200) null
 );
 
 create table detalle_pedido(
-id_detalle_pedidos integer primary key not null auto_increment,
-id_pedido integer not null, foreign key(id_pedido) REFERENCES
-pedido(id_pedido) ON DELETE CASCADE ON UPDATE CASCADE,
-id_producto integer not null, foreign key(id_producto) REFERENCES
-producto(id_producto) ON DELETE CASCADE ON UPDATE CASCADE, 
+id_detalle integer primary key not null auto_increment,
+id_pedido integer not null, foreign key(id_pedido) REFERENCES pedido(id_pedido) ON DELETE CASCADE ON UPDATE CASCADE,
+id_producto integer not null, foreign key(id_producto) REFERENCES producto(id_producto) ON DELETE CASCADE ON UPDATE CASCADE, 
 cantidad decimal(6,2) not null default 0,
 importe decimal(8,2) not null default 0
 );
