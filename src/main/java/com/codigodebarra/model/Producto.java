@@ -5,34 +5,30 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Producto {
 
-    int id;
+    int idProducto;
 
-    String codigo_barra;
-    String nombre;
-    String marca;
-    String contenido;
-    String imagenURL;
-
+    String codBarra, nombre, marca, cont, imagenUrl;
+    boolean igvAplicable; //true si si aplica igv, false si está exonerado
     double precio;
     int cantidad;
 
     public Producto() {
     }
 
-    public int getId() {
-        return id;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
-    public String getCodigo_barra() {
-        return codigo_barra;
+    public String getCodBarra() {
+        return codBarra;
     }
 
-    public void setCodigo_barra(String codigo_barra) {
-        this.codigo_barra = codigo_barra;
+    public void setCodBarra(String codBarra) {
+        this.codBarra = codBarra;
     }
 
     public String getNombre() {
@@ -41,6 +37,38 @@ public class Producto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getCont() {
+        return cont;
+    }
+
+    public void setCont(String cont) {
+        this.cont = cont;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
+
+    public boolean isIgvAplicable() {
+        return igvAplicable;
+    }
+
+    public void setIgvAplicable(boolean igvAplicable) {
+        this.igvAplicable = igvAplicable;
     }
 
     public double getPrecio() {
@@ -57,35 +85,6 @@ public class Producto {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
-    }
-
-    public String getImagenURL() {
-        return imagenURL;
-    }
-
-    public void setImagenURL(String imagenURL) {
-        this.imagenURL = imagenURL;
-    }
-
-    @Override
-    public String toString() {
-        return "Producto{" + "id=" + id + ", codigo_barra=" + codigo_barra + ", nombre=" + nombre + ", compania=" + marca + ", contenido=" + contenido + ", imagenURL=" + imagenURL + ", precio=" + precio + ", cantidad=" + cantidad + '}';
     }
 
 }

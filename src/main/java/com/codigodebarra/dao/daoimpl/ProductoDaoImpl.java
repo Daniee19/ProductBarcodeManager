@@ -13,10 +13,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.crypto.AEADBadTagException;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -51,14 +49,14 @@ public class ProductoDaoImpl implements ProductoDao {
             if (rs.next()) {
                 p = new Producto();
 
-                p.setId(rs.getInt("id_producto"));
-                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("id_producto"));
+                p.setCodBarra(rs.getString("codigo_barra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setMarca(rs.getString("marca"));
-                p.setContenido(rs.getString("contenido"));
-                p.setImagenURL(rs.getString("imagenURL"));
+                p.setCont(rs.getString("contenido"));
+                p.setImagenUrl(rs.getString("imagenURL"));
             }
 
         } catch (SQLException e) {
@@ -83,14 +81,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setId(rs.getInt("id_producto"));
-                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("id_producto"));
+                p.setCodBarra(rs.getString("codigo_barra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setMarca(rs.getString("marca"));
-                p.setContenido(rs.getString("contenido"));
-                p.setImagenURL(rs.getString("imagenURL"));
+                p.setCont(rs.getString("contenido"));
+                p.setImagenUrl(rs.getString("imagenURL"));
                 productos.add(p);
             }
 
@@ -120,13 +118,13 @@ public class ProductoDaoImpl implements ProductoDao {
 
         //Llamar a la variable, la cual ya pasó por el DriverManager...
         try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);) {
-            ps.setString(1, producto.getCodigo_barra());
+            ps.setString(1, producto.getCodBarra());
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
             ps.setInt(4, producto.getCantidad());
             ps.setString(5, producto.getMarca());
-            ps.setString(6, producto.getContenido());
-            ps.setString(7, producto.getImagenURL());
+            ps.setString(6, producto.getCont());
+            ps.setString(7, producto.getImagenUrl());
 
             ps.executeUpdate(); //Tenemos que ejecutarlo primero, para obtener el id del producto que se haya creado
 
@@ -199,14 +197,14 @@ public class ProductoDaoImpl implements ProductoDao {
             if (rs.next()) {
                 p = new Producto();
 
-                p.setId(rs.getInt("id_producto"));
-                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("id_producto"));
+                p.setCodBarra(rs.getString("codigo_barra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setMarca(rs.getString("marca"));
-                p.setContenido(rs.getString("contenido"));
-                p.setImagenURL(rs.getString("imagenURL"));
+                p.setCont(rs.getString("contenido"));
+                p.setImagenUrl(rs.getString("imagenURL"));
 
             }
         } catch (SQLException e) {
@@ -236,14 +234,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setId(rs.getInt("id_producto"));
-                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("id_producto"));
+                p.setCodBarra(rs.getString("codigo_barra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setMarca(rs.getString("marca"));
-                p.setContenido(rs.getString("contenido"));
-                p.setImagenURL(rs.getString("imagenURL"));
+                p.setCont(rs.getString("contenido"));
+                p.setImagenUrl(rs.getString("imagenURL"));
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -273,14 +271,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setId(rs.getInt("id_producto"));
-                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("id_producto"));
+                p.setCodBarra(rs.getString("codigo_barra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setMarca(rs.getString("marca"));
-                p.setContenido(rs.getString("contenido"));
-                p.setImagenURL(rs.getString("imagenURL"));
+                p.setCont(rs.getString("contenido"));
+                p.setImagenUrl(rs.getString("imagenURL"));
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -310,14 +308,15 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setId(rs.getInt("id_producto"));
-                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("id_producto"));
+                p.setCodBarra(rs.getString("codigo_barra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setMarca(rs.getString("marca"));
-                p.setContenido(rs.getString("contenido"));
-                p.setImagenURL(rs.getString("imagenURL"));
+                p.setCont(rs.getString("contenido"));
+                p.setImagenUrl(rs.getString("imagenURL"));
+
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -347,14 +346,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setId(rs.getInt("id_producto"));
-                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("id_producto"));
+                p.setCodBarra(rs.getString("codigo_barra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setMarca(rs.getString("marca"));
-                p.setContenido(rs.getString("contenido"));
-                p.setImagenURL(rs.getString("imagenURL"));
+                p.setCont(rs.getString("contenido"));
+                p.setImagenUrl(rs.getString("imagenURL"));
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -384,14 +383,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setId(rs.getInt("id_producto"));
-                p.setCodigo_barra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("id_producto"));
+                p.setCodBarra(rs.getString("codigo_barra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setCantidad(rs.getInt("cantidad"));
                 p.setMarca(rs.getString("marca"));
-                p.setContenido(rs.getString("contenido"));
-                p.setImagenURL(rs.getString("imagenURL"));
+                p.setCont(rs.getString("contenido"));
+                p.setImagenUrl(rs.getString("imagenURL"));
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -447,10 +446,10 @@ public class ProductoDaoImpl implements ProductoDao {
             PreparedStatement ps = conn.prepareStatement(sb.toString());
             ps.setString(1, producto.getNombre());
             ps.setString(2, producto.getMarca());
-            ps.setString(3, producto.getContenido());
+            ps.setString(3, producto.getCont());
             ps.setDouble(4, producto.getPrecio());
             ps.setInt(5, producto.getCantidad());
-            ps.setString(6, producto.getCodigo_barra());
+            ps.setString(6, producto.getCodBarra());
 
             ps.executeUpdate();
 
@@ -481,7 +480,7 @@ public class ProductoDaoImpl implements ProductoDao {
         //Generar un archivo inputStream
         try {
             InputStream is = new BufferedInputStream(new FileInputStream(reporte.getAbsolutePath()));
-            
+
             if (is == null) {
                 System.out.println("El archivo reporte.jasper no se encuentra en el classpath.");
             } else {
@@ -489,9 +488,9 @@ public class ProductoDaoImpl implements ProductoDao {
             }
             //Convertimos el archivo obtenido por medio del BufferedInputStream
             JasperReport jr = (JasperReport) JRLoader.loadObject(is);
-            
+
             JasperPrint jp = JasperFillManager.fillReport(jr, null, conn);
-            
+
             return jp;
         } catch (FileNotFoundException e) {
             System.out.println("Error en realizar el reporte de todos los productos: " + e.getMessage());

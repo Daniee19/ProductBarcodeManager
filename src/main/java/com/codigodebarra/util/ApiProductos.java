@@ -32,11 +32,11 @@ public class ApiProductos {
                 String imagenURL = obtenerImagen(productNode);
 
                 JOptionPane.showMessageDialog(null, "Está en el if");
-                p.setCodigo_barra(codigo_barra);
+                p.setCodBarra(codigo_barra);
                 p.setNombre(productNode.path("product_name").asText());
-                p.setContenido(productNode.path("quantity").asText());
+                p.setCont(productNode.path("quantity").asText());
                 p.setMarca(productNode.path("brands").asText());
-                p.setImagenURL(imagenURL);
+                p.setImagenUrl(imagenURL);
 
             } else {
                 //Llamar a la API
@@ -67,11 +67,11 @@ public class ApiProductos {
                 ////Esto es importante para guardarlo en el archivo json
                 objetoCache.guardarCacheEnArchivo(cache); //Guardamos ese mapa que será, posteriormente un jsonNode que se almacenará al archivo
                 //
-                p.setCodigo_barra(codigo_barra);
+                p.setCodBarra(codigo_barra);
                 p.setNombre(productNode.path("product_name").asText());
-                p.setContenido(productNode.path("quantity").asText());
+                p.setCont(productNode.path("quantity").asText());
                 p.setMarca(productNode.path("brands").asText());
-                p.setImagenURL(imagenURL);
+                p.setImagenUrl(imagenURL);
             }
         } catch (HeadlessException | IOException e) {
             System.out.println("Error al consumir la API: " + e.getMessage());

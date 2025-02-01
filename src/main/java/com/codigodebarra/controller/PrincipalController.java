@@ -21,6 +21,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -43,8 +45,7 @@ public final class PrincipalController implements ActionListener {
     ApiProductos api;
     Producto productoGlobal;
     Usuario usuario;
-    DefaultTableModel modelo;
-
+    DefaultTableModel modelo, modeloDv;
     int xMouse, yMouse;
 
     public PrincipalController(JInterfazPrincipal vistaIp, Usuario usuario) {
@@ -59,8 +60,8 @@ public final class PrincipalController implements ActionListener {
         api = new ApiProductos();
         Disenio.getDesignWindows();
         modelo = new DefaultTableModel();
+        modeloDv = new DefaultTableModel();
         acciones();
-
     }
 
     public void acciones() {
@@ -69,7 +70,7 @@ public final class PrincipalController implements ActionListener {
         //Menu lateral - > paneles
         navegacionTabbedPane();
         //Tabla
-        disenioTabla();
+        disenioTablaInventario();
         //Boton en info al encontrar el producto
         pnlAgregarOActualizaProducto();
         //Agregar producto
@@ -79,9 +80,12 @@ public final class PrincipalController implements ActionListener {
 
         vistaIp.getBtnOkEscanear().addActionListener(this);
         vistaInfo.getBtnCancelar().addActionListener(this);
-
+        metodosDVenta();
     }
 
+    /**
+     * PANEL PRINCIPAL.
+     */
     public void bienvenida(Usuario usuario) {
         vistaIp.getLblNombre().setText(String.format("%s, %s", usuario.getApellido(), usuario.getNombre()));
     }
@@ -89,13 +93,16 @@ public final class PrincipalController implements ActionListener {
     public void mostrarElementosEnTabla(List<Producto> listaProductos) {
         modelo.setRowCount(0);
         for (Producto p : listaProductos) {
-            Object[] fila = {p.getCodigo_barra(), p.getNombre(), p.getMarca(), p.getContenido(), p.getPrecio(), p.getCantidad()};
+            Object[] fila = {p.getCodBarra(), p.getNombre(), p.getMarca(), p.getCont(), p.getPrecio(), p.getCantidad()};
             modelo.addRow(fila);
         }
         vistaIp.getTxtValorProd().setText("");
     }
 
-    private void disenioTabla() {
+    /**
+     * TABLA INVENTARIO.
+     */
+    private void disenioTablaInventario() {
 
         String[] tituloColumnas = {"Cod. Barra", "Nombre", "Marca", "Contenido", "Precio", "Cantidad"};
 
@@ -152,8 +159,11 @@ public final class PrincipalController implements ActionListener {
         mostrarElementosEnTabla(productos);
         //============= Referencia: ComboBox y TextField de busqueda
         informacionBusqueda();
+        limpiarSeleccionFilaTablaClicPanel();
+        //Hacer que se limpie las filas de la tabla que se encontraba seleccionada, al hacer clic en los distintos paneles
+    }
 
-        //Hacer que se limpie las filas de la tabla que se encontraba seleccioanda, al hacer clic en los distintos paneles
+    public void limpiarSeleccionFilaTablaClicPanel() {
         vistaIp.getjPanel4().addMouseListener(new MouseAdapter() {
 
             @Override
@@ -173,102 +183,6 @@ public final class PrincipalController implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 vistaIp.getTablaProductos().clearSelection();
-            }
-        });
-    }
-
-    public void popMenuVenta() {
-        //Se crean los items
-        JMenuItem gDetallePedido = new JMenuItem("Gestionar Detalle de Venta");
-        JMenuItem pedidos = new JMenuItem("Ver Ventas");
-
-        //Se agregan al popmenu
-        vistaIp.getPmVenta().add(gDetallePedido);
-        vistaIp.getPmVenta().add(pedidos);
-
-        //Se agrega al componente el cual al hacer clic derecho mostrará el popmenu con los items
-        vistaIp.getPnlVenta().setComponentPopupMenu(vistaIp.getPmVenta());
-
-        vistaIp.getPnlVenta().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-                if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
-                    vistaIp.getPmVenta().show(e.getComponent(), e.getX(), e.getY());
-                }
-            }
-            
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlVenta().setBackground(new Color(220, 220, 220));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaIp.getPnlVenta().setBackground(new Color(255, 255, 255));
-            }
-        });
-
-        //Acciones de los items
-        gDetallePedido.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(3);
-            }
-        });
-
-        pedidos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(4);
-                mostrarElementosEnTabla(productoDao.selectAll());
-            }
-        });
-    }
-
-    public void popMenuInventario() {
-        //Se crean los items
-        JMenuItem escanearProducto = new JMenuItem("Escanear Producto");
-        JMenuItem controlInventario = new JMenuItem("Gestionar Inventario");
-
-        //Se agregan al popmenu
-        vistaIp.getPmInventario().add(escanearProducto);
-        vistaIp.getPmInventario().add(controlInventario);
-
-        //Se agrega al componente el cual al hacer clic derecho mostrará el popmenu con los items
-        vistaIp.getPnlInventario().setComponentPopupMenu(vistaIp.getPmInventario());
-        //Configurar para mostrar el popmenu con el clic izquierdo y derecho
-        vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-                if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
-                    vistaIp.getPmInventario().show(e.getComponent(), e.getX(), e.getY());
-                }
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlInventario().setBackground(new Color(220, 220, 220));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
-            }
-        });
-        //Acciones de los items
-        escanearProducto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(1);
-            }
-        });
-        controlInventario.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(2);
-                mostrarElementosEnTabla(productoDao.selectAll());
             }
         });
     }
@@ -307,7 +221,7 @@ public final class PrincipalController implements ActionListener {
                         } else {
                             p = productoDao.findByCodeProduct(vistaIp.getTxtValorProd().getText());
                             modelo.setNumRows(0);
-                            Object[] fila = {p.getCodigo_barra(), p.getNombre(), p.getMarca(), p.getContenido(), p.getPrecio(), p.getCantidad()};
+                            Object[] fila = {p.getCodBarra(), p.getNombre(), p.getMarca(), p.getCont(), p.getPrecio(), p.getCantidad()};
                             modelo.addRow(fila);
                         }
                     }
@@ -381,10 +295,10 @@ public final class PrincipalController implements ActionListener {
                         int cantidadP = (int) vistaIp.getSpnCantidadGP().getValue();
 
                         Producto p = new Producto();
-                        p.setCodigo_barra(codigoB);
+                        p.setCodBarra(codigoB);
                         p.setNombre(nombreP);
                         p.setMarca(marcaP);
-                        p.setContenido(contenidoP);
+                        p.setCont(contenidoP);
                         p.setPrecio(precioP);
                         p.setCantidad(cantidadP);
 
@@ -466,37 +380,57 @@ public final class PrincipalController implements ActionListener {
                                 limpiezaTextFieldsGP();
                             }
                         });
+
                         // 3. Actualizar
                         for (MouseListener ml : vistaIp.getPnlActualizarGP().getMouseListeners()) {
                             vistaIp.getPnlActualizarGP().removeMouseListener(ml);
                         }
+
                         vistaIp.getPnlActualizarGP().addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent ev) {
                                 //Código de actualizar
                                 int fila = vistaIp.getTablaProductos().getSelectedRow();
                                 if (fila > -1) {
+
+                                    try {
+                                        //Forzar a que se utilice el valor escrito manualmente (textField)
+                                        vistaIp.getSpnCantidadGP().commitEdit();
+                                        vistaIp.getSpnPrecioGP().commitEdit();
+                                    } catch (ParseException pe) {
+                                        pe.printStackTrace();
+                                    }
+
                                     modelo.setValueAt(vistaIp.getTxtNombreGP().getText(), fila, 1);
                                     modelo.setValueAt(vistaIp.getTxtMarcaGP().getText(), fila, 2);
                                     modelo.setValueAt(vistaIp.getTxtContenidoGP().getText(), fila, 3);
                                     modelo.setValueAt(vistaIp.getSpnPrecioGP().getValue(), fila, 4);
-                                    modelo.setValueAt(vistaIp.getSpnCantidadGP().getValue(), fila, 5);
+                                    modelo.setValueAt(((Number) vistaIp.getSpnCantidadGP().getValue()).intValue(), fila, 5);
 
                                     Producto p = new Producto();
-                                    p.setCodigo_barra(vistaIp.getTxtCodBarraGP().getText());
+                                    p.setCodBarra(vistaIp.getTxtCodBarraGP().getText());
                                     p.setNombre(vistaIp.getTxtNombreGP().getText());
                                     p.setMarca(vistaIp.getTxtMarcaGP().getText());
-                                    p.setContenido(vistaIp.getTxtContenidoGP().getText());
-                                    p.setPrecio(((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue());
+                                    p.setCont(vistaIp.getTxtContenidoGP().getText());
                                     p.setCantidad(((Number) vistaIp.getSpnCantidadGP().getValue()).intValue());
+                                    p.setPrecio(((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue());
 
                                     productoDao.updateByCodeBar(p);
-                                    JOptionPane.showMessageDialog(null, "Producto actualizado");
 
+                                    /**
+                                     * Se tiene que deseleccionar la fila de la
+                                     * tabla despues de haber realizado la
+                                     * acción de actualizar o de eliminar.
+                                     */
+                                    JOptionPane.showMessageDialog(null, "Producto actualizado");
+                                    vistaIp.getTablaProductos().clearSelection();
+                                    limpiezaTextFieldsGP();
                                 }
-                                limpiezaTextFieldsGP();
+
                             }
-                        });
+                        }
+                        );
+
                     } else {
                         alternarPanelesGP(true);
                         //Agregar producto
@@ -504,7 +438,8 @@ public final class PrincipalController implements ActionListener {
                     } //Fin en caso se seleccione o no una fila de la tabla
                 }
             }//Fin del ValueChanged
-        });
+        }
+        );
 
     } // Fin de la GP
 
@@ -528,64 +463,14 @@ public final class PrincipalController implements ActionListener {
         return codBarra;
     }
 
-    public void limpiezaTextFieldsGP() {
-        vistaIp.getTxtCodBarraGP().setText("");
-        vistaIp.getTxtNombreGP().setText("");
-        vistaIp.getTxtMarcaGP().setText("");
-        vistaIp.getTxtContenidoGP().setText("");
-        vistaIp.getSpnPrecioGP().setValue(0);
-        vistaIp.getSpnCantidadGP().setValue(0);
-    }
-
-    public void pnlAgregarOActualizaProducto() {
-        vistaInfo.getBtnAceptar().addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Ayudará a separar la lógica del botón
-                String command = e.getActionCommand();
-                if (command.equals("aumentar")) {
-                    int cantidadActualizada = productoDao.updateQuantityAfterInsert(productoGlobal.getId());
-                    vistaInfo.getTxtCantidadProd().setText(String.valueOf(cantidadActualizada));
-
-                    JOptionPane.showMessageDialog(null, "Cantidad incrementada con éxito");
-                } else if (command.equals("agregar")) {
-                    System.out.println("Se va a agregar");
-
-                    /**
-                     * El productoGlobal trae el objeto producto seteado con los
-                     * valores obtenidos de la API y se muestra en los
-                     * TextFields, pero en todo caso devuelve valores nulos, se
-                     * evalua con la bd (bueno eso es otra historia). Lo que
-                     * pasa es que se está trayendo los valores de la API
-                     * incluso con los valores vacíos, por ende se debe de leer
-                     * los texFields, cuando se de en el botón de agregar, para
-                     * setear los cambios del productoGobal y crear el producto.
-                     *
-                     */
-                    productoGlobal.setNombre(vistaInfo.getTxtNombreProd().getText());
-                    productoGlobal.setMarca(vistaInfo.getTxtMarcaProd().getText());
-                    productoGlobal.setContenido(vistaInfo.getTxtContenidoProd().getText());
-
-                    int idObtenido = productoDao.insert(productoGlobal);
-
-                    if (idObtenido > 0) {
-                        productoDao.updateQuantityAfterInsert(idObtenido);
-                        JOptionPane.showMessageDialog(null, "Producto agregado con éxito");
-                        vistaInfo.dispose();
-                    } else {
-                        System.out.println("No se agregó");
-                    }
-                }
-            }
-        });
-    }
-
+    /**
+     * ESCANEAR CODIGO.
+     */
     public void escanearCodigo() throws MalformedURLException {
         Producto productoApi = api.consumirApi(vistaIp.getTxtCodigoEscanear().getText());
         Producto producto_bd = productoDao.findByCodeProduct(vistaIp.getTxtCodigoEscanear().getText());
 
-        if (productoApi.getCodigo_barra() != null) {
+        if (productoApi.getCodBarra() != null) {
 
             System.out.println("Funciono la api");
 
@@ -606,7 +491,7 @@ public final class PrincipalController implements ActionListener {
 
                 this.productoGlobal = productoApi;
             }
-            vistaInfo.getLblCodigoBarra().setText(productoApi.getCodigo_barra());
+            vistaInfo.getLblCodigoBarra().setText(productoApi.getCodBarra());
             vistaInfo.setLocationRelativeTo(null);
             vistaInfo.setVisible(true);
 
@@ -618,114 +503,103 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getTxtCodigoEscanear().setText("");
     }
 
-    public void cargarImagenPorURL(String url_imagen) throws MalformedURLException {
-        URL url = new URL(url_imagen);
+    /**
+     * CONFIGURACIÓN GENERAL.
+     */
+    public void popMenuVenta() {
+        //Se crean los items
+        JMenuItem gDetallePedido = new JMenuItem("Gestionar Detalle de Venta");
+        JMenuItem pedidos = new JMenuItem("Ver Ventas");
 
-        // Cargar la imagen desde la URL
-        ImageIcon imagen = new ImageIcon(url);
+        //Se agregan al popmenu
+        vistaIp.getPmVenta().add(gDetallePedido);
+        vistaIp.getPmVenta().add(pedidos);
 
-        // Redimensionar la imagen
-        Image img = imagen.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
-        //Volver a crear la imagen pero con la escala actualizada
-        imagen = new ImageIcon(img);
+        //Se agrega al componente el cual al hacer clic derecho mostrará el popmenu con los items
+        vistaIp.getPnlVenta().setComponentPopupMenu(vistaIp.getPmVenta());
 
-        // Asignar la imagen al JLabel
-        vistaInfo.getLblImagen().setIcon(imagen);
-        vistaInfo.getLblImagen().setText("");
+        vistaIp.getPnlVenta().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
+                    vistaIp.getPmVenta().show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlVenta().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlVenta().setBackground(new Color(255, 255, 255));
+            }
+        });
+
+        //Acciones de los items
+        gDetallePedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(3);
+            }
+        });
+
+        pedidos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(4);
+                mostrarElementosEnTabla(productoDao.selectAll());
+            }
+        });
     }
 
-    public void obtenerPDF() {
-        Barras ba = new Barras();
-        List<Producto> productos = productoDao.selectAll();
-        System.out.println(productos);
-        for (Producto ps : productos) {
-            ba.generarCodBarras(ps.getCodigo_barra(), "EAN-13");
-        }
-    }
+    public void popMenuInventario() {
+        //Se crean los items
+        JMenuItem escanearProducto = new JMenuItem("Escanear Producto");
+        JMenuItem controlInventario = new JMenuItem("Gestionar Inventario");
 
-    public void condicionalBrindarDatosProductoApiOBd(Producto productoApi, Producto producto_bd) throws MalformedURLException {
-        //Corregir porque a la primera llamada aparecen los text field con --
-        if (productoApi.getNombre().isEmpty()) {
+        //Se agregan al popmenu
+        vistaIp.getPmInventario().add(escanearProducto);
+        vistaIp.getPmInventario().add(controlInventario);
 
-            if (producto_bd == null) {
-                vistaInfo.getTxtNombreProd().setEditable(true);
-                vistaInfo.getTxtNombreProd().setText("--");
-            } else {
-                vistaInfo.getTxtNombreProd().setEditable(false);
-                vistaInfo.getTxtNombreProd().setText(producto_bd.getNombre());
-            }
-        } else {
-            vistaInfo.getTxtNombreProd().setEditable(false);
+        //Se agrega al componente el cual al hacer clic derecho mostrará el popmenu con los items
+        vistaIp.getPnlInventario().setComponentPopupMenu(vistaIp.getPmInventario());
+        //Configurar para mostrar el popmenu con el clic izquierdo y derecho
+        vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
-            if (producto_bd == null) {
-                vistaInfo.getTxtNombreProd().setText(productoApi.getNombre());
-            } else {
-                //Si el producto existe en la api pero, hice alguna actualizacion entonces traeme de la bd
-                vistaInfo.getTxtNombreProd().setText(producto_bd.getNombre());
+                if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
+                    vistaIp.getPmInventario().show(e.getComponent(), e.getX(), e.getY());
+                }
             }
-        }
 
-        //==========================================
-        //Si en caso el producto no retorna el nombre de la compania
-        if (productoApi.getMarca().isEmpty()) {
-            if (producto_bd == null) {
-                vistaInfo.getTxtMarcaProd().setEditable(true);
-                vistaInfo.getTxtMarcaProd().setText("--");
-            } else {
-                vistaInfo.getTxtMarcaProd().setEditable(false);
-                vistaInfo.getTxtMarcaProd().setText(producto_bd.getNombre());
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlInventario().setBackground(new Color(220, 220, 220));
             }
-        } else {
-            //Si en caso se haga cambios al resultado dado de la API
-            vistaInfo.getTxtMarcaProd().setEditable(false);
-            if (producto_bd == null) {
-                vistaInfo.getTxtMarcaProd().setText(productoApi.getMarca());
-            } else {
-                vistaInfo.getTxtMarcaProd().setText(producto_bd.getMarca());
-            }
-        }
 
-        if (productoApi.getContenido().isEmpty()) {
-
-            if (producto_bd == null) {
-                vistaInfo.getTxtContenidoProd().setEditable(true);
-                vistaInfo.getTxtContenidoProd().setText("--");
-            } else {
-                vistaInfo.getTxtContenidoProd().setEditable(false);
-                vistaInfo.getTxtContenidoProd().setText(producto_bd.getContenido());
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
             }
-        } else {
-            vistaInfo.getTxtContenidoProd().setEditable(false);
-            if (producto_bd == null) {
-                vistaInfo.getTxtContenidoProd().setText(productoApi.getContenido());
-            } else {
-                vistaInfo.getTxtContenidoProd().setText(producto_bd.getContenido());
+        });
+        //Acciones de los items
+        escanearProducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(1);
             }
-        }
-        //Esto es así porque no se hace una consulta directa a la API para obtener la cantidad del producto (stock)
-        vistaInfo.getTxtCantidadProd().setEditable(false);
-        if (producto_bd == null) {
-            vistaInfo.getTxtCantidadProd().setText("0");
-        } else {
-            vistaInfo.getTxtCantidadProd().setText(String.valueOf(producto_bd.getCantidad()));
-        }
-
-        //vistaInfo.getTxtAreaInformacion().setText(sb.toString());
-        //Almacenamos en la variable global para ver los cambios al actualizar
-        //this.textAreaInfo = sb;
-        if (productoApi.getImagenURL() != null) {
-            if (producto_bd == null) {
-                cargarImagenPorURL(productoApi.getImagenURL());
-            } else {
-                cargarImagenPorURL(producto_bd.getImagenURL());
+        });
+        controlInventario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(2);
+                mostrarElementosEnTabla(productoDao.selectAll());
             }
-        } else {
-            if (producto_bd == null) {
-                vistaInfo.getLblImagen().setText("Imagen no encontrada");
-            } else {
-                vistaInfo.getLblImagen().setText(producto_bd.getImagenURL());
-            }
-        }
+        });
     }
 
     private void configuracionTabbedPane() {
@@ -840,7 +714,6 @@ public final class PrincipalController implements ActionListener {
         });
         popMenuInventario();
         popMenuVenta();
-       
 
         vistaIp.getPnlCerrarSesion().addMouseListener(new MouseAdapter() {
             @Override
@@ -869,6 +742,15 @@ public final class PrincipalController implements ActionListener {
         });
     }
 
+    public void limpiezaTextFieldsGP() {
+        vistaIp.getTxtCodBarraGP().setText("");
+        vistaIp.getTxtNombreGP().setText("");
+        vistaIp.getTxtMarcaGP().setText("");
+        vistaIp.getTxtContenidoGP().setText("");
+        vistaIp.getSpnPrecioGP().setValue(0);
+        vistaIp.getSpnCantidadGP().setValue(0);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == vistaIp.getBtnOkEscanear()) {
@@ -885,4 +767,170 @@ public final class PrincipalController implements ActionListener {
         }
     }
 
+    public void obtenerPDF() {
+        Barras ba = new Barras();
+        List<Producto> productos = productoDao.selectAll();
+        System.out.println(productos);
+        for (Producto ps : productos) {
+            ba.generarCodBarras(ps.getCodBarra(), "EAN-13");
+        }
+    }
+
+    /**
+     * VISTA INFO.
+     */
+    public void pnlAgregarOActualizaProducto() {
+        vistaInfo.getBtnAceptar().addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Ayudará a separar la lógica del botón
+                String command = e.getActionCommand();
+                if (command.equals("aumentar")) {
+                    int cantidadActualizada = productoDao.updateQuantityAfterInsert(productoGlobal.getIdProducto());
+                    vistaInfo.getTxtCantidadProd().setText(String.valueOf(cantidadActualizada));
+
+                    JOptionPane.showMessageDialog(null, "Cantidad incrementada con éxito");
+                } else if (command.equals("agregar")) {
+                    System.out.println("Se va a agregar");
+
+                    /**
+                     * El productoGlobal trae el objeto producto seteado con los
+                     * valores obtenidos de la API y se muestra en los
+                     * TextFields, pero en todo caso devuelve valores nulos, se
+                     * evalua con la bd (bueno eso es otra historia). Lo que
+                     * pasa es que se está trayendo los valores de la API
+                     * incluso con los valores vacíos, por ende se debe de leer
+                     * los texFields, cuando se de en el botón de agregar, para
+                     * setear los cambios del productoGobal y crear el producto.
+                     *
+                     */
+                    productoGlobal.setNombre(vistaInfo.getTxtNombreProd().getText());
+                    productoGlobal.setMarca(vistaInfo.getTxtMarcaProd().getText());
+                    productoGlobal.setCont(vistaInfo.getTxtContenidoProd().getText());
+
+                    int idObtenido = productoDao.insert(productoGlobal);
+
+                    if (idObtenido > 0) {
+                        productoDao.updateQuantityAfterInsert(idObtenido);
+                        JOptionPane.showMessageDialog(null, "Producto agregado con éxito");
+                        vistaInfo.dispose();
+                    } else {
+                        System.out.println("No se agregó");
+                    }
+                }
+            }
+        });
+    }
+
+    public void cargarImagenPorURL(String url_imagen) throws MalformedURLException {
+        URL url = new URL(url_imagen);
+
+        // Cargar la imagen desde la URL
+        ImageIcon imagen = new ImageIcon(url);
+
+        // Redimensionar la imagen
+        Image img = imagen.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
+        //Volver a crear la imagen pero con la escala actualizada
+        imagen = new ImageIcon(img);
+
+        // Asignar la imagen al JLabel
+        vistaInfo.getLblImagen().setIcon(imagen);
+        vistaInfo.getLblImagen().setText("");
+    }
+
+    public void condicionalBrindarDatosProductoApiOBd(Producto productoApi, Producto producto_bd) throws MalformedURLException {
+        //Corregir porque a la primera llamada aparecen los text field con --
+        if (productoApi.getNombre().isEmpty()) {
+
+            if (producto_bd == null) {
+                vistaInfo.getTxtNombreProd().setEditable(true);
+                vistaInfo.getTxtNombreProd().setText("--");
+            } else {
+                vistaInfo.getTxtNombreProd().setEditable(false);
+                vistaInfo.getTxtNombreProd().setText(producto_bd.getNombre());
+            }
+        } else {
+            vistaInfo.getTxtNombreProd().setEditable(false);
+
+            if (producto_bd == null) {
+                vistaInfo.getTxtNombreProd().setText(productoApi.getNombre());
+            } else {
+                //Si el producto existe en la api pero, hice alguna actualizacion entonces traeme de la bd
+                vistaInfo.getTxtNombreProd().setText(producto_bd.getNombre());
+            }
+        }
+
+        //==========================================
+        //Si en caso el producto no retorna el nombre de la compania
+        if (productoApi.getMarca().isEmpty()) {
+            if (producto_bd == null) {
+                vistaInfo.getTxtMarcaProd().setEditable(true);
+                vistaInfo.getTxtMarcaProd().setText("--");
+            } else {
+                vistaInfo.getTxtMarcaProd().setEditable(false);
+                vistaInfo.getTxtMarcaProd().setText(producto_bd.getNombre());
+            }
+        } else {
+            //Si en caso se haga cambios al resultado dado de la API
+            vistaInfo.getTxtMarcaProd().setEditable(false);
+            if (producto_bd == null) {
+                vistaInfo.getTxtMarcaProd().setText(productoApi.getMarca());
+            } else {
+                vistaInfo.getTxtMarcaProd().setText(producto_bd.getMarca());
+            }
+        }
+
+        if (productoApi.getCont().isEmpty()) {
+
+            if (producto_bd == null) {
+                vistaInfo.getTxtContenidoProd().setEditable(true);
+                vistaInfo.getTxtContenidoProd().setText("--");
+            } else {
+                vistaInfo.getTxtContenidoProd().setEditable(false);
+                vistaInfo.getTxtContenidoProd().setText(producto_bd.getCont());
+            }
+        } else {
+            vistaInfo.getTxtContenidoProd().setEditable(false);
+            if (producto_bd == null) {
+                vistaInfo.getTxtContenidoProd().setText(productoApi.getCont());
+            } else {
+                vistaInfo.getTxtContenidoProd().setText(producto_bd.getCont());
+            }
+        }
+        //Esto es así porque no se hace una consulta directa a la API para obtener la cantidad del producto (stock)
+        vistaInfo.getTxtCantidadProd().setEditable(false);
+        if (producto_bd == null) {
+            vistaInfo.getTxtCantidadProd().setText("0");
+        } else {
+            vistaInfo.getTxtCantidadProd().setText(String.valueOf(producto_bd.getCantidad()));
+        }
+
+        //vistaInfo.getTxtAreaInformacion().setText(sb.toString());
+        //Almacenamos en la variable global para ver los cambios al actualizar
+        //this.textAreaInfo = sb;
+        if (productoApi.getImagenUrl() != null) {
+            if (producto_bd == null) {
+                cargarImagenPorURL(productoApi.getImagenUrl());
+            } else {
+                cargarImagenPorURL(producto_bd.getImagenUrl());
+            }
+        } else {
+            if (producto_bd == null) {
+                vistaInfo.getLblImagen().setText("Imagen no encontrada");
+            } else {
+                vistaInfo.getLblImagen().setText(producto_bd.getImagenUrl());
+            }
+        }
+    }
+
+    public void metodosDVenta() {
+        disenioTablaDVenta();
+    }
+
+    public void disenioTablaDVenta() {
+        String[] nombreColumnas = {"Trabajador", "Nombre prod.", "Marca prod.", "Precio", "Cantidad", "Importe", "Descuento", "Subtotal"};
+        modeloDv.setColumnIdentifiers(nombreColumnas);
+        vistaIp.getTablaDetalleVenta().setModel(modeloDv);
+    }
 }
