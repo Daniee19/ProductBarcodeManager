@@ -8,9 +8,10 @@ idProducto integer primary key not null auto_increment,
 codigoBarra varchar(20) not null unique,
 nombre varchar(60)  null,
 precio decimal(8,2)  null default 0,
-cantidad integer null default 0,
+stock integer null default 0,
 marca varchar(50) null,
 contenido varchar(20) null,
+igvAplicable tinyint(1) not null,
 imagenUrl varchar(200) null
 );
 
