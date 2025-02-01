@@ -11,7 +11,7 @@ precio decimal(8,2)  null default 0,
 cantidad integer null default 0,
 marca varchar(50) null,
 contenido varchar(20) null,
-imagenURL varchar(200) null
+imagenUrl varchar(200) null
 );
 
 create table usuario (
