@@ -24,22 +24,29 @@ rol varchar(20) not null
 );
 
 create table venta(
-id_venta integer primary key not null auto_increment,
-id_usuario integer not null, foreign key(id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
+idVenta integer primary key not null auto_increment,
+idUsuario integer not null, foreign key(id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
 fechaVenta timestamp default current_timestamp,
-subtotal decimal(8,2) not null default 0,
-descuento decimal(8,2) null default 0,
+impTotSnIgv decimal(8,2) not null default 0,
+igvTotal decimal(6,2) not null default 0,
+impTotCnIgv decimal(8,2) not null default 0,
+descTot decimal(6,2) not null default 0,
 total decimal(8,2) not null default 0,
-metodo_pago enum('Tarjeta', 'Efectivo', 'Yape','Plin','Transacción', 'Fiado') not null,
-observacion varchar(220) null
+tipoVenta enum('Boleta', 'Factura') default 'Boleta',
+metPago enum('Tarjeta', 'Efectivo', 'Yape','Plin','Transacción', 'Fiado') not null default 'Efectivo',
+observacion varchar(250) null
 );
 
 create table detalle_venta(
-id_detalle integer primary key not null auto_increment,
-id_venta integer not null, foreign key(id_venta) REFERENCES venta(id_venta) ON DELETE CASCADE ON UPDATE CASCADE,
-id_producto integer not null, foreign key(id_producto) REFERENCES producto(id_producto) ON DELETE CASCADE ON UPDATE CASCADE, 
-cantidad decimal(6,2) not null default 0,
-importe decimal(8,2) not null default 0
+idDetalle integer primary key not null auto_increment,
+idVenta integer not null, foreign key(id_venta) REFERENCES venta(id_venta) ON DELETE CASCADE ON UPDATE CASCADE,
+idProducto integer not null, foreign key(id_producto) REFERENCES producto(id_producto) ON DELETE CASCADE ON UPDATE CASCADE, 
+cant decimal(6,2) not null default 0,
+impSnIgv decimal(8,2) not null default 0,
+igv decimal(6,2) not null default 0,
+impCnIgv decimal(8,2) not null default 0,
+descProdu decimal(6,2) not null default 0,
+subtotCnDesc decimal(8,2) not null default 0
 );
 
 ```
