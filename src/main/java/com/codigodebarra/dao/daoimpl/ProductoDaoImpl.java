@@ -40,7 +40,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append(" from ")
                 .append("producto")
                 .append(" where")
-                .append("id_producto = ?");
+                .append("idProducto = ?");
         try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
 
             ps.setInt(1, id);
@@ -49,14 +49,14 @@ public class ProductoDaoImpl implements ProductoDao {
             if (rs.next()) {
                 p = new Producto();
 
-                p.setIdProducto(rs.getInt("id_producto"));
-                p.setCodBarra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setCodBarra(rs.getString("codigoBarra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
-                p.setCantidad(rs.getInt("cantidad"));
+                p.setStock(rs.getInt("stock"));
                 p.setMarca(rs.getString("marca"));
                 p.setCont(rs.getString("contenido"));
-                p.setImagenUrl(rs.getString("imagenURL"));
+                p.setImagenUrl(rs.getString("imagenUrl"));
             }
 
         } catch (SQLException e) {
@@ -81,14 +81,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setIdProducto(rs.getInt("id_producto"));
-                p.setCodBarra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setCodBarra(rs.getString("codigoBarra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
-                p.setCantidad(rs.getInt("cantidad"));
+                p.setStock(rs.getInt("stock"));
                 p.setMarca(rs.getString("marca"));
                 p.setCont(rs.getString("contenido"));
-                p.setImagenUrl(rs.getString("imagenURL"));
+                p.setImagenUrl(rs.getString("imagenUrl"));
                 productos.add(p);
             }
 
@@ -105,13 +105,13 @@ public class ProductoDaoImpl implements ProductoDao {
         int id_obtenido_producto = 0;
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO ").append(" producto ")
-                .append("(producto.codigo_barra, ")
+                .append("(producto.codigoBarra, ")
                 .append("producto.nombre, ")
                 .append("producto.precio, ")
-                .append("producto.cantidad, ")
+                .append("producto.stock, ")
                 .append("producto.marca, ")
                 .append("producto.contenido, ")
-                .append("producto.imagenURL ")
+                .append("producto.imagenUrl ")
                 .append(") values (")
                 .append("?,?,?,?,?,?,?")
                 .append(")");
@@ -121,7 +121,7 @@ public class ProductoDaoImpl implements ProductoDao {
             ps.setString(1, producto.getCodBarra());
             ps.setString(2, producto.getNombre());
             ps.setDouble(3, producto.getPrecio());
-            ps.setInt(4, producto.getCantidad());
+            ps.setInt(4, producto.getStock());
             ps.setString(5, producto.getMarca());
             ps.setString(6, producto.getCont());
             ps.setString(7, producto.getImagenUrl());
@@ -146,38 +146,38 @@ public class ProductoDaoImpl implements ProductoDao {
     @Override
     public int updateQuantityAfterInsert(int id) {
         con = new Conexion();
-        int cantidad = -1;
+        int stock = -1;
         StringBuilder sql = new StringBuilder();
         sql.append("Update ")
                 .append("producto")
                 .append(" set ")
-                .append("cantidad = cantidad +1")
+                .append("stock = stock +1")
                 .append(" where ")
-                .append("id_producto = ?");
-        String obtenerCantidad = "Select cantidad from producto where id_producto=?";
-        //Se hace la consulta para actualizar la cantidad del producto, por medio de su id del producto
+                .append("idProducto = ?");
+        String obtenerCantidad = "Select stock from producto where idProducto=?";
+        //Se hace la consulta para actualizar la stock del producto, por medio de su id del producto
         try (Connection conn = con.getConexion();) {
             try (PreparedStatement ps = conn.prepareStatement(sql.toString());) {
                 ps.setInt(1, id);
                 ps.executeUpdate();
             }
-            //Se ejecuta con respecto a la consulta para obtener la cantidad actualizada del producto
+            //Se ejecuta con respecto a la consulta para obtener la stock actualizada del producto
             try (PreparedStatement ps2 = conn.prepareStatement(obtenerCantidad);) {
                 ps2.setInt(1, id);
                 try (ResultSet rs = ps2.executeQuery()) {
                     if (rs.next()) {
-                        cantidad = rs.getInt("cantidad");
+                        stock = rs.getInt("stock");
                     }
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error al momento de consultar: " + e.getMessage());
+            System.out.println("Error al momento de actualizar despues de haber insertado un nuevo producto: " + e.getMessage());
         }
-        return cantidad;
+        return stock;
     }
 
     @Override
-    public Producto findByCodeProduct(String codigo_barra
+    public Producto findByCodeProduct(String codigoBarra
     ) {
         con = new Conexion();
         Producto p = null;
@@ -188,23 +188,23 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("from ")
                 .append("producto ")
                 .append("where ")
-                .append("codigo_barra = ?");
+                .append("codigoBarra = ?");
         try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
 
-            ps.setString(1, codigo_barra);
+            ps.setString(1, codigoBarra);
 
             rs = ps.executeQuery();
             if (rs.next()) {
                 p = new Producto();
 
-                p.setIdProducto(rs.getInt("id_producto"));
-                p.setCodBarra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setCodBarra(rs.getString("codigoBarra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
-                p.setCantidad(rs.getInt("cantidad"));
+                p.setStock(rs.getInt("stock"));
                 p.setMarca(rs.getString("marca"));
                 p.setCont(rs.getString("contenido"));
-                p.setImagenUrl(rs.getString("imagenURL"));
+                p.setImagenUrl(rs.getString("imagenUrl"));
 
             }
         } catch (SQLException e) {
@@ -234,14 +234,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setIdProducto(rs.getInt("id_producto"));
-                p.setCodBarra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setCodBarra(rs.getString("codigoBarra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
-                p.setCantidad(rs.getInt("cantidad"));
+                p.setStock(rs.getInt("stock"));
                 p.setMarca(rs.getString("marca"));
                 p.setCont(rs.getString("contenido"));
-                p.setImagenUrl(rs.getString("imagenURL"));
+                p.setImagenUrl(rs.getString("imagenUrl"));
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -271,14 +271,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setIdProducto(rs.getInt("id_producto"));
-                p.setCodBarra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setCodBarra(rs.getString("codigoBarra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
-                p.setCantidad(rs.getInt("cantidad"));
+                p.setStock(rs.getInt("stock"));
                 p.setMarca(rs.getString("marca"));
                 p.setCont(rs.getString("contenido"));
-                p.setImagenUrl(rs.getString("imagenURL"));
+                p.setImagenUrl(rs.getString("imagenUrl"));
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -308,14 +308,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setIdProducto(rs.getInt("id_producto"));
-                p.setCodBarra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setCodBarra(rs.getString("codigoBarra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
-                p.setCantidad(rs.getInt("cantidad"));
+                p.setStock(rs.getInt("stock"));
                 p.setMarca(rs.getString("marca"));
                 p.setCont(rs.getString("contenido"));
-                p.setImagenUrl(rs.getString("imagenURL"));
+                p.setImagenUrl(rs.getString("imagenUrl"));
 
                 productos.add(p);
             }
@@ -346,14 +346,14 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setIdProducto(rs.getInt("id_producto"));
-                p.setCodBarra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setCodBarra(rs.getString("codigoBarra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
-                p.setCantidad(rs.getInt("cantidad"));
+                p.setStock(rs.getInt("stock"));
                 p.setMarca(rs.getString("marca"));
                 p.setCont(rs.getString("contenido"));
-                p.setImagenUrl(rs.getString("imagenURL"));
+                p.setImagenUrl(rs.getString("imagenUrl"));
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -374,7 +374,7 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("from ")
                 .append("producto ")
                 .append("where ")
-                .append("cantidad = ?");
+                .append("stock = ?");
         try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
 
             ps.setString(1, quantity);
@@ -383,24 +383,24 @@ public class ProductoDaoImpl implements ProductoDao {
             while (rs.next()) {
                 Producto p = new Producto();
 
-                p.setIdProducto(rs.getInt("id_producto"));
-                p.setCodBarra(rs.getString("codigo_barra"));
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setCodBarra(rs.getString("codigoBarra"));
                 p.setNombre(rs.getString("nombre"));
                 p.setPrecio(rs.getDouble("precio"));
-                p.setCantidad(rs.getInt("cantidad"));
+                p.setStock(rs.getInt("stock"));
                 p.setMarca(rs.getString("marca"));
                 p.setCont(rs.getString("contenido"));
-                p.setImagenUrl(rs.getString("imagenURL"));
+                p.setImagenUrl(rs.getString("imagenUrl"));
                 productos.add(p);
             }
         } catch (SQLException e) {
-            System.out.println("Error al momento de consultar por cantidad: " + e.getMessage());
+            System.out.println("Error al momento de consultar por stock: " + e.getMessage());
         }
         return productos;
     }
 
     @Override
-    public boolean deleteByCodeBar(String codigo_barra
+    public boolean deleteByCodeBar(String codigoBarra
     ) {
         con = new Conexion();
         boolean estado = false;
@@ -409,10 +409,10 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("from ")
                 .append("producto ")
                 .append("where ")
-                .append("codigo_barra = ?");
+                .append("codigoBarra = ?");
         try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
 
-            ps.setString(1, codigo_barra);
+            ps.setString(1, codigoBarra);
             ps.executeUpdate();
             estado = true;
         } catch (SQLException e) {
@@ -438,8 +438,8 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("marca=?,")
                 .append("contenido=?,")
                 .append("precio=?,")
-                .append("cantidad=? ")
-                .append("where codigo_barra=?;");
+                .append("stock=? ")
+                .append("where codigoBarra=?;");
 
         try {
             Connection conn = con.getConexion();
@@ -448,7 +448,7 @@ public class ProductoDaoImpl implements ProductoDao {
             ps.setString(2, producto.getMarca());
             ps.setString(3, producto.getCont());
             ps.setDouble(4, producto.getPrecio());
-            ps.setInt(5, producto.getCantidad());
+            ps.setInt(5, producto.getStock());
             ps.setString(6, producto.getCodBarra());
 
             ps.executeUpdate();
@@ -499,5 +499,41 @@ public class ProductoDaoImpl implements ProductoDao {
         }
 
         return null;
+    }
+
+    @Override
+    public Producto findSpecificByNameBrandContent(String name, String brand, String content) {
+        con = new Conexion();
+        Producto p = null;
+        ResultSet rs = null;
+        StringBuilder sql = new StringBuilder();
+        sql.append("Select ")
+                .append("codigoBarra, ")
+                .append("precio, ")
+                .append("stock ")
+                .append("from ")
+                .append("producto ")
+                .append("where ")
+                .append("nombre = ? ")
+                .append("AND marca=? ")
+                .append("AND contenido=?");
+        try (Connection conn = con.getConexion(); PreparedStatement ps = conn.prepareStatement(sql.toString());) {
+
+            ps.setString(1, name);
+            ps.setString(2, brand);
+            ps.setString(3, content);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                p = new Producto();
+                System.out.println("Se enconttró el producto");
+                p.setCodBarra(rs.getString("codigoBarra"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setStock(rs.getInt("stock"));
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al momento de consultar por contenido: " + e.getMessage());
+        }
+        return p;
     }
 }

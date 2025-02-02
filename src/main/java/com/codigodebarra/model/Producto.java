@@ -10,7 +10,7 @@ public class Producto {
     String codBarra, nombre, marca, cont, imagenUrl;
     boolean igvAplicable; //true si si aplica igv, false si está exonerado
     double precio;
-    int cantidad;
+    int stock;
 
     public Producto() {
     }
@@ -79,12 +79,12 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getStock() {
+        return stock;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
 }

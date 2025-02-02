@@ -27,6 +27,34 @@ public class LoginController {
         acciones();
     }
 
+    public void evaluarLogin(String nombreUsuario, char[] contrasenia) {
+        if ((!nombreUsuario.isEmpty()) && contrasenia.length != 0) {
+            Usuario usuario = usuarioDao.evaluarUsuario(nombreUsuario, contrasenia);
+
+            if (usuario != null) {
+                JInterfazPrincipal ip = new JInterfazPrincipal();
+                PrincipalController pc = new PrincipalController(ip, usuario);
+                vistaLogin.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+            }
+            /**
+             * <br> Esto se tiene que hacer en la sección del administrador.
+             */
+//            Usuario usuario = new Usuario();
+//            usuario.setNombre("Yoshua");
+//            usuario.setApellido("Castaneda");
+//            usuario.setNombreUsuario("dani");
+//            usuario.setContrasenia("dani");
+//            usuario.setRol("Administrador");
+//
+//            usuarioDao.insert(usuario);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese los campos para iniciar sesión");
+
+        }
+    }
+
     public void acciones() {
         //Opciones de la Tabbed Pane
         vistaLogin.getPnlBarraOpciones().addMouseListener(new MouseAdapter() {
@@ -129,33 +157,4 @@ public class LoginController {
             }
         });
     }
-
-    public void evaluarLogin(String nombreUsuario, char[] contrasenia) {
-        if ((!nombreUsuario.isEmpty()) && contrasenia.length != 0) {
-            Usuario usuario = usuarioDao.evaluarUsuario(nombreUsuario, contrasenia);
-
-            if (usuario != null) {
-                JInterfazPrincipal ip = new JInterfazPrincipal();
-                PrincipalController pc = new PrincipalController(ip, usuario);
-                vistaLogin.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuario no encontrado");
-            }
-            /**
-             * <br> Esto se tiene que hacer en la sección del administrador.
-             */
-//            Usuario usuario = new Usuario();
-//            usuario.setNombre("Yoshua");
-//            usuario.setApellido("Castaneda");
-//            usuario.setNombreUsuario("da");
-//            usuario.setContrasenia("da");
-//            usuario.setRol("Administrador");
-//
-//            usuarioDao.insert(usuario);
-        } else {
-            JOptionPane.showMessageDialog(null, "Ingrese los campos para iniciar sesión");
-
-        }
-    }
-
 }

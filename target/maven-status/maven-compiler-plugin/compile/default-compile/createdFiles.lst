@@ -2,11 +2,9 @@ com\codigodebarra\controller\PrincipalController$11.class
 com\codigodebarra\controller\PrincipalController$8$2.class
 com\codigodebarra\controller\LoginController$3.class
 com\codigodebarra\controller\PrincipalController$1.class
-com\codigodebarra\model\DetallePedido.class
 com\codigodebarra\model\Usuario.class
 com\codigodebarra\controller\PrincipalController$8.class
 com\codigodebarra\controller\PrincipalController.class
-com\codigodebarra\model\Pedido.class
 com\codigodebarra\config\Conexion.class
 com\codigodebarra\view\JInformacion.class
 com\codigodebarra\controller\PrincipalController$14.class

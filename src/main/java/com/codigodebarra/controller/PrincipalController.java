@@ -2,7 +2,9 @@ package com.codigodebarra.controller;
 
 import com.codigodebarra.config.Disenio;
 import com.codigodebarra.dao.ProductoDao;
+import com.codigodebarra.dao.UsuarioDao;
 import com.codigodebarra.dao.daoimpl.ProductoDaoImpl;
+import com.codigodebarra.dao.daoimpl.UsuarioDaoImpl;
 import com.codigodebarra.model.Producto;
 import com.codigodebarra.model.Usuario;
 import com.codigodebarra.util.ApiProductos;
@@ -28,7 +30,10 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -45,12 +50,14 @@ public final class PrincipalController implements ActionListener {
     ApiProductos api;
     Producto productoGlobal;
     Usuario usuario;
-    DefaultTableModel modelo, modeloDv;
-    int xMouse, yMouse;
+    DefaultTableModel modelo, modeloDv, modeloDv2;
+    int xMouse, yMouse, stockGlobal = 0;
+    UsuarioDao usuarioDao;
 
     public PrincipalController(JInterfazPrincipal vistaIp, Usuario usuario) {
         this.vistaIp = vistaIp;
         //Se necesita que la vistaIp ya haya sida creada
+        this.usuario = usuario;
         bienvenida(usuario);
         this.vistaIp.setVisible(true);
         this.vistaIp.setLocationRelativeTo(null);
@@ -61,6 +68,8 @@ public final class PrincipalController implements ActionListener {
         Disenio.getDesignWindows();
         modelo = new DefaultTableModel();
         modeloDv = new DefaultTableModel();
+        modeloDv2 = new DefaultTableModel();
+        usuarioDao = new UsuarioDaoImpl();
         acciones();
     }
 
@@ -93,7 +102,7 @@ public final class PrincipalController implements ActionListener {
     public void mostrarElementosEnTabla(List<Producto> listaProductos) {
         modelo.setRowCount(0);
         for (Producto p : listaProductos) {
-            Object[] fila = {p.getCodBarra(), p.getNombre(), p.getMarca(), p.getCont(), p.getPrecio(), p.getCantidad()};
+            Object[] fila = {p.getCodBarra(), p.getNombre(), p.getMarca(), p.getCont(), p.getPrecio(), p.getStock()};
             modelo.addRow(fila);
         }
         vistaIp.getTxtValorProd().setText("");
@@ -221,7 +230,7 @@ public final class PrincipalController implements ActionListener {
                         } else {
                             p = productoDao.findByCodeProduct(vistaIp.getTxtValorProd().getText());
                             modelo.setNumRows(0);
-                            Object[] fila = {p.getCodBarra(), p.getNombre(), p.getMarca(), p.getCont(), p.getPrecio(), p.getCantidad()};
+                            Object[] fila = {p.getCodBarra(), p.getNombre(), p.getMarca(), p.getCont(), p.getPrecio(), p.getStock()};
                             modelo.addRow(fila);
                         }
                     }
@@ -300,7 +309,7 @@ public final class PrincipalController implements ActionListener {
                         p.setMarca(marcaP);
                         p.setCont(contenidoP);
                         p.setPrecio(precioP);
-                        p.setCantidad(cantidadP);
+                        p.setStock(cantidadP);
 
                         if (productoDao.insert(p) != 0) {
                             System.out.println("Se agregó exitosamente");
@@ -412,7 +421,7 @@ public final class PrincipalController implements ActionListener {
                                     p.setNombre(vistaIp.getTxtNombreGP().getText());
                                     p.setMarca(vistaIp.getTxtMarcaGP().getText());
                                     p.setCont(vistaIp.getTxtContenidoGP().getText());
-                                    p.setCantidad(((Number) vistaIp.getSpnCantidadGP().getValue()).intValue());
+                                    p.setStock(((Number) vistaIp.getSpnCantidadGP().getValue()).intValue());
                                     p.setPrecio(((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue());
 
                                     productoDao.updateByCodeBar(p);
@@ -465,6 +474,8 @@ public final class PrincipalController implements ActionListener {
 
     /**
      * ESCANEAR CODIGO.
+     *
+     * @throws java.net.MalformedURLException
      */
     public void escanearCodigo() throws MalformedURLException {
         Producto productoApi = api.consumirApi(vistaIp.getTxtCodigoEscanear().getText());
@@ -602,14 +613,18 @@ public final class PrincipalController implements ActionListener {
         });
     }
 
-    private void configuracionTabbedPane() {
-        //Ocultar las pestañas del TabbedPane
-        vistaIp.getjTabbedPane1().setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
+    private void ocultarPestaniasTdP(JTabbedPane tbdPane) {
+        tbdPane.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
             @Override
             protected int calculateTabAreaHeight(int tabPlacement, int runCount, int maxTabHeight) {
                 return 0; // Ocultar las pestañas
             }
         });
+    }
+
+    private void configuracionTabbedPane() {
+        //Ocultar las pestañas del TabbedPane
+        ocultarPestaniasTdP(vistaIp.getjTabbedPane1());
         //Barra superior
         vistaIp.getPnlBarraDeOpciones().addMouseListener(new MouseAdapter() {
             @Override
@@ -753,6 +768,18 @@ public final class PrincipalController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == vistaIp.getCheckBoxDescuentoDv()) {
+            if (vistaIp.getCheckBoxDescuentoDv().isSelected()) {
+                vistaIp.getTxtDescuentoDv().setEditable(true);
+            } else {
+                vistaIp.getTxtDescuentoDv().setEditable(false);
+            }
+        }
+        if (e.getSource() == vistaIp.getCbInfoProduDv()) {
+
+            mostrarInfoCb(vistaIp.getCbInfoProduDv().getSelectedItem());
+
+        }
         if (e.getSource() == vistaIp.getBtnOkEscanear()) {
 
             try {
@@ -764,6 +791,12 @@ public final class PrincipalController implements ActionListener {
         //
         if (e.getSource() == vistaInfo.getBtnCancelar()) {
             vistaInfo.dispose();
+        }
+        if (e.getSource() == vistaIp.getRbFactura()) {
+            vistaIp.getTbpTablaDv().setSelectedIndex(1);
+        }
+        if (e.getSource() == vistaIp.getRbBoleta()) {
+            vistaIp.getTbpTablaDv().setSelectedIndex(0);
         }
     }
 
@@ -903,7 +936,7 @@ public final class PrincipalController implements ActionListener {
         if (producto_bd == null) {
             vistaInfo.getTxtCantidadProd().setText("0");
         } else {
-            vistaInfo.getTxtCantidadProd().setText(String.valueOf(producto_bd.getCantidad()));
+            vistaInfo.getTxtCantidadProd().setText(String.valueOf(producto_bd.getStock()));
         }
 
         //vistaInfo.getTxtAreaInformacion().setText(sb.toString());
@@ -926,11 +959,114 @@ public final class PrincipalController implements ActionListener {
 
     public void metodosDVenta() {
         disenioTablaDVenta();
+        mostrarValoresSwingComponents();
     }
 
     public void disenioTablaDVenta() {
-        String[] nombreColumnas = {"Trabajador", "Nombre prod.", "Marca prod.", "Precio", "Cantidad", "Importe", "Descuento", "Subtotal"};
+        String[] nombreColumnas = {"Cód. Barra", "Nombre", "Marca", "Cont.", "Precio", "Cant.", "Importe", "Desc.", "Subtotal"};
         modeloDv.setColumnIdentifiers(nombreColumnas);
         vistaIp.getTablaDetalleVenta().setModel(modeloDv);
+
+        String[] nombreColumnas2 = {"Cód. Barra", "Nombre", "Marca", "Cont.", "Precio Sin IGV", "Cant.", "Importe sin IGV", "IGV", "Importe con IGV", "Desc.", "Subtotal con desc."};
+        modeloDv2.setColumnIdentifiers(nombreColumnas2);
+        vistaIp.getTablaDv2().setModel(modeloDv2);
+    }
+
+    public void mostrarValoresSwingComponents() {
+        vistaIp.getRbBoleta().addActionListener(this);
+        vistaIp.getRbFactura().addActionListener(this);
+        vistaIp.getCbInfoProduDv().addActionListener(this);
+
+        ocultarPestaniasTdP(vistaIp.getTbpTablaDv());
+
+        vistaIp.getTxtTrabajadorDv().setText(String.format("%s, %s", usuario.getApellido(), usuario.getNombre()));
+
+        vistaIp.getCbInfoProduDv().addItem("<Seleccione info producto>");
+        List<Producto> productos = productoDao.selectAll();
+        for (Producto p : productos) {
+            if (p.getPrecio() != 0.0 && p.getStock() != 0) {
+                vistaIp.getCbInfoProduDv().addItem(String.format("%s - %s - %s", p.getNombre(), p.getMarca(), p.getCont()));
+            }
+        }
+        vistaIp.getCbMetPagoDv().addItem("<Seleccione>");
+        vistaIp.getCbMetPagoDv().addItem("Efectivo");
+        vistaIp.getCbMetPagoDv().addItem("Tarjeta");
+        vistaIp.getCbMetPagoDv().addItem("Yape");
+        vistaIp.getCbMetPagoDv().addItem("Plin");
+        vistaIp.getCbMetPagoDv().addItem("Transacción");
+        vistaIp.getCbMetPagoDv().addItem("Fiado");
+
+        vistaIp.getSeleccionTVenta().add(vistaIp.getRbBoleta());
+        vistaIp.getSeleccionTVenta().add(vistaIp.getRbFactura());
+        vistaIp.getRbBoleta().setSelected(true);
+
+        vistaIp.getCheckBoxDescuentoDv().addActionListener(this);
+
+        vistaIp.getSpnCantidadDv().addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                SpinnerNumberModel spnNModel = new SpinnerNumberModel(((Number) vistaIp.getSpnCantidadDv().getValue()).intValue(), 0, stockGlobal, 1);
+                vistaIp.getSpnCantidadDv().setModel(spnNModel);
+                if (vistaIp.getTxtStockDv().getText() != null && !vistaIp.getTxtStockDv().getText().equals("")) {
+
+//                    int stockModelo = Integer.parseInt(vistaIp.getTxtStockDv().getText());
+                    int valorStock = Integer.parseInt(vistaIp.getTxtStockDv().getText());
+                    if (valorStock >= 0) {
+                        int valor = ((Number) vistaIp.getSpnCantidadDv().getValue()).intValue();
+
+                        int diferencia = stockGlobal - valor;
+
+                        vistaIp.getTxtStockDv().setText(String.valueOf(diferencia));
+
+                    }
+
+                    //vistaIp.getSpnCantidadDv().setValue(diferencia);
+                } else {
+                    vistaIp.getSpnCantidadDv().setValue(0);
+                }
+            }
+        }); //Fin del ChangeListener
+
+    }
+
+    public void mostrarInfoCb(Object item) {
+        String infoProducto = item.toString();
+        if (!infoProducto.equals("<Seleccione info producto>")) {
+            String[] recortes = infoProducto.split(" - ");
+
+            String nombre = recortes[0];
+            String marca = recortes[1];
+            String contenido = recortes[2];
+            String concatenado = null;
+            boolean concatenar = false;
+            /**
+             * Si en caso se obtiene el contenido de un producto con ' - '.
+             */
+            for (int i = 3; i < recortes.length; i++) {
+                concatenado = contenido.concat(" - " + recortes[i]);
+                concatenar = true;
+            }
+            if (concatenar == true) {
+                contenido = concatenado;
+            }
+
+            Producto atributosE = productoDao.findSpecificByNameBrandContent(nombre, marca, contenido);
+
+            /**
+             * Mostramos el valor del item del combobox seleccionado.
+             */
+            vistaIp.getTxtContenidoDv().setText(contenido);
+            String precio = String.valueOf(atributosE.getPrecio());
+            String stock = String.valueOf(atributosE.getStock());
+
+            vistaIp.getTxtPrecioDv().setText(precio);
+            vistaIp.getTxtStockDv().setText(stock);
+
+            stockGlobal = atributosE.getStock();
+        } else {
+            vistaIp.getTxtContenidoDv().setText("");
+            vistaIp.getTxtPrecioDv().setText("");
+            vistaIp.getTxtStockDv().setText("");
+        }
     }
 }

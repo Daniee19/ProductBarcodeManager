@@ -6,9 +6,17 @@ public class Venta {
 
     int idVenta, idUsuario;
     double impTotSnIgv, impTotCnIgv, descTot, igvTotal, total;
-    String tipoVenta, metPago, observacion;
+    String observacion;
     Timestamp fechaVenta;
-    
+
+    enum metPago {
+        Efectivo, Tarjeta, Yape, Pli, Transaccion, Fiado;
+    }
+
+    enum tipoVenta {
+        Boleta, Factura;
+    }
+
     public int getIdVenta() {
         return idVenta;
     }
@@ -57,22 +65,6 @@ public class Venta {
         this.total = total;
     }
 
-    public String getTipoVenta() {
-        return tipoVenta;
-    }
-
-    public void setTipoVenta(String tipoVenta) {
-        this.tipoVenta = tipoVenta;
-    }
-
-    public String getMetPago() {
-        return metPago;
-    }
-
-    public void setMetPago(String metPago) {
-        this.metPago = metPago;
-    }
-
     public String getObservacion() {
         return observacion;
     }
@@ -96,5 +88,5 @@ public class Venta {
     public void setIgvTotal(double igvTotal) {
         this.igvTotal = igvTotal;
     }
-    
+
 }

@@ -3,7 +3,6 @@ package com.codigodebarra.dao.daoimpl;
 import com.codigodebarra.config.Conexion;
 import com.codigodebarra.dao.UsuarioDao;
 import com.codigodebarra.model.Usuario;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class UsuarioDaoImpl implements UsuarioDao {
 
@@ -25,15 +25,14 @@ public class UsuarioDaoImpl implements UsuarioDao {
         Usuario usuario = null;
         StringBuilder sql = new StringBuilder();
         sql.append("Select ")
-                .append("id_usuario, ")
+                .append("idUsuario, ")
                 .append("nombre, ")
                 .append("apellido, ")
-                .append("nombre_usuario, ")
-                .append("AES_DECRYPT(contrasenia, contrasenia), ")
+                .append("nombreUsuario, ")
                 .append("rol ")
                 .append("from usuario ")
                 .append("where ")
-                .append("id_usuario = ")
+                .append("idUsuario = ")
                 .append("?");
 
         try {
@@ -45,11 +44,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
             if (rs.next()) {
                 usuario = new Usuario();
-                usuario.setId_usuario(rs.getInt("id_usuario"));
+                usuario.setId_usuario(rs.getInt("idUsuario"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setApellido(rs.getString("apellido"));
-                usuario.setNombreUsuario(rs.getString("nombre_usuario"));
-                usuario.setContrasenia(rs.getString("contrasenia"));
+                usuario.setNombreUsuario(rs.getString("nombreUsuario"));
                 usuario.setRol(rs.getString("rol"));
 
             }
@@ -66,14 +64,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
         List<Usuario> usuarios = new ArrayList<>();
         StringBuilder sql = new StringBuilder();
         sql.append("Select ")
-                .append("id_usuario, ")
+                .append("idUsuario, ")
                 .append("nombre, ")
                 .append("apellido, ")
-                .append("nombre_usuario, ")
-                .append("AES_DECRYPT(contrasenia, contrasenia), ")
+                .append("nombreUsuario, ")
                 .append("rol ")
-                .append("from usuario ")
-                .append(")");
+                .append("from usuario ");
 
         try {
             Connection conn = con.getConexion();
@@ -83,16 +79,15 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
             while (rs.next()) {
                 Usuario usuario = new Usuario();
-                usuario.setId_usuario(rs.getInt("id_usuario"));
+                usuario.setId_usuario(rs.getInt("idUsuario"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setApellido(rs.getString("apellido"));
-                usuario.setNombreUsuario(rs.getString("nombre_usuario"));
-                usuario.setContrasenia(rs.getString("contrasenia"));
+                usuario.setNombreUsuario(rs.getString("nombreUsuario"));
                 usuario.setRol(rs.getString("rol"));
                 usuarios.add(usuario);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error al consultar todos los usuarios: " + e.getMessage());
         }
         return usuarios;
@@ -110,7 +105,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
                 .append("usuario.contrasenia, ")
                 .append("usuario.rol ")
                 .append(") values (")
-                .append("?,?,?,AES_ENCRYPT(?,?),?")
+                .append("?,?,?,?,?")
                 .append(")");
         try {
             Connection conn = con.getConexion(); //Llamar a la variable, la cual ya pasó por el DriverManager...
@@ -119,15 +114,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getNombreUsuario());
-            /**
-             * Puse 2 veces el usuario.getContrasenia(), porque quiero que la
-             * clave sea la misma que la contraseña. Esto no significa que se
-             * guardará la contraseña como tipo String, es decir, como texto...
-             * Sino que servirá como clave para poder descifrar esa contraseña.
-             */
-            ps.setString(4, usuario.getContrasenia());
-            ps.setString(5, usuario.getContrasenia());
-            ps.setString(6, usuario.getRol());
+            //Se está insertando el hash+salt para que ningún registro tenga el mismo hash
+            ps.setString(4, BCrypt.hashpw(usuario.getContrasenia(), BCrypt.gensalt()));
+            ps.setString(5, usuario.getRol());
 
             ps.executeUpdate(); //Tenemos que ejecutarlo primero, para obtener el id del producto que se haya creado
 
@@ -148,57 +137,56 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
     @Override
     public Usuario evaluarUsuario(String nombreUsuario, char[] contrasenia) {
+        //Se trae de tipo char[] porque es de tipo txtPASSWORD
         con = new Conexion();
         Usuario usuario = null;
         StringBuilder sb = new StringBuilder();
         sb.append("Select ")
-                .append("usuario.id_usuario, ")
+                .append("usuario.idUsuario, ")
                 .append("usuario.nombre, ")
                 .append("usuario.apellido, ")
                 .append("usuario.nombreUsuario, ")
-                .append("AES_DECRYPT(usuario.contrasenia, usuario.contrasenia), ")
+                .append("usuario.contrasenia, ")
                 .append("usuario.rol ")
                 .append("from ")
                 .append(" usuario ")
                 .append("WHERE ")
                 .append("nombreUsuario = ")
-                .append("? ")
-                .append("AND ")
-                .append("AES_DECRYPT(contrasenia, ?) = ")
-                .append("?");
-        /**
-         * Quiero desencriptar un valor del campo que se encuentre en la columna
-         * *contrasenia* (del where), la cual se desencriptará en todo caso yo
-         * ingrese la clave secreta, la cual es el primer '?' dentro de append
-         * de AES_DECRYPT. Y bueno el segundo parámetro vendría a ser el valor
-         * ingresado a comparar.
-         */
+                .append("? ");
+
         try {
 
             Connection conn = con.getConexion();
             ps = conn.prepareStatement(sb.toString());
             ps.setString(1, nombreUsuario);
 
-            String str = new String(contrasenia);
-            byte[] byteArray = str.getBytes(StandardCharsets.UTF_8);
-            System.out.println("byteArray: " + byteArray);
-            ps.setBytes(2, byteArray);
-            ps.setBytes(3, byteArray);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                usuario = new Usuario();
-                usuario.setNombre(rs.getString("nombre"));
-                usuario.setApellido(rs.getString("apellido"));
-                usuario.setId_usuario(rs.getInt("id_usuario"));
-                usuario.setNombreUsuario("nombreUsuario");
-                usuario.setRol(rs.getString("rol"));
-                System.out.println("ELEMENTOS ENCONTRADOS");
+                String contraseniaHasheada = rs.getString("contrasenia");
+                //Convertimos el char[] a String 
+                String str = new String(contrasenia);
+                try {
+                    /**
+                     * Obtenemos el salt de la contraseña hasheada. Y lo
+                     * combinamos ese salt entontrado y lo combinamos con el
+                     * texto plano hasheado. Y luego se compara y si son iguales
+                     * devuelve true, y sino false.
+                     */
+                    if (BCrypt.checkpw(str, contraseniaHasheada)) {
 
-            } else {
-                System.out.println("Elementos no encontradoss, no coincide la contrasenia o el nombre de usuario");
+                        usuario = new Usuario();
+                        usuario.setNombre(rs.getString("nombre"));
+                        usuario.setApellido(rs.getString("apellido"));
+                        usuario.setId_usuario(rs.getInt("idUsuario"));
+                        usuario.setNombreUsuario("nombreUsuario");
+                        usuario.setRol(rs.getString("rol"));
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error en la comparación de las contraseñas: " + e.getMessage());
+                }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error al evaluar al usuario: " + e.getMessage());
         }
 
