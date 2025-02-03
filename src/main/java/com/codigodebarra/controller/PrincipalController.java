@@ -24,6 +24,9 @@ import java.awt.event.MouseMotionAdapter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +36,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
@@ -972,7 +976,34 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getTablaDv2().setModel(modeloDv2);
     }
 
+    public void actualizarHora(DateTimeFormatter formatoHora) {
+        vistaIp.getLblHora().setText(String.valueOf(LocalTime.now().format(formatoHora)));
+    }
+
     public void mostrarValoresSwingComponents() {
+
+        vistaIp.getPnlEscanearCodBarraDv().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String codEscan = JOptionPane.showInputDialog("Escanee el producto", "");
+                if (!codEscan.isEmpty()) {
+                    Producto p = productoDao.findByCodeProduct(codEscan);
+                    
+                }
+
+            }
+        });
+
+        //-----------
+        DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+        vistaIp.getLblFecha().setText(String.valueOf(LocalDate.now().format(formatoFecha)));
+
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+        //Timer que actualiza la hora cada segundo
+        Timer timer = new Timer(1000, e -> actualizarHora(formatoHora));
+        timer.start();
+        actualizarHora(formatoHora);
+
         vistaIp.getRbBoleta().addActionListener(this);
         vistaIp.getRbFactura().addActionListener(this);
         vistaIp.getCbInfoProduDv().addActionListener(this);
@@ -980,7 +1011,8 @@ public final class PrincipalController implements ActionListener {
         ocultarPestaniasTdP(vistaIp.getTbpTablaDv());
 
         vistaIp.getTxtTrabajadorDv().setText(String.format("%s, %s", usuario.getApellido(), usuario.getNombre()));
-
+        
+        //-------------------
         vistaIp.getCbInfoProduDv().addItem("<Seleccione info producto>");
         List<Producto> productos = productoDao.selectAll();
         for (Producto p : productos) {

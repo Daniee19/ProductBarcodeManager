@@ -114,12 +114,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         panelDetalleVenta = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel25 = new javax.swing.JLabel();
-        pnlEscanearCodBarraDv = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        pnlManualDv = new javax.swing.JPanel();
-        jLabel31 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         cbInfoProduDv = new javax.swing.JComboBox<>();
         jLabel34 = new javax.swing.JLabel();
@@ -145,6 +141,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel34 = new javax.swing.JPanel();
         jLabel66 = new javax.swing.JLabel();
         txtTrabajadorDv = new javax.swing.JTextField();
+        pnlEscanearCodBarraDv = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
         jPanel27 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaObservacion = new javax.swing.JTextArea();
@@ -190,6 +188,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jTextField9 = new javax.swing.JTextField();
         jLabel48 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
         jLabel63 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
         jPanel35 = new javax.swing.JPanel();
@@ -264,7 +263,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         rbBoleta = new javax.swing.JRadioButton();
         rbFactura = new javax.swing.JRadioButton();
         jPanel10 = new javax.swing.JPanel();
-        txtHoraDia = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
+        lblHora = new javax.swing.JLabel();
         panelVenta = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
@@ -829,62 +829,19 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel25.setText("Agregar pedido");
-        jPanel9.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 8, -1, -1));
-
-        pnlEscanearCodBarraDv.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel30.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel30.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel30.setText("Escanear cod. barra");
-        jLabel30.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout pnlEscanearCodBarraDvLayout = new javax.swing.GroupLayout(pnlEscanearCodBarraDv);
-        pnlEscanearCodBarraDv.setLayout(pnlEscanearCodBarraDvLayout);
-        pnlEscanearCodBarraDvLayout.setHorizontalGroup(
-            pnlEscanearCodBarraDvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnlEscanearCodBarraDvLayout.setVerticalGroup(
-            pnlEscanearCodBarraDvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel30, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-        );
-
-        jPanel9.add(pnlEscanearCodBarraDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 120, 35));
-
-        pnlManualDv.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel31.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel31.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel31.setText("Manual");
-        jLabel31.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout pnlManualDvLayout = new javax.swing.GroupLayout(pnlManualDv);
-        pnlManualDv.setLayout(pnlManualDvLayout);
-        pnlManualDvLayout.setHorizontalGroup(
-            pnlManualDvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-        );
-        pnlManualDvLayout.setVerticalGroup(
-            pnlManualDvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-        );
-
-        jPanel9.add(pnlManualDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 120, 35));
-
-        jLabel51.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel51.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel51.setText("#00000000000");
-        jPanel9.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 6, 140, 30));
+        jPanel9.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 13, 190, -1));
 
-        jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 380, 110));
+        jLabel31.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel31.setText("Venta");
+        jPanel9.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 7, 110, 40));
+
+        jPanel8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 380, 60));
 
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel13.add(cbInfoProduDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 300, 30));
+        jPanel13.add(cbInfoProduDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 230, 30));
 
         jLabel34.setText("Información del producto");
         jPanel13.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 180, -1));
@@ -995,7 +952,20 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         txtTrabajadorDv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel13.add(txtTrabajadorDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 300, 30));
 
-        jPanel8.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 380, 400));
+        pnlEscanearCodBarraDv.setBackground(new java.awt.Color(204, 204, 204));
+        pnlEscanearCodBarraDv.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel30.setBackground(new java.awt.Color(153, 153, 153));
+        jLabel30.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escanear_codigo_30x30.png"))); // NOI18N
+        jLabel30.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel30.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pnlEscanearCodBarraDv.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
+
+        jPanel13.add(pnlEscanearCodBarraDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 60, 30));
+
+        jPanel8.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 380, 410));
 
         jPanel27.setBackground(new java.awt.Color(204, 204, 204));
         jPanel27.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1021,7 +991,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel47, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel27.add(pnlGuardarVentaDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 100, 40));
+        jPanel27.add(pnlGuardarVentaDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 100, 40));
 
         jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel49.setText("Cancelar Venta");
@@ -1038,15 +1008,15 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
-        jPanel27.add(pnlCancelarVentaDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 100, 40));
+        jPanel27.add(pnlCancelarVentaDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 100, 40));
 
-        jPanel8.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 570, 380, 200));
+        jPanel8.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 380, 200));
 
         jLabel52.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(0, 0, 0));
         jLabel52.setText("Si ya agregaste todos los productos");
-        jPanel8.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 320, -1));
-        jPanel8.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 330, 10));
+        jPanel8.add(jLabel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 320, -1));
+        jPanel8.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 330, 10));
 
         panelDetalleVenta.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 420, 790));
 
@@ -1226,11 +1196,17 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         jPanel19.add(jPanel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 610, 310, 70));
 
-        jLabel63.setText("PDF");
-        jPanel19.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 50, 50));
+        jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel65.setText("Excel");
-        jPanel19.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 50, 50));
+        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pdf.png"))); // NOI18N
+        jPanel12.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 60, 50));
+
+        jLabel65.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
+        jPanel12.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 60, 50));
+
+        jPanel19.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 60, 130));
 
         tbpTablaDv.addTab("tab1", jPanel19);
 
@@ -1584,8 +1560,14 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtHoraDia.setText("hora");
-        jPanel10.add(txtHoraDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 6, 300, 40));
+        lblFecha.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblFecha.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblFecha.setText("fecha");
+        jPanel10.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 300, 30));
+
+        lblHora.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblHora.setText("hora");
+        jPanel10.add(lblHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 150, -1));
 
         jPanel39.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, 330, 60));
 
@@ -1898,14 +1880,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.jLabel24 = jLabel24;
     }
 
-    public JLabel getjLabel25() {
-        return jLabel25;
-    }
-
-    public void setjLabel25(JLabel jLabel25) {
-        this.jLabel25 = jLabel25;
-    }
-
     public JLabel getjLabel26() {
         return jLabel26;
     }
@@ -2162,12 +2136,28 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.txtContenidoDv = jTextField1;
     }
 
-    public JLabel getTxtHoraDia() {
-        return txtHoraDia;
+    public JLabel getjLabel51() {
+        return jLabel51;
     }
 
-    public void setTxtHoraDia(JLabel txtHoraDia) {
-        this.txtHoraDia = txtHoraDia;
+    public void setjLabel51(JLabel jLabel51) {
+        this.jLabel51 = jLabel51;
+    }
+
+    public JLabel getLblHora() {
+        return lblHora;
+    }
+
+    public void setLblHora(JLabel lblHora) {
+        this.lblHora = lblHora;
+    }
+
+    public JLabel getLblFecha() {
+        return lblFecha;
+    }
+
+    public void setLblFecha(JLabel lblFecha) {
+        this.lblFecha = lblFecha;
     }
 
     public JLabel getjLabel52() {
@@ -3410,14 +3400,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.pnlLimpiarGP = pnlLimpiarGP;
     }
 
-    public JPanel getPnlManualDv() {
-        return pnlManualDv;
-    }
-
-    public void setPnlManualDv(JPanel pnlManualDv) {
-        this.pnlManualDv = pnlManualDv;
-    }
-
     public JPanel getPnlMinusLogin() {
         return pnlMinusLogin;
     }
@@ -3716,7 +3698,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -3787,6 +3768,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -3871,6 +3853,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lblExcelDv;
     private javax.swing.JLabel lblExcelProd;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblInventario;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPdfDv;
@@ -3902,7 +3886,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlIzquierdaOperacionesProducto;
     private javax.swing.JPanel pnlLeft;
     private javax.swing.JPanel pnlLimpiarGP;
-    private javax.swing.JPanel pnlManualDv;
     private javax.swing.JPanel pnlMinusLogin;
     private javax.swing.JPanel pnlNorth;
     private javax.swing.JPanel pnlOperacionesProducto;
@@ -3928,7 +3911,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescuentoDv;
     private javax.swing.JTextField txtDescuentoTotal2Dv;
     private javax.swing.JTextField txtDescuentoTotalDv;
-    private javax.swing.JLabel txtHoraDia;
     private javax.swing.JTextField txtIgvTotal;
     private javax.swing.JTextField txtImpTotalConIgv2Dv;
     private javax.swing.JTextField txtImpTotalDv;
