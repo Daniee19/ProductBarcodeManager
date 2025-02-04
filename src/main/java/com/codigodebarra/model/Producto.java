@@ -63,7 +63,7 @@ public class Producto {
         this.imagenUrl = imagenUrl;
     }
 
-    public boolean isIgvAplicable() {
+    public boolean getIgvAplicable() {
         return igvAplicable;
     }
 

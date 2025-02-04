@@ -138,11 +138,12 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel61 = new javax.swing.JLabel();
         txtContenidoDv = new javax.swing.JTextField();
         jLabel50 = new javax.swing.JLabel();
-        jPanel34 = new javax.swing.JPanel();
+        pnlLimpiarDv = new javax.swing.JPanel();
         jLabel66 = new javax.swing.JLabel();
         txtTrabajadorDv = new javax.swing.JTextField();
         pnlEscanearCodBarraDv = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         jPanel27 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaObservacion = new javax.swing.JTextArea();
@@ -155,6 +156,12 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         tbpTablaDv = new javax.swing.JTabbedPane();
+        jPanel28 = new javax.swing.JPanel();
+        jPanel29 = new javax.swing.JPanel();
+        jLabel58 = new javax.swing.JLabel();
+        rbBoleta = new javax.swing.JRadioButton();
+        rbFactura = new javax.swing.JRadioButton();
+        jSeparator11 = new javax.swing.JSeparator();
         jPanel19 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaDetalleVenta = new javax.swing.JTable();
@@ -258,13 +265,14 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jSeparator24 = new javax.swing.JSeparator();
         txtImpTotalConIgv2Dv = new javax.swing.JTextField();
         jPanel39 = new javax.swing.JPanel();
-        jPanel38 = new javax.swing.JPanel();
-        jLabel62 = new javax.swing.JLabel();
-        rbBoleta = new javax.swing.JRadioButton();
-        rbFactura = new javax.swing.JRadioButton();
         jPanel10 = new javax.swing.JPanel();
         lblFecha = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
+        jPanel30 = new javax.swing.JPanel();
+        jPanel31 = new javax.swing.JPanel();
+        lblDinamiTipoVenta = new javax.swing.JLabel();
+        rbBoleta1 = new javax.swing.JRadioButton();
+        rbFactura1 = new javax.swing.JRadioButton();
         panelVenta = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
@@ -844,7 +852,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel13.add(cbInfoProduDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 230, 30));
 
         jLabel34.setText("Información del producto");
-        jPanel13.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 180, -1));
+        jPanel13.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 150, -1));
 
         jLabel35.setText("Trabajador");
         jPanel13.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 120, 20));
@@ -937,16 +945,16 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel50.setText("Contenido");
         jPanel13.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
 
-        jPanel34.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel34.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlLimpiarDv.setBackground(new java.awt.Color(255, 255, 255));
+        pnlLimpiarDv.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel66.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel66.setText("Limpiar");
         jLabel66.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel66.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel34.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 30));
+        pnlLimpiarDv.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 30));
 
-        jPanel13.add(jPanel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 100, 30));
+        jPanel13.add(pnlLimpiarDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, 100, 30));
 
         txtTrabajadorDv.setEditable(false);
         txtTrabajadorDv.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -964,6 +972,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlEscanearCodBarraDv.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
 
         jPanel13.add(pnlEscanearCodBarraDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 60, 30));
+
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconoInfo.png"))); // NOI18N
+        jLabel25.setToolTipText("Solo productos con precio y stock definidos, con stock al día");
+        jPanel13.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 68, -1, -1));
 
         jPanel8.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 380, 410));
 
@@ -1042,6 +1054,51 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         );
 
         panelDetalleVenta.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1900, 90));
+
+        jPanel29.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel58.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel58.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel58.setText("Seleccione el tipo de venta, antes de empezar");
+        jPanel29.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 721, 50));
+
+        rbBoleta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbBoleta.setText("Boleta");
+        rbBoleta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbBoletaActionPerformed(evt);
+            }
+        });
+        jPanel29.add(rbBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, -1));
+
+        rbFactura.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbFactura.setText("Factura");
+        rbFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbFacturaActionPerformed(evt);
+            }
+        });
+        jPanel29.add(rbFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
+        jPanel29.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 520, 10));
+
+        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
+        jPanel28.setLayout(jPanel28Layout);
+        jPanel28Layout.setHorizontalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addGap(209, 209, 209)
+                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(210, Short.MAX_VALUE))
+        );
+        jPanel28Layout.setVerticalGroup(
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel28Layout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(260, Short.MAX_VALUE))
+        );
+
+        tbpTablaDv.addTab("tab3", jPanel28);
 
         jPanel19.setBackground(new java.awt.Color(255, 153, 153));
         jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1122,7 +1179,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         txtTotalPagarDv.setForeground(new java.awt.Color(60, 63, 65));
         txtTotalPagarDv.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTotalPagarDv.setBorder(null);
-        jPanel23.add(txtTotalPagarDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 24, 140, 20));
+        jPanel23.add(txtTotalPagarDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 140, 20));
 
         jPanel24.setBackground(new java.awt.Color(255, 255, 255));
         jPanel24.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1250,11 +1307,13 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         jPanel42.add(jPanel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 670, 370, 70));
 
+        lblPdfDv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pdf.png"))); // NOI18N
         lblPdfDv.setText("PDF");
         jPanel42.add(lblPdfDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 60, 50));
 
+        lblExcelDv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excel.png"))); // NOI18N
         lblExcelDv.setText("EXCEL");
-        jPanel42.add(lblExcelDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 60, 50));
+        jPanel42.add(lblExcelDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 80, 50));
 
         jPanel40.add(jPanel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 340, 70));
 
@@ -1319,7 +1378,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         txtTotalPagar2Dv.setForeground(new java.awt.Color(60, 63, 65));
         txtTotalPagar2Dv.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTotalPagar2Dv.setBorder(null);
-        jPanel46.add(txtTotalPagar2Dv, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 24, 150, 20));
+        jPanel46.add(txtTotalPagar2Dv, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 150, 20));
 
         jPanel47.setBackground(new java.awt.Color(255, 255, 255));
         jPanel47.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1531,32 +1590,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         jPanel39.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel38.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel62.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel62.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel62.setText("Seleccione el tipo de venta a realizar");
-        jLabel62.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel38.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 270, 20));
-
-        jPanel39.add(jPanel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 290, 40));
-
-        rbBoleta.setText("Boleta");
-        rbBoleta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbBoletaActionPerformed(evt);
-            }
-        });
-        jPanel39.add(rbBoleta, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
-
-        rbFactura.setText("Factura");
-        rbFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbFacturaActionPerformed(evt);
-            }
-        });
-        jPanel39.add(rbFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
-
         jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1570,6 +1603,48 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel10.add(lblHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 150, -1));
 
         jPanel39.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 0, 330, 60));
+
+        javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
+        jPanel30.setLayout(jPanel30Layout);
+        jPanel30Layout.setHorizontalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel30Layout.setVerticalGroup(
+            jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel39.add(jPanel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -40, -1, -1));
+
+        jPanel31.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel31.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblDinamiTipoVenta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblDinamiTipoVenta.setText("Seleccione el tipo de venta");
+        jPanel31.add(lblDinamiTipoVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 180, -1));
+
+        rbBoleta1.setBackground(new java.awt.Color(255, 255, 255));
+        rbBoleta1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbBoleta1.setText("Boleta");
+        rbBoleta1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbBoleta1ActionPerformed(evt);
+            }
+        });
+        jPanel31.add(rbBoleta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 18, -1, -1));
+
+        rbFactura1.setBackground(new java.awt.Color(255, 255, 255));
+        rbFactura1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rbFactura1.setText("Factura");
+        rbFactura1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbFactura1ActionPerformed(evt);
+            }
+        });
+        jPanel31.add(rbFactura1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 18, -1, -1));
+
+        jPanel39.add(jPanel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 60));
 
         panelDetalleVenta.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 1210, 60));
 
@@ -1671,6 +1746,14 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private void txtImpTotalConIgv2DvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImpTotalConIgv2DvActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtImpTotalConIgv2DvActionPerformed
+
+    private void rbBoleta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbBoleta1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbBoleta1ActionPerformed
+
+    private void rbFactura1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFactura1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbFactura1ActionPerformed
 
     public JButton getBtnOkEscanear() {
         return btnOkEscanear;
@@ -2120,12 +2203,28 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.jPanel10 = jPanel10;
     }
 
-    public JPanel getjPanel34() {
-        return jPanel34;
+    public JLabel getjLabel25() {
+        return jLabel25;
     }
 
-    public void setjPanel34(JPanel jPanel34) {
-        this.jPanel34 = jPanel34;
+    public void setjLabel25(JLabel jLabel25) {
+        this.jLabel25 = jLabel25;
+    }
+
+    public JPanel getjPanel12() {
+        return jPanel12;
+    }
+
+    public void setjPanel12(JPanel jPanel12) {
+        this.jPanel12 = jPanel12;
+    }
+
+    public JPanel getPnlLimpiarDv() {
+        return pnlLimpiarDv;
+    }
+
+    public void setPnlLimpiarDv(JPanel pnlLimpiarDv) {
+        this.pnlLimpiarDv = pnlLimpiarDv;
     }
 
     public JTextField getjTextField1() {
@@ -2238,14 +2337,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
     public void setjLabel61(JLabel jLabel61) {
         this.jLabel61 = jLabel61;
-    }
-
-    public JLabel getjLabel62() {
-        return jLabel62;
-    }
-
-    public void setjLabel62(JLabel jLabel62) {
-        this.jLabel62 = jLabel62;
     }
 
     public JLabel getjLabel63() {
@@ -2630,14 +2721,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
     public void setjPanel37(JPanel jPanel37) {
         this.jPanel37 = jPanel37;
-    }
-
-    public JPanel getjPanel38() {
-        return jPanel38;
-    }
-
-    public void setjPanel38(JPanel jPanel38) {
-        this.jPanel38 = jPanel38;
     }
 
     public JPanel getjPanel39() {
@@ -3672,6 +3755,78 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.txtValorProd = txtValorProd;
     }
 
+    public JLabel getjLabel58() {
+        return jLabel58;
+    }
+
+    public void setjLabel58(JLabel jLabel58) {
+        this.jLabel58 = jLabel58;
+    }
+
+    public JLabel getLblDinamiTipoVenta() {
+        return lblDinamiTipoVenta;
+    }
+
+    public void setLblDinamiTipoVenta(JLabel lblDinamiTipoVenta) {
+        this.lblDinamiTipoVenta = lblDinamiTipoVenta;
+    }
+
+    public JPanel getjPanel28() {
+        return jPanel28;
+    }
+
+    public void setjPanel28(JPanel jPanel28) {
+        this.jPanel28 = jPanel28;
+    }
+
+    public JPanel getjPanel29() {
+        return jPanel29;
+    }
+
+    public void setjPanel29(JPanel jPanel29) {
+        this.jPanel29 = jPanel29;
+    }
+
+    public JPanel getjPanel30() {
+        return jPanel30;
+    }
+
+    public void setjPanel30(JPanel jPanel30) {
+        this.jPanel30 = jPanel30;
+    }
+
+    public JPanel getjPanel31() {
+        return jPanel31;
+    }
+
+    public void setjPanel31(JPanel jPanel31) {
+        this.jPanel31 = jPanel31;
+    }
+
+    public JSeparator getjSeparator11() {
+        return jSeparator11;
+    }
+
+    public void setjSeparator11(JSeparator jSeparator11) {
+        this.jSeparator11 = jSeparator11;
+    }
+
+    public JRadioButton getRbBoleta1() {
+        return rbBoleta1;
+    }
+
+    public void setRbBoleta1(JRadioButton rbBoleta1) {
+        this.rbBoleta1 = rbBoleta1;
+    }
+
+    public JRadioButton getRbFactura1() {
+        return rbFactura1;
+    }
+
+    public void setRbFactura1(JRadioButton rbFactura1) {
+        this.rbFactura1 = rbFactura1;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOkEscanear;
@@ -3698,6 +3853,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
@@ -3733,11 +3889,11 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
@@ -3785,11 +3941,13 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel34;
+    private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel37;
-    private javax.swing.JPanel jPanel38;
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel40;
@@ -3819,6 +3977,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator14;
@@ -3851,6 +4010,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lblDinamiTipoVenta;
     private javax.swing.JLabel lblExcelDv;
     private javax.swing.JLabel lblExcelProd;
     private javax.swing.JLabel lblFecha;
@@ -3885,6 +4045,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlInventarioTitulo;
     private javax.swing.JPanel pnlIzquierdaOperacionesProducto;
     private javax.swing.JPanel pnlLeft;
+    private javax.swing.JPanel pnlLimpiarDv;
     private javax.swing.JPanel pnlLimpiarGP;
     private javax.swing.JPanel pnlMinusLogin;
     private javax.swing.JPanel pnlNorth;
@@ -3894,7 +4055,9 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlVenta;
     private javax.swing.JPanel pnlXLogin;
     private javax.swing.JRadioButton rbBoleta;
+    private javax.swing.JRadioButton rbBoleta1;
     private javax.swing.JRadioButton rbFactura;
+    private javax.swing.JRadioButton rbFactura1;
     private javax.swing.ButtonGroup seleccionTVenta;
     private javax.swing.JSpinner spnCantidadDv;
     private javax.swing.JSpinner spnCantidadGP;

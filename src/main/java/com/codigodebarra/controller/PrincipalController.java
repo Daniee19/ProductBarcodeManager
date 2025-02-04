@@ -9,6 +9,7 @@ import com.codigodebarra.model.Producto;
 import com.codigodebarra.model.Usuario;
 import com.codigodebarra.util.ApiProductos;
 import com.codigodebarra.util.Barras;
+import com.codigodebarra.util.filtro.SoloNumero;
 import com.codigodebarra.view.JInformacion;
 import com.codigodebarra.view.JInterfazPrincipal;
 import com.codigodebarra.view.JLogin;
@@ -21,6 +22,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
@@ -43,6 +45,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AbstractDocument;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
 
@@ -286,6 +289,28 @@ public final class PrincipalController implements ActionListener {
             vistaIp.getPnlActualizarGP().setBackground(new Color(255, 255, 255));
             vistaIp.getPnlEliminarGP().setBackground(new Color(255, 255, 255));
             vistaIp.getPnlLimpiarGP().setBackground(new Color(255, 255, 255));
+        }
+    }
+
+    public void alternarPanelesDv(boolean valor) {
+        vistaIp.getPnlLimpiarDv().setEnabled(valor);
+        vistaIp.getPnlAgregarDv().setEnabled(valor);
+        //vistaIp.getTxtCodBarraGP().setEditable(valor);
+        vistaIp.getPnlActualizarDv().setEnabled(!valor);
+        vistaIp.getPnlEliminarDv().setEnabled(!valor);
+
+        if (valor == true) {
+            vistaIp.getPnlAgregarDv().setBackground(new Color(255, 255, 255));
+            vistaIp.getPnlActualizarDv().setBackground(new Color(200, 200, 200));
+            vistaIp.getPnlEliminarDv().setBackground(new Color(200, 200, 200));
+            vistaIp.getPnlLimpiarDv().setBackground(new Color(255, 255, 255));
+
+            limpiezaTextFieldsGP();
+        } else {
+            vistaIp.getPnlAgregarDv().setBackground(new Color(200, 200, 200));
+            vistaIp.getPnlActualizarDv().setBackground(new Color(255, 255, 255));
+            vistaIp.getPnlEliminarDv().setBackground(new Color(255, 255, 255));
+            vistaIp.getPnlLimpiarDv().setBackground(new Color(200, 200, 200));
         }
     }
 
@@ -796,11 +821,46 @@ public final class PrincipalController implements ActionListener {
         if (e.getSource() == vistaInfo.getBtnCancelar()) {
             vistaInfo.dispose();
         }
-        if (e.getSource() == vistaIp.getRbFactura()) {
-            vistaIp.getTbpTablaDv().setSelectedIndex(1);
+        if (e.getSource() == vistaIp.getRbFactura() || e.getSource() == vistaIp.getRbFactura1()) {
+            vistaIp.getTbpTablaDv().setSelectedIndex(2);
+            int rpta = JOptionPane.showConfirmDialog(null, "¿Desear realizar una factura?");
+            if (rpta == JOptionPane.NO_OPTION) {
+                vistaIp.getTbpTablaDv().setSelectedIndex(0);
+                vistaIp.getSeleccionTVenta().clearSelection();
+            } else if (rpta == JOptionPane.CANCEL_OPTION) {
+                vistaIp.getTbpTablaDv().setSelectedIndex(0);
+                vistaIp.getSeleccionTVenta().clearSelection();
+            } else if (rpta == JOptionPane.CLOSED_OPTION) {
+                vistaIp.getTbpTablaDv().setSelectedIndex(0);
+                vistaIp.getSeleccionTVenta().clearSelection();
+            } else {
+                vistaIp.getLblDinamiTipoVenta().setText("Tipo de venta seleccionado");
+                vistaIp.getRbFactura1().setSelected(true);
+                vistaIp.getRbFactura1().setEnabled(false);
+                vistaIp.getRbBoleta1().setSelected(false);
+                vistaIp.getRbBoleta1().setEnabled(false);
+            }
         }
-        if (e.getSource() == vistaIp.getRbBoleta()) {
-            vistaIp.getTbpTablaDv().setSelectedIndex(0);
+        if (e.getSource() == vistaIp.getRbBoleta() || e.getSource() == vistaIp.getRbBoleta1()) {
+            vistaIp.getTbpTablaDv().setSelectedIndex(1);
+            int rpta = JOptionPane.showConfirmDialog(null, "¿Deseas realizar una boleta?");
+
+            if (rpta == JOptionPane.NO_OPTION) {
+                vistaIp.getTbpTablaDv().setSelectedIndex(0);
+                vistaIp.getSeleccionTVenta().clearSelection();
+            } else if (rpta == JOptionPane.CANCEL_OPTION) {
+                vistaIp.getTbpTablaDv().setSelectedIndex(0);
+                vistaIp.getSeleccionTVenta().clearSelection();
+            } else if (rpta == JOptionPane.CLOSED_OPTION) {
+                vistaIp.getTbpTablaDv().setSelectedIndex(0);
+                vistaIp.getSeleccionTVenta().clearSelection();
+            } else {
+                vistaIp.getLblDinamiTipoVenta().setText("Tipo de venta seleccionado");
+                vistaIp.getRbBoleta1().setSelected(true);
+                vistaIp.getRbBoleta1().setEnabled(false);
+                vistaIp.getRbFactura1().setSelected(false);
+                vistaIp.getRbFactura1().setEnabled(false);
+            }
         }
     }
 
@@ -980,15 +1040,208 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getLblHora().setText(String.valueOf(LocalTime.now().format(formatoHora)));
     }
 
-    public void mostrarValoresSwingComponents() {
+    public void operacionesDv() {
+        vistaIp.getPnlAgregarDv().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (vistaIp.getRbBoleta().isSelected()) {
 
+                    if (vistaIp.getCbInfoProduDv().getSelectedItem() != null && vistaIp.getCbInfoProduDv().getSelectedItem() != "<Seleccione info producto>") {
+
+                        String desc = "0";
+
+                        try {
+                            vistaIp.getSpnCantidadDv().commitEdit();
+                        } catch (ParseException pe) {
+                            pe.getMessage();
+                        }
+
+                        if (vistaIp.getCheckBoxDescuentoDv().isSelected()) {
+                            if (!vistaIp.getTxtDescuentoDv().equals("")) {
+                                desc = vistaIp.getTxtDescuentoDv().getText();
+                            }
+                        }
+
+                        String[] retInfo = obtenerInfoCbInfoProdu();
+                        Producto p = productoDao.findSpecificByNameBrandContent(retInfo[0], retInfo[1], retInfo[2]);
+
+                        String precio = String.valueOf(p.getPrecio());
+                        String cant = String.valueOf(vistaIp.getSpnCantidadDv().getValue());
+                        String codBarra = p.getCodBarra();
+                        double importe = p.getPrecio() * Double.parseDouble(vistaIp.getSpnCantidadDv().getValue().toString());
+                        //----
+                        Object[] filaTdetV = {codBarra, retInfo[0], retInfo[1], retInfo[2], precio, cant, String.valueOf(importe), desc, importe - Double.parseDouble(desc)};
+
+                        modeloDv.addRow(filaTdetV);
+                        vistaIp.getTablaDetalleVenta().setModel(modeloDv);
+                        limpiezaTextFieldDv();
+                        double importeT = 0;
+                        double descT = 0;
+                        //Falta el total
+                        for (int i = 0; i < vistaIp.getTablaDetalleVenta().getRowCount(); i++) {
+                            importeT += Double.parseDouble(vistaIp.getTablaDetalleVenta().getValueAt(i, 6).toString());
+                            descT += Double.parseDouble(vistaIp.getTablaDetalleVenta().getValueAt(i, 7).toString());
+                        }
+                        BigDecimal impTbd = new BigDecimal(String.valueOf(importeT));
+                        BigDecimal descTbd = new BigDecimal(String.valueOf(descT));
+
+                        vistaIp.getTxtImpTotalDv().setText(String.valueOf(impTbd));
+                        vistaIp.getTxtDescuentoTotalDv().setText(String.valueOf(descTbd));
+                        double totalDv = importeT - descT;
+                        BigDecimal totalDvbd = new BigDecimal(String.valueOf(totalDv));
+                        vistaIp.getTxtTotalPagarDv().setText(String.valueOf(totalDvbd));
+                    }
+                } else if (vistaIp.getRbFactura().isSelected()) {
+                    if (vistaIp.getCbInfoProduDv().getSelectedItem() != null && vistaIp.getCbInfoProduDv().getSelectedItem() != "<Seleccione info producto>") {
+                        String desc = "0";
+
+                        if (vistaIp.getCheckBoxDescuentoDv().isSelected()) {
+                            desc = vistaIp.getTxtDescuentoDv().getText();
+                        }
+
+                        String[] retInfo = obtenerInfoCbInfoProdu();
+                        Producto p = productoDao.findSpecificByNameBrandContent(retInfo[0], retInfo[1], retInfo[2]);
+
+                        String precio = String.valueOf(p.getPrecio());
+                        String cant = String.valueOf(vistaIp.getSpnCantidadDv().getValue());
+                        String codBarra = p.getCodBarra();
+                        double importe = p.getPrecio() * Double.parseDouble(vistaIp.getSpnCantidadDv().getValue().toString());
+                        //----"Cód. Barra", "Nombre", "Marca", "Cont.", "Precio Sin IGV", "Cant.", "Importe sin IGV", "IGV", "Importe con IGV", "Desc.", "Subtotal con desc."
+                        double prSnIgv = 0;
+                        //Logica para quitar el 18% del igv para mostrarlo 
+                        if (p.getIgvAplicable() == true) {
+                            prSnIgv = p.getPrecio() / 1.18;
+                        } else {
+                            prSnIgv = p.getPrecio();
+                        }
+                        double impSnIgv = prSnIgv * Double.parseDouble(cant);
+                        double igv = impSnIgv * 0.18;
+                        double impCnIgv = impSnIgv + igv;
+                        Object[] filaTdetV2 = {codBarra, retInfo[0], retInfo[1], retInfo[2], String.valueOf(prSnIgv), cant, String.valueOf(impSnIgv), String.valueOf(igv), String.valueOf(impCnIgv), desc, String.valueOf(impCnIgv - Double.parseDouble(desc))};
+                        modeloDv2.addRow(filaTdetV2);
+                        vistaIp.getTablaDv2().setModel(modeloDv2);
+                        limpiezaTextFieldDv();
+                        double importeTsn = 0;
+                        double importeTcn = 0;
+                        double igvT = 0;
+                        double descT = 0;
+                        //Falta el total
+                        for (int i = 0; i < vistaIp.getTablaDv2().getRowCount(); i++) {
+                            importeTsn += Double.parseDouble(vistaIp.getTablaDv2().getValueAt(i, 6).toString());
+                            igvT += Double.parseDouble(vistaIp.getTablaDv2().getValueAt(i, 7).toString());
+                            importeTcn += Double.parseDouble(vistaIp.getTablaDv2().getValueAt(i, 8).toString());
+                            descT += Double.parseDouble(vistaIp.getTablaDv2().getValueAt(i, 9).toString());
+                        }
+
+                        BigDecimal impTsnbd = new BigDecimal(String.valueOf(importeTsn));
+                        BigDecimal igvTbd = new BigDecimal(String.valueOf(igvT));
+                        BigDecimal impTcnbd = new BigDecimal(String.valueOf(importeTcn));
+                        BigDecimal descTbd = new BigDecimal(String.valueOf(descT));
+
+                        vistaIp.getTxtImpTotalSinIgv().setText(String.valueOf(impTsnbd));
+                        vistaIp.getTxtIgvTotal().setText(String.valueOf(igvTbd));
+                        vistaIp.getTxtImpTotalConIgv2Dv().setText(String.valueOf(impTcnbd));
+                        vistaIp.getTxtDescuentoTotal2Dv().setText(String.valueOf(descTbd));
+                        double totalDv2 = importeTcn - descT;
+
+                        BigDecimal totbd2 = new BigDecimal(String.valueOf(totalDv2));
+                        vistaIp.getTxtTotalPagar2Dv().setText(String.valueOf(totbd2));
+                    }
+                }
+            }
+
+        });
+    }
+
+    public void limpiezaTextFieldDv() {
+        vistaIp.getCbInfoProduDv().setSelectedIndex(0);
+        vistaIp.getCheckBoxDescuentoDv().setSelected(false);
+        vistaIp.getTxtDescuentoDv().setText("");
+        vistaIp.getTxtDescuentoDv().setEditable(false);
+        vistaIp.getTxtContenidoDv().setText("");
+        vistaIp.getTxtPrecioDv().setText("");
+        vistaIp.getTxtStockDv().setText("");
+        vistaIp.getCbMetPagoDv().setSelectedIndex(0);
+        vistaIp.getSpnCantidadDv().setValue(0);
+    }
+
+    public String[] obtenerInfoCbInfoProdu() {
+        String[] recortes = vistaIp.getCbInfoProduDv().getSelectedItem().toString().split(" - ");
+
+        String nombre = recortes[0];
+        String marca = recortes[1];
+        String contenido = recortes[2];
+        String concatenado = null;
+        boolean concatenar = false;
+        /**
+         * Si en caso se obtiene el contenido de un producto con ' - '.
+         */
+        for (int i = 3; i < recortes.length; i++) {
+            concatenado = contenido.concat(" - " + recortes[i]);
+            concatenar = true;
+        }
+        if (concatenar == true) {
+            contenido = concatenado;
+        }
+        String[] retornar = {nombre, marca, contenido};
+        return retornar;
+    }
+
+    public void mostrarValoresSwingComponents() {
+        alternarPanelesDv(true);
+        ((AbstractDocument) vistaIp.getTxtDescuentoDv().getDocument()).setDocumentFilter(new SoloNumero());
+
+        operacionesDv();
         vistaIp.getPnlEscanearCodBarraDv().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String codEscan = JOptionPane.showInputDialog("Escanee el producto", "");
-                if (!codEscan.isEmpty()) {
+                if (codEscan != null) {
                     Producto p = productoDao.findByCodeProduct(codEscan);
-                    
+                    //String codBarra = p.getCodBarra();
+                    String marca = p.getMarca();
+                    String nombre = p.getNombre();
+                    String cont = p.getCont();
+                    String stock = String.valueOf(p.getStock());
+                    String precio = String.valueOf(p.getPrecio());
+
+                    for (int i = 1; i < vistaIp.getCbInfoProduDv().getItemCount(); i++) {
+
+                        String item = vistaIp.getCbInfoProduDv().getItemAt(i);
+
+                        String[] recortes = item.split(" - ");
+
+                        String nombreR = recortes[0];
+                        String marcaR = recortes[1];
+                        String contenidoR = recortes[2];
+
+                        String concatenado = null;
+                        boolean concatenar = false;
+                        /**
+                         * Si en caso se obtiene el contenido de un producto con
+                         * ' - '.
+                         */
+                        for (int x = 3; x < recortes.length; x++) {
+                            concatenado = contenidoR.concat(" - " + recortes[x]);
+                            concatenar = true;
+                        }
+                        if (concatenar == true) {
+                            contenidoR = concatenado;
+                        }
+
+                        if (nombre.equals(nombreR) && marca.equals(marcaR) && cont.equals(contenidoR)) {
+
+                            vistaIp.getCbInfoProduDv().setSelectedIndex(i);
+                            vistaIp.getTxtStockDv().setText(stock);
+                            vistaIp.getTxtContenidoDv().setText(cont);
+                            vistaIp.getTxtPrecioDv().setText(precio);
+                            return;
+                        } else {
+                            if (i == vistaIp.getCbInfoProduDv().getItemCount() - 1) {
+                                JOptionPane.showMessageDialog(null, "No se encontró el producto");
+                            }
+                        }
+                    }
                 }
 
             }
@@ -1006,12 +1259,14 @@ public final class PrincipalController implements ActionListener {
 
         vistaIp.getRbBoleta().addActionListener(this);
         vistaIp.getRbFactura().addActionListener(this);
+        vistaIp.getRbBoleta1().addActionListener(this);
+        vistaIp.getRbFactura1().addActionListener(this);
         vistaIp.getCbInfoProduDv().addActionListener(this);
-
+        vistaIp.getLblDinamiTipoVenta().setText("Seleccione el tipo de venta");
         ocultarPestaniasTdP(vistaIp.getTbpTablaDv());
 
         vistaIp.getTxtTrabajadorDv().setText(String.format("%s, %s", usuario.getApellido(), usuario.getNombre()));
-        
+
         //-------------------
         vistaIp.getCbInfoProduDv().addItem("<Seleccione info producto>");
         List<Producto> productos = productoDao.selectAll();
@@ -1030,7 +1285,9 @@ public final class PrincipalController implements ActionListener {
 
         vistaIp.getSeleccionTVenta().add(vistaIp.getRbBoleta());
         vistaIp.getSeleccionTVenta().add(vistaIp.getRbFactura());
-        vistaIp.getRbBoleta().setSelected(true);
+        vistaIp.getSeleccionTVenta().add(vistaIp.getRbBoleta1());
+        vistaIp.getSeleccionTVenta().add(vistaIp.getRbFactura1());
+        //vistaIp.getRbBoleta().setSelected(true);
 
         vistaIp.getCheckBoxDescuentoDv().addActionListener(this);
 
