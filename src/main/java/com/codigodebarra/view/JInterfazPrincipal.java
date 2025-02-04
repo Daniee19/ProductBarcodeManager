@@ -30,6 +30,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pmVenta = new javax.swing.JPopupMenu();
         buttonGroup1 = new javax.swing.ButtonGroup();
         seleccionTVenta = new javax.swing.ButtonGroup();
+        btnGroupContieneIgv = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         pnlNorth = new javax.swing.JPanel();
         pnlBarraDeOpciones = new javax.swing.JPanel();
@@ -103,6 +104,12 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlLimpiarGP = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         txtCodBarraGP = new javax.swing.JTextField();
+        jPanel32 = new javax.swing.JPanel();
+        jLabel62 = new javax.swing.JLabel();
+        rbSiContieneIgv = new javax.swing.JRadioButton();
+        rbNoContieneIgv = new javax.swing.JRadioButton();
+        jPanel33 = new javax.swing.JPanel();
+        jLabel75 = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -685,7 +692,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel11.add(txtMarcaGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 140, 40));
 
         txtContenidoGP.setBorder(javax.swing.BorderFactory.createTitledBorder("Contenido"));
-        jPanel11.add(txtContenidoGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 300, 40));
+        jPanel11.add(txtContenidoGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 160, 40));
 
         spnPrecioGP.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 0.1d));
         spnPrecioGP.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -710,7 +717,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlAgregarGP.setLayout(pnlAgregarGPLayout);
         pnlAgregarGPLayout.setHorizontalGroup(
             pnlAgregarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+            .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlAgregarGPLayout.setVerticalGroup(
             pnlAgregarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -730,7 +737,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlActualizarGP.setLayout(pnlActualizarGPLayout);
         pnlActualizarGPLayout.setHorizontalGroup(
             pnlActualizarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+            .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlActualizarGPLayout.setVerticalGroup(
             pnlActualizarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -749,7 +756,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlEliminarGP.setLayout(pnlEliminarGPLayout);
         pnlEliminarGPLayout.setHorizontalGroup(
             pnlEliminarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlEliminarGPLayout.setVerticalGroup(
             pnlEliminarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -768,7 +775,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlLimpiarGP.setLayout(pnlLimpiarGPLayout);
         pnlLimpiarGPLayout.setHorizontalGroup(
             pnlLimpiarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+            .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlLimpiarGPLayout.setVerticalGroup(
             pnlLimpiarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -778,7 +785,46 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel11.add(pnlLimpiarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 110, 30));
 
         txtCodBarraGP.setBorder(javax.swing.BorderFactory.createTitledBorder("Cod. de barra"));
-        jPanel11.add(txtCodBarraGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 300, 40));
+        jPanel11.add(txtCodBarraGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 220, 40));
+
+        jPanel32.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel32.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel62.setText("¿Contiene IGV?");
+        jPanel32.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, -1));
+
+        rbSiContieneIgv.setBackground(new java.awt.Color(255, 255, 255));
+        rbSiContieneIgv.setText("Si");
+        rbSiContieneIgv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel32.add(rbSiContieneIgv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 19, -1, 20));
+
+        rbNoContieneIgv.setBackground(new java.awt.Color(255, 255, 255));
+        rbNoContieneIgv.setText("No");
+        rbNoContieneIgv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel32.add(rbNoContieneIgv, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 19, -1, 20));
+
+        jPanel11.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 130, -1));
+
+        jPanel33.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel75.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escanear_codigo_30x30.png"))); // NOI18N
+        jLabel75.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
+        jPanel33.setLayout(jPanel33Layout);
+        jPanel33Layout.setHorizontalGroup(
+            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel33Layout.setVerticalGroup(
+            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel75))
+        );
+
+        jPanel11.add(jPanel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 70, 30));
 
         pnlOperacionesProducto.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 420, 440));
 
@@ -1032,9 +1078,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         panelDetalleVenta.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 420, 790));
 
-        jPanel7.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setForeground(new java.awt.Color(0, 0, 0));
 
+        jLabel24.setBackground(new java.awt.Color(255, 255, 255));
         jLabel24.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1050,7 +1097,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+            .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         );
 
         panelDetalleVenta.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1900, 90));
@@ -1100,7 +1147,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         tbpTablaDv.addTab("tab3", jPanel28);
 
-        jPanel19.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaDetalleVenta.setModel(new javax.swing.table.DefaultTableModel(
@@ -1267,7 +1314,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         tbpTablaDv.addTab("tab1", jPanel19);
 
-        jPanel37.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel37.setBackground(new java.awt.Color(255, 255, 255));
         jPanel37.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablaDv2.setModel(new javax.swing.table.DefaultTableModel(
@@ -3827,8 +3874,49 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.rbFactura1 = rbFactura1;
     }
 
+    public ButtonGroup getBtnGroupContieneIgv() {
+        return btnGroupContieneIgv;
+    }
+
+    public void setBtnGroupContieneIgv(ButtonGroup btnGroupContieneIgv) {
+        this.btnGroupContieneIgv = btnGroupContieneIgv;
+    }
+
+    public JLabel getjLabel62() {
+        return jLabel62;
+    }
+
+    public void setjLabel62(JLabel jLabel62) {
+        this.jLabel62 = jLabel62;
+    }
+
+    public JPanel getjPanel32() {
+        return jPanel32;
+    }
+
+    public void setjPanel32(JPanel jPanel32) {
+        this.jPanel32 = jPanel32;
+    }
+
+    public JRadioButton getRbNoContieneIgv() {
+        return rbNoContieneIgv;
+    }
+
+    public void setRbNoContieneIgv(JRadioButton rbNoContieneIgv) {
+        this.rbNoContieneIgv = rbNoContieneIgv;
+    }
+
+    public JRadioButton getRbSiContieneIgv() {
+        return rbSiContieneIgv;
+    }
+
+    public void setRbSiContieneIgv(JRadioButton rbSiContieneIgv) {
+        this.rbSiContieneIgv = rbSiContieneIgv;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btnGroupContieneIgv;
     private javax.swing.JButton btnOkEscanear;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbInfoProduDv;
@@ -3894,6 +3982,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
@@ -3907,6 +3996,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
@@ -3946,6 +4036,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
+    private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel39;
@@ -4058,6 +4150,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbBoleta1;
     private javax.swing.JRadioButton rbFactura;
     private javax.swing.JRadioButton rbFactura1;
+    private javax.swing.JRadioButton rbNoContieneIgv;
+    private javax.swing.JRadioButton rbSiContieneIgv;
     private javax.swing.ButtonGroup seleccionTVenta;
     private javax.swing.JSpinner spnCantidadDv;
     private javax.swing.JSpinner spnCantidadGP;
