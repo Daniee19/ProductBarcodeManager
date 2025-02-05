@@ -70,7 +70,7 @@ public final class PrincipalController implements ActionListener {
         this.vistaIp.setLocationRelativeTo(null);
 
         vistaInfo = new JInformacion(vistaIp, true);
-        productoDao = new ProductoDaoImpl();
+        productoDao = new ProductoDaoImpl(usuario);
         api = new ApiProductos();
         Disenio.getDesignWindows();
         modelo = new DefaultTableModel();
@@ -208,11 +208,25 @@ public final class PrincipalController implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 //Obtener el archivo jasper configurado
-                JasperPrint jp = productoDao.reportAllProducts();
+                JasperPrint jp = productoDao.reportAllProducts(usuario.getId_usuario(), "pdf");
+//                String nombreDescarga = "reporte_productos_"+usuario.getNombre()+".pdf";
+//                try {
+//                    JasperExportManager.exportReportToPdfFile(jp, nombreDescarga);
+//                } catch (JRException ex) {
+//                    Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+
                 //Codigo para que al cerrar la visualización no se cierre todo el sistema.
                 JasperViewer viewReport = new JasperViewer(jp, false);
                 viewReport.setDefaultCloseOperation(vistaIp.DISPOSE_ON_CLOSE);
                 viewReport.setVisible(true);
+            }
+        });
+        vistaIp.getLblExcelProd().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                productoDao.reportAllProducts(usuario.getId_usuario(), "excel");
             }
         });
     }
@@ -319,6 +333,7 @@ public final class PrincipalController implements ActionListener {
         alternarPanelesGP(true);
         vistaIp.getBtnGroupContieneIgv().add(vistaIp.getRbSiContieneIgv());
         vistaIp.getBtnGroupContieneIgv().add(vistaIp.getRbNoContieneIgv());
+        //Al comienzo 
         MouseAdapter ma = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent ev) {
@@ -358,6 +373,10 @@ public final class PrincipalController implements ActionListener {
 
             }
         }; // Fin del mouseAdapter
+        //Se asigna lo que se haría si se da clic en el botón agregar, desde el comienzo por default, luego dentro de la tabla cuando se deseleccione la fila de una tabla y se desee agregar un nuevo producto
+        for (MouseListener ml : vistaIp.getPnlAgregarGP().getMouseListeners()) {
+            vistaIp.getPnlAgregarGP().removeMouseListener(ml);
+        }
         vistaIp.getPnlAgregarGP().addMouseListener(ma);
 
         //Esta logica funcionará si en todo cas se selecciona o se deselecciona una fila de la tabla
@@ -471,6 +490,9 @@ public final class PrincipalController implements ActionListener {
                     } else {
                         alternarPanelesGP(true);
                         //Agregar producto
+                        for (MouseListener ml : vistaIp.getPnlAgregarGP().getMouseListeners()) {
+                            vistaIp.getPnlAgregarGP().removeMouseListener(ml);
+                        }
                         vistaIp.getPnlAgregarGP().addMouseListener(ma);
                     } //Fin en caso se seleccione o no una fila de la tabla
                 }

@@ -24,7 +24,7 @@ public interface ProductoDao extends Dao<Producto> {
 
     public boolean deleteByCodeBar(String codigo_barra);
 
-    public JasperPrint reportAllProducts();
+    public JasperPrint reportAllProducts(int idUsuario, String tipoReporte);
 
     public Producto findSpecificByNameBrandContent(String name, String brand, String content);
 }
