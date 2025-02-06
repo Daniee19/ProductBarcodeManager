@@ -94,7 +94,8 @@ public final class PrincipalController implements ActionListener {
         //Generar archivo PDF
         generarPdfProductos();
 
-        vistaIp.getBtnOkEscanear().addActionListener(this);
+        //vistaIp.getBtnOkEscanear().addActionListener(this);
+        vistaIp.getBtnEscanearProduGP().addActionListener(this);
         vistaInfo.getBtnCancelar().addActionListener(this);
         metodosDVenta();
     }
@@ -290,42 +291,51 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getTxtCodBarraGP().setEditable(valor);
         vistaIp.getPnlActualizarGP().setEnabled(!valor);
         vistaIp.getPnlEliminarGP().setEnabled(!valor);
-        vistaIp.getPnlLimpiarGP().setEnabled(!valor);
 
         if (valor == true) {
-            vistaIp.getPnlAgregarGP().setBackground(new Color(255, 255, 255));
-            vistaIp.getPnlActualizarGP().setBackground(new Color(200, 200, 200));
-            vistaIp.getPnlEliminarGP().setBackground(new Color(200, 200, 200));
-            vistaIp.getPnlLimpiarGP().setBackground(new Color(200, 200, 200));
+            vistaIp.getPnlAgregarGP().setBackground(pnlGrisCO(true));
+            vistaIp.getPnlActualizarGP().setBackground(pnlGrisCO(false));
+            vistaIp.getPnlEliminarGP().setBackground(pnlGrisCO(false));
+
             limpiezaTextFieldsGP();
         } else {
-            vistaIp.getPnlAgregarGP().setBackground(new Color(200, 200, 200));
-            vistaIp.getPnlActualizarGP().setBackground(new Color(255, 255, 255));
-            vistaIp.getPnlEliminarGP().setBackground(new Color(255, 255, 255));
-            vistaIp.getPnlLimpiarGP().setBackground(new Color(255, 255, 255));
+            vistaIp.getPnlAgregarGP().setBackground(pnlGrisCO(false));
+            vistaIp.getPnlActualizarGP().setBackground(pnlGrisCO(true));
+            vistaIp.getPnlEliminarGP().setBackground(pnlGrisCO(true));
+
         }
+        vistaIp.getPnlLimpiarGP().setBackground(pnlGrisCO(true));
     }
 
     public void alternarPanelesDv(boolean valor) {
-        vistaIp.getPnlLimpiarDv().setEnabled(valor);
+
         vistaIp.getPnlAgregarDv().setEnabled(valor);
         //vistaIp.getTxtCodBarraGP().setEditable(valor);
         vistaIp.getPnlActualizarDv().setEnabled(!valor);
         vistaIp.getPnlEliminarDv().setEnabled(!valor);
 
         if (valor == true) {
-            vistaIp.getPnlAgregarDv().setBackground(new Color(255, 255, 255));
-            vistaIp.getPnlActualizarDv().setBackground(new Color(200, 200, 200));
-            vistaIp.getPnlEliminarDv().setBackground(new Color(200, 200, 200));
-            vistaIp.getPnlLimpiarDv().setBackground(new Color(255, 255, 255));
+            vistaIp.getPnlAgregarDv().setBackground(pnlGrisCO(true));
+            vistaIp.getPnlActualizarDv().setBackground(pnlGrisCO(false));
+            vistaIp.getPnlEliminarDv().setBackground(pnlGrisCO(false));
 
             limpiezaTextFieldsGP();
         } else {
-            vistaIp.getPnlAgregarDv().setBackground(new Color(200, 200, 200));
-            vistaIp.getPnlActualizarDv().setBackground(new Color(255, 255, 255));
-            vistaIp.getPnlEliminarDv().setBackground(new Color(255, 255, 255));
-            vistaIp.getPnlLimpiarDv().setBackground(new Color(200, 200, 200));
+            vistaIp.getPnlAgregarDv().setBackground(pnlGrisCO(false));
+            vistaIp.getPnlActualizarDv().setBackground(pnlGrisCO(true));
+            vistaIp.getPnlEliminarDv().setBackground(pnlGrisCO(true));
+
         }
+        vistaIp.getPnlLimpiarDv().setBackground(pnlGrisCO(true));
+    }
+
+    public Color pnlGrisCO(boolean trufal) {
+        //verdadero = claro
+        if (trufal == true) {
+            return new Color(255, 255, 255);
+        }
+        //false = oscuro
+        return new Color(200, 200, 200);
     }
 
     public void gestionProductoIp() {
@@ -528,8 +538,12 @@ public final class PrincipalController implements ActionListener {
      * @throws java.net.MalformedURLException
      */
     public void escanearCodigo() throws MalformedURLException {
-        Producto productoApi = api.consumirApi(vistaIp.getTxtCodigoEscanear().getText());
-        Producto producto_bd = productoDao.findByCodeProduct(vistaIp.getTxtCodigoEscanear().getText());
+        String codBarraProdu = JOptionPane.showInputDialog("Ingrese el código de barra del producto");
+        if (codBarraProdu == null || codBarraProdu.equals("")) {
+            return;
+        }
+        Producto productoApi = api.consumirApi(codBarraProdu);
+        Producto producto_bd = productoDao.findByCodeProduct(codBarraProdu);
 
         if (productoApi.getCodBarra() != null) {
 
@@ -561,7 +575,6 @@ public final class PrincipalController implements ActionListener {
             System.out.println("No funciono la api");
         }
 
-        vistaIp.getTxtCodigoEscanear().setText("");
     }
 
     /**
@@ -603,6 +616,7 @@ public final class PrincipalController implements ActionListener {
         gDetallePedido.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                actualizarCBproductoInfoDv();
                 vistaIp.getjTabbedPane1().setSelectedIndex(3);
             }
         });
@@ -611,9 +625,20 @@ public final class PrincipalController implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 vistaIp.getjTabbedPane1().setSelectedIndex(4);
-                mostrarElementosEnTabla(productoDao.selectAll());
             }
         });
+    }
+
+    public void actualizarCBproductoInfoDv() {
+        vistaIp.getCbInfoProduDv().removeAllItems();
+
+        vistaIp.getCbInfoProduDv().addItem("<Seleccione info producto>");
+
+        for (Producto p : productoDao.selectAll()) {
+            if (p.getPrecio() != 0.0 && p.getStock() != 0 && !p.getCont().equals("--")) {
+                vistaIp.getCbInfoProduDv().addItem(String.format("%s - %s - %s", p.getNombre(), p.getMarca(), p.getCont()));
+            }
+        }
     }
 
     public void popMenuInventario() {
@@ -814,6 +839,8 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getTxtContenidoGP().setText("");
         vistaIp.getSpnPrecioGP().setValue(0);
         vistaIp.getSpnCantidadGP().setValue(0);
+        vistaIp.getTablaProductos().clearSelection();
+        vistaIp.getBtnGroupContieneIgv().clearSelection();
     }
 
     @Override
@@ -830,7 +857,7 @@ public final class PrincipalController implements ActionListener {
             mostrarInfoCb(vistaIp.getCbInfoProduDv().getSelectedItem());
 
         }
-        if (e.getSource() == vistaIp.getBtnOkEscanear()) {
+        if (e.getSource() == vistaIp.getBtnEscanearProduGP()) {
 
             try {
                 escanearCodigo();
@@ -937,6 +964,8 @@ public final class PrincipalController implements ActionListener {
                         System.out.println("No se agregó");
                     }
                 }
+
+                mostrarElementosEnTabla(productoDao.selectAll());
             }
         });
     }
@@ -1295,13 +1324,8 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getTxtTrabajadorDv().setText(String.format("%s, %s", usuario.getApellido(), usuario.getNombre()));
 
         //-------------------
-        vistaIp.getCbInfoProduDv().addItem("<Seleccione info producto>");
-        List<Producto> productos = productoDao.selectAll();
-        for (Producto p : productos) {
-            if (p.getPrecio() != 0.0 && p.getStock() != 0) {
-                vistaIp.getCbInfoProduDv().addItem(String.format("%s - %s - %s", p.getNombre(), p.getMarca(), p.getCont()));
-            }
-        }
+        actualizarCBproductoInfoDv();
+        //-------------------
         vistaIp.getCbMetPagoDv().addItem("<Seleccione>");
         vistaIp.getCbMetPagoDv().addItem("Efectivo");
         vistaIp.getCbMetPagoDv().addItem("Tarjeta");
@@ -1346,7 +1370,11 @@ public final class PrincipalController implements ActionListener {
     }
 
     public void mostrarInfoCb(Object item) {
+        if (item == null || item.equals("")) {
+            return;
+        }
         String infoProducto = item.toString();
+
         if (!infoProducto.equals("<Seleccione info producto>")) {
             String[] recortes = infoProducto.split(" - ");
 

@@ -63,12 +63,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         panelEscanear = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        txtCodigoEscanear = new javax.swing.JTextField();
-        btnOkEscanear = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JSeparator();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         panelInventario = new javax.swing.JPanel();
@@ -108,8 +102,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel62 = new javax.swing.JLabel();
         rbSiContieneIgv = new javax.swing.JRadioButton();
         rbNoContieneIgv = new javax.swing.JRadioButton();
-        jPanel33 = new javax.swing.JPanel();
-        jLabel75 = new javax.swing.JLabel();
+        btnEscanearProduGP = new javax.swing.JButton();
         jPanel16 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -568,37 +561,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("ESCANEAR");
-        jLabel4.setAutoscrolls(true);
-        jLabel4.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 290, 230, -1));
-
-        txtCodigoEscanear.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtCodigoEscanear.setBorder(null);
-        jPanel2.add(txtCodigoEscanear, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 400, 40));
-
-        btnOkEscanear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnOkEscanear.setText("OK");
-        btnOkEscanear.setAutoscrolls(true);
-        btnOkEscanear.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnOkEscanear.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel2.add(btnOkEscanear, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 490, 90, 30));
-
-        jSeparator4.setBackground(new java.awt.Color(102, 102, 102));
-        jSeparator4.setForeground(new java.awt.Color(153, 153, 153));
-        jSeparator4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jSeparator4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 450, 398, 14));
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escanear_codigo_barra.png"))); // NOI18N
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 300, 60, 70));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        jLabel6.setText("CÓDIGO");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 330, 170, -1));
-
         jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel33.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -662,11 +624,11 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         pnlBuscarProd.setLayout(pnlBuscarProdLayout);
         pnlBuscarProdLayout.setHorizontalGroup(
             pnlBuscarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlBuscarProdLayout.setVerticalGroup(
             pnlBuscarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel6.add(pnlBuscarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 80, 30));
@@ -724,7 +686,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(pnlAgregarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 110, 30));
+        jPanel11.add(pnlAgregarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 110, 30));
         jPanel11.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 300, 20));
 
         pnlActualizarGP.setBackground(new java.awt.Color(255, 255, 255));
@@ -744,7 +706,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(pnlActualizarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 110, 30));
+        jPanel11.add(pnlActualizarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 110, 30));
 
         pnlEliminarGP.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -760,7 +722,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         );
         pnlEliminarGPLayout.setVerticalGroup(
             pnlEliminarGPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+            .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel11.add(pnlEliminarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 110, 30));
@@ -782,7 +744,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
             .addComponent(jLabel29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
         );
 
-        jPanel11.add(pnlLimpiarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 110, 30));
+        jPanel11.add(pnlLimpiarGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 110, 30));
 
         txtCodBarraGP.setBorder(javax.swing.BorderFactory.createTitledBorder("Cod. de barra"));
         jPanel11.add(txtCodBarraGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 220, 40));
@@ -805,26 +767,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         jPanel11.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 130, -1));
 
-        jPanel33.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel75.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escanear_codigo_30x30.png"))); // NOI18N
-        jLabel75.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
-        jPanel33.setLayout(jPanel33Layout);
-        jPanel33Layout.setHorizontalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel33Layout.setVerticalGroup(
-            jPanel33Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel33Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel75))
-        );
-
-        jPanel11.add(jPanel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, 70, 30));
+        btnEscanearProduGP.setBackground(new java.awt.Color(255, 255, 255));
+        btnEscanearProduGP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escanear_codigo_30x30.png"))); // NOI18N
+        btnEscanearProduGP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel11.add(btnEscanearProduGP, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 78, 70, 30));
 
         pnlOperacionesProducto.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 190, 420, 440));
 
@@ -1020,7 +966,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel13.add(pnlEscanearCodBarraDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 60, 30));
 
         jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconoInfo.png"))); // NOI18N
-        jLabel25.setToolTipText("Solo productos con precio y stock definidos, con stock al día");
+        jLabel25.setToolTipText("Solo productos con información completa y stock mayor a 0");
         jPanel13.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 68, -1, -1));
 
         jPanel8.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 380, 410));
@@ -1802,12 +1748,12 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rbFactura1ActionPerformed
 
-    public JButton getBtnOkEscanear() {
-        return btnOkEscanear;
+    public JButton getBtnEscanearProduGP() {
+        return btnEscanearProduGP;
     }
 
-    public void setBtnOkEscanear(JButton btnOkEscanear) {
-        this.btnOkEscanear = btnOkEscanear;
+    public void setBtnEscanearProduGP(JButton btnEscanearProduGP) {
+        this.btnEscanearProduGP = btnEscanearProduGP;
     }
 
     public ButtonGroup getButtonGroup1() {
@@ -2130,14 +2076,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.jLabel39 = jLabel39;
     }
 
-    public JLabel getjLabel4() {
-        return jLabel4;
-    }
-
-    public void setjLabel4(JLabel jLabel4) {
-        this.jLabel4 = jLabel4;
-    }
-
     public JLabel getjLabel40() {
         return jLabel40;
     }
@@ -2362,14 +2300,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.jLabel59 = jLabel59;
     }
 
-    public JLabel getjLabel6() {
-        return jLabel6;
-    }
-
-    public void setjLabel6(JLabel jLabel6) {
-        this.jLabel6 = jLabel6;
-    }
-
     public JLabel getjLabel60() {
         return jLabel60;
     }
@@ -2568,14 +2498,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
     public void setjLabel89(JLabel jLabel89) {
         this.jLabel89 = jLabel89;
-    }
-
-    public JLabel getjLabel9() {
-        return jLabel9;
-    }
-
-    public void setjLabel9(JLabel jLabel9) {
-        this.jLabel9 = jLabel9;
     }
 
     public JLabel getjLabel90() {
@@ -3112,14 +3034,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
     public void setjSeparator3(JSeparator jSeparator3) {
         this.jSeparator3 = jSeparator3;
-    }
-
-    public JSeparator getjSeparator4() {
-        return jSeparator4;
-    }
-
-    public void setjSeparator4(JSeparator jSeparator4) {
-        this.jSeparator4 = jSeparator4;
     }
 
     public JSeparator getjSeparator5() {
@@ -3674,14 +3588,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.txtCodBarraGP = txtCodBarraGP;
     }
 
-    public JTextField getTxtCodigoEscanear() {
-        return txtCodigoEscanear;
-    }
-
-    public void setTxtCodigoEscanear(JTextField txtCodigoEscanear) {
-        this.txtCodigoEscanear = txtCodigoEscanear;
-    }
-
     public JTextField getTxtContenidoGP() {
         return txtContenidoGP;
     }
@@ -3916,8 +3822,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEscanearProduGP;
     private javax.swing.ButtonGroup btnGroupContieneIgv;
-    private javax.swing.JButton btnOkEscanear;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbInfoProduDv;
     private javax.swing.JComboBox<String> cbMetPagoDv;
@@ -3957,7 +3863,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
@@ -3979,7 +3884,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
@@ -3996,7 +3900,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
-    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
@@ -4008,7 +3911,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel87;
     private javax.swing.JLabel jLabel88;
     private javax.swing.JLabel jLabel89;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel90;
     private javax.swing.JLabel jLabel91;
     private javax.swing.JPanel jPanel1;
@@ -4037,7 +3939,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel30;
     private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
-    private javax.swing.JPanel jPanel33;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel39;
@@ -4084,7 +3985,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator23;
     private javax.swing.JSeparator jSeparator24;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
@@ -4162,7 +4062,6 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tbpTablaDv;
     private javax.swing.JTextArea txtAreaObservacion;
     private javax.swing.JTextField txtCodBarraGP;
-    private javax.swing.JTextField txtCodigoEscanear;
     private javax.swing.JTextField txtContenidoDv;
     private javax.swing.JTextField txtContenidoGP;
     private javax.swing.JTextField txtDescuentoDv;
