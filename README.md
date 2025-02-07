@@ -1,7 +1,7 @@
 ## Database
 ```sql
 Create database tiendita;
-use tiendita;
+Use tiendita;
 
 create table producto (
 idProducto integer primary key not null auto_increment,
@@ -11,7 +11,7 @@ precio decimal(8,2)  null default 0,
 stock integer null default 0,
 marca varchar(50) null,
 contenido varchar(20) null,
-igvAplicable tinyint(1) not null,
+igvAplicable tinyint(1) not null default 0,
 imagenUrl varchar(200) null
 );
 
@@ -34,7 +34,7 @@ impTotCnIgv decimal(8,2) not null default 0,
 descTot decimal(6,2) not null default 0,
 total decimal(8,2) not null default 0,
 tipoVenta enum('Boleta', 'Factura') default 'Boleta',
-metPago enum('Tarjeta', 'Efectivo', 'Yape','Plin','Transacción', 'Fiado') not null default 'Efectivo',
+metPago enum('Efectivo', 'Tarjeta', 'Yape', 'Plin', 'Transacción', 'Fiado') not null default 'Efectivo',
 observacion varchar(250) null
 );
 
