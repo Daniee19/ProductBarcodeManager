@@ -107,10 +107,11 @@ public class ProductoDaoImpl implements ProductoDao {
                 p.setIdProducto(rs.getInt("idProducto"));
                 p.setCodBarra(rs.getString("codigoBarra"));
                 p.setNombre(rs.getString("nombre"));
-                p.setPrecio(rs.getDouble("precio"));
-                p.setStock(rs.getInt("stock"));
                 p.setMarca(rs.getString("marca"));
                 p.setCont(rs.getString("contenido"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setStock(rs.getInt("stock"));
+                p.setIgvAplicable(rs.getBoolean("igvAplicable"));
                 p.setImagenUrl(rs.getString("imagenUrl"));
                 productos.add(p);
             }
@@ -134,9 +135,10 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("producto.stock, ")
                 .append("producto.marca, ")
                 .append("producto.contenido, ")
+                .append("producto.igvAplicable, ")
                 .append("producto.imagenUrl ")
                 .append(") values (")
-                .append("?,?,?,?,?,?,?")
+                .append("?,?,?,?,?,?,?,?")
                 .append(")");
 
         //Llamar a la variable, la cual ya pasó por el DriverManager...
@@ -147,7 +149,8 @@ public class ProductoDaoImpl implements ProductoDao {
             ps.setInt(4, producto.getStock());
             ps.setString(5, producto.getMarca());
             ps.setString(6, producto.getCont());
-            ps.setString(7, producto.getImagenUrl());
+            ps.setBoolean(7, producto.getIgvAplicable());
+            ps.setString(8, producto.getImagenUrl());
 
             ps.executeUpdate(); //Tenemos que ejecutarlo primero, para obtener el id del producto que se haya creado
 
@@ -445,8 +448,7 @@ public class ProductoDaoImpl implements ProductoDao {
     }
 
     @Override
-    public boolean delete(int id
-    ) {
+    public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -461,7 +463,8 @@ public class ProductoDaoImpl implements ProductoDao {
                 .append("marca=?,")
                 .append("contenido=?,")
                 .append("precio=?,")
-                .append("stock=? ")
+                .append("stock=?, ")
+                .append("igvAplicable=? ")
                 .append("where codigoBarra=?;");
 
         try {
@@ -472,7 +475,8 @@ public class ProductoDaoImpl implements ProductoDao {
             ps.setString(3, producto.getCont());
             ps.setDouble(4, producto.getPrecio());
             ps.setInt(5, producto.getStock());
-            ps.setString(6, producto.getCodBarra());
+            ps.setBoolean(6, producto.getIgvAplicable());
+            ps.setString(7, producto.getCodBarra());
 
             ps.executeUpdate();
 
@@ -564,10 +568,10 @@ public class ProductoDaoImpl implements ProductoDao {
             //Nombres de columnas de la tabla
             row = sheet.createRow(5);
 
-            String[] info = {"Nombre", "Marca", "Contenido", "Precio", "Stock"};
+            String[] info = {"Nombre", "Marca", "Contenido", "Precio", "Stock", "IGV o Exonerado"};
 
             cs = diseniosExcel(wb, IndexedColors.BLACK.getIndex(), IndexedColors.WHITE.getIndex(), 11);
-            for (int i = 1; i < 6; i++) {
+            for (int i = 1; i < info.length + 1; i++) {
                 Cell cNCol = row.createCell(i);
                 cNCol.setCellStyle(cs);
                 cNCol.setCellValue(info[i - 1]);
@@ -576,7 +580,7 @@ public class ProductoDaoImpl implements ProductoDao {
             //Agregar datos a las filas
             ProductoDao p = new ProductoDaoImpl(usuario);
             List<Producto> productos = p.selectAll();
-
+            String valVisual = "";
             for (int i = 0; i < productos.size(); i++) {
                 row = sheet.createRow(i + 6);
                 row.createCell(1).setCellValue(productos.get(i).getNombre());
@@ -584,12 +588,15 @@ public class ProductoDaoImpl implements ProductoDao {
                 row.createCell(3).setCellValue(productos.get(i).getCont());
                 row.createCell(4).setCellValue(String.valueOf(productos.get(i).getPrecio()));
                 row.createCell(5).setCellValue(productos.get(i).getStock());
+
+                valVisual = productos.get(i).getIgvAplicable() ? "IGV" : "Exo";
+                row.createCell(6).setCellValue(valVisual);
             }
             /**
-             * Ajustar el tamaño de las celdas desde 0 a 5. Por cierto, para
-             * conocimiento, las celdas tienen un size width por default como
-             * minimo, lo cual hace que cuando haya menos texto no se note el
-             * cambio en el ajuste del contenido.
+             * Ajustar el tamaño de todas las columnas (1 - 6)al tamaño mayor.
+             * Por cierto, para conocimiento, las celdas tienen un size width
+             * por default como minimo, lo cual hace que cuando haya menos texto
+             * no se note el cambio en el ajuste del contenido.
              */
             for (int i = 0; i < row.getPhysicalNumberOfCells(); i++) {
                 sheet.autoSizeColumn(i + 1);
@@ -654,7 +661,7 @@ public class ProductoDaoImpl implements ProductoDao {
         //Cambiar el color de fondo
         cs.setFillForegroundColor(colorFondo);
         cs.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        // ✅ PONER NEGRITA AL TEXTO
+        //PONER NEGRITA AL TEXTO
         Font font = wb.createFont();
         font.setBold(true); // Activar negrita
         font.setFontHeightInPoints((short) tamanioFont); // Cambiar tamaño del texto
@@ -690,7 +697,7 @@ public class ProductoDaoImpl implements ProductoDao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 p = new Producto();
-                System.out.println("Se enconttró el producto");
+                System.out.println("Se encontró el producto");
                 p.setCodBarra(rs.getString("codigoBarra"));
                 p.setPrecio(rs.getDouble("precio"));
                 p.setStock(rs.getInt("stock"));

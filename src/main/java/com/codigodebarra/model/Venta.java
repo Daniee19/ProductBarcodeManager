@@ -5,16 +5,24 @@ import java.sql.Timestamp;
 public class Venta {
 
     int idVenta, idUsuario;
-    double impTotSnIgv, impTotCnIgv, descTot, igvTotal, total;
-    String observacion;
+    double impTotSnIgvOExo, impTotMasIgv, descTot, igvTotal, total;
+    String observacion, metPago, tipoVenta;
     Timestamp fechaVenta;
 
-    enum metPago {
-        Efectivo, Tarjeta, Yape, Pli, Transaccion, Fiado;
+    public String getMetPago() {
+        return metPago;
     }
 
-    enum tipoVenta {
-        Boleta, Factura;
+    public void setMetPago(String metPago) {
+        this.metPago = metPago;
+    }
+
+    public String getTipoVenta() {
+        return tipoVenta;
+    }
+
+    public void setTipoVenta(String tipoVenta) {
+        this.tipoVenta = tipoVenta;
     }
 
     public int getIdVenta() {
@@ -33,20 +41,20 @@ public class Venta {
         this.idUsuario = idUsuario;
     }
 
-    public double getImpTotSnIgv() {
-        return impTotSnIgv;
+    public double getImpTotSnIgvOExo() {
+        return impTotSnIgvOExo;
     }
 
-    public void setImpTotSnIgv(double impTotSnIgv) {
-        this.impTotSnIgv = impTotSnIgv;
+    public void setImpTotSnIgvOExo(double impTotSnIgvOExo) {
+        this.impTotSnIgvOExo = impTotSnIgvOExo;
     }
 
-    public double getImpTotCnIgv() {
-        return impTotCnIgv;
+    public double getImpTotMasIgv() {
+        return impTotMasIgv;
     }
 
-    public void setImpTotCnIgv(double impTotCnIgv) {
-        this.impTotCnIgv = impTotCnIgv;
+    public void setImpTotMasIgv(double impTotMasIgv) {
+        this.impTotMasIgv = impTotMasIgv;
     }
 
     public double getDescTot() {

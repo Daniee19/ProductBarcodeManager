@@ -147,10 +147,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel27 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaObservacion = new javax.swing.JTextArea();
-        pnlGuardarVentaDv = new javax.swing.JPanel();
-        jLabel47 = new javax.swing.JLabel();
-        pnlCancelarVentaDv = new javax.swing.JPanel();
-        jLabel49 = new javax.swing.JLabel();
+        btnGuardarVenta = new javax.swing.JButton();
+        btnCancelarVenta = new javax.swing.JButton();
         jLabel52 = new javax.swing.JLabel();
         jSeparator10 = new javax.swing.JSeparator();
         jPanel7 = new javax.swing.JPanel();
@@ -432,7 +430,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         lblInventario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblInventario.setForeground(new java.awt.Color(0, 0, 0));
         lblInventario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblInventario.setText("Inventario");
+        lblInventario.setText("Producto");
         lblInventario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pnlInventarioLayout = new javax.swing.GroupLayout(pnlInventario);
@@ -758,12 +756,18 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         rbSiContieneIgv.setBackground(new java.awt.Color(255, 255, 255));
         rbSiContieneIgv.setText("Si");
         rbSiContieneIgv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel32.add(rbSiContieneIgv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 19, -1, 20));
+        jPanel32.add(rbSiContieneIgv, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 19, -1, 20));
 
         rbNoContieneIgv.setBackground(new java.awt.Color(255, 255, 255));
-        rbNoContieneIgv.setText("No");
+        rbNoContieneIgv.setText("No, está exonerado");
+        rbNoContieneIgv.setToolTipText("No, está exonerado");
         rbNoContieneIgv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel32.add(rbNoContieneIgv, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 19, -1, 20));
+        rbNoContieneIgv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbNoContieneIgvActionPerformed(evt);
+            }
+        });
+        jPanel32.add(rbNoContieneIgv, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 19, 70, 20));
 
         jPanel11.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 130, -1));
 
@@ -862,7 +866,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jPanel13.add(txtDescuentoDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 170, 30));
 
         spnCantidadDv.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        jPanel13.add(spnCantidadDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 120, 30));
+        jPanel13.add(spnCantidadDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 130, 30));
 
         jLabel37.setText("Método de pago");
         jPanel13.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, -1));
@@ -980,39 +984,13 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         jPanel27.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 320, 120));
 
-        jLabel47.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel47.setText("Guardar Venta");
-        jLabel47.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGuardarVenta.setText("Guardar");
+        btnGuardarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel27.add(btnGuardarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 100, 40));
 
-        javax.swing.GroupLayout pnlGuardarVentaDvLayout = new javax.swing.GroupLayout(pnlGuardarVentaDv);
-        pnlGuardarVentaDv.setLayout(pnlGuardarVentaDvLayout);
-        pnlGuardarVentaDvLayout.setHorizontalGroup(
-            pnlGuardarVentaDvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnlGuardarVentaDvLayout.setVerticalGroup(
-            pnlGuardarVentaDvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel47, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        jPanel27.add(pnlGuardarVentaDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 100, 40));
-
-        jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel49.setText("Cancelar Venta");
-        jLabel49.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout pnlCancelarVentaDvLayout = new javax.swing.GroupLayout(pnlCancelarVentaDv);
-        pnlCancelarVentaDv.setLayout(pnlCancelarVentaDvLayout);
-        pnlCancelarVentaDvLayout.setHorizontalGroup(
-            pnlCancelarVentaDvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnlCancelarVentaDvLayout.setVerticalGroup(
-            pnlCancelarVentaDvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel49, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        jPanel27.add(pnlCancelarVentaDv, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 100, 40));
+        btnCancelarVenta.setText("Cancelar");
+        btnCancelarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel27.add(btnCancelarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 100, 40));
 
         jPanel8.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 380, 200));
 
@@ -1439,8 +1417,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel78.setText("IMPORTE TOTAL");
         jPanel48.add(jLabel78, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 15, 150, -1));
 
-        jLabel87.setText("SIN IGV");
-        jPanel48.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 35, -1, -1));
+        jLabel87.setText("SIN IGV O EXONERADO");
+        jPanel48.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 35, -1, -1));
 
         jLabel88.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel88.setForeground(new java.awt.Color(0, 0, 0));
@@ -1539,8 +1517,8 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel82.setText("IMPORTE TOTAL");
         jPanel52.add(jLabel82, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 15, 150, -1));
 
-        jLabel90.setText("CON IGV");
-        jPanel52.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 35, -1, -1));
+        jLabel90.setText("MÁS IGV");
+        jPanel52.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 35, 60, -1));
 
         jLabel91.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel91.setForeground(new java.awt.Color(0, 0, 0));
@@ -1637,7 +1615,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel31.add(rbFactura1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 18, -1, -1));
 
-        jPanel39.add(jPanel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 60));
+        jPanel39.add(jPanel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 880, 60));
 
         panelDetalleVenta.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 1210, 60));
 
@@ -1747,6 +1725,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private void rbFactura1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFactura1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rbFactura1ActionPerformed
+
+    private void rbNoContieneIgvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbNoContieneIgvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbNoContieneIgvActionPerformed
 
     public JButton getBtnEscanearProduGP() {
         return btnEscanearProduGP;
@@ -2132,28 +2114,12 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.jLabel46 = jLabel46;
     }
 
-    public JLabel getjLabel47() {
-        return jLabel47;
-    }
-
-    public void setjLabel47(JLabel jLabel47) {
-        this.jLabel47 = jLabel47;
-    }
-
     public JLabel getjLabel48() {
         return jLabel48;
     }
 
     public void setjLabel48(JLabel jLabel48) {
         this.jLabel48 = jLabel48;
-    }
-
-    public JLabel getjLabel49() {
-        return jLabel49;
-    }
-
-    public void setjLabel49(JLabel jLabel49) {
-        this.jLabel49 = jLabel49;
     }
 
     public JLabel getjLabel5() {
@@ -3340,12 +3306,20 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         this.pnlBuscarProd = pnlBuscarProd;
     }
 
-    public JPanel getPnlCancelarVentaDv() {
-        return pnlCancelarVentaDv;
+    public JButton getBtnCancelarVenta() {
+        return btnCancelarVenta;
     }
 
-    public void setPnlCancelarVentaDv(JPanel pnlCancelarVentaDv) {
-        this.pnlCancelarVentaDv = pnlCancelarVentaDv;
+    public void setBtnCancelarVenta(JButton btnCancelarVenta) {
+        this.btnCancelarVenta = btnCancelarVenta;
+    }
+
+    public JButton getBtnGuardarVenta() {
+        return btnGuardarVenta;
+    }
+
+    public void setBtnGuardarVenta(JButton btnGuardarVenta) {
+        this.btnGuardarVenta = btnGuardarVenta;
     }
 
     public JPanel getPnlCenter() {
@@ -3395,15 +3369,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     public void setPnlFSLogin(JPanel pnlFSLogin) {
         this.pnlFSLogin = pnlFSLogin;
     }
-
-    public JPanel getPnlGuardarVentaDv() {
-        return pnlGuardarVentaDv;
-    }
-
-    public void setPnlGuardarVentaDv(JPanel pnlGuardarVentaDv) {
-        this.pnlGuardarVentaDv = pnlGuardarVentaDv;
-    }
-
+    
     public JPanel getPnlInventario() {
         return pnlInventario;
     }
@@ -3822,8 +3788,10 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelarVenta;
     private javax.swing.JButton btnEscanearProduGP;
     private javax.swing.ButtonGroup btnGroupContieneIgv;
+    private javax.swing.JButton btnGuardarVenta;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbInfoProduDv;
     private javax.swing.JComboBox<String> cbMetPagoDv;
@@ -3870,9 +3838,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -4025,14 +3991,12 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel pnlAgregarGP;
     private javax.swing.JPanel pnlBarraDeOpciones;
     private javax.swing.JPanel pnlBuscarProd;
-    private javax.swing.JPanel pnlCancelarVentaDv;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlCerrarSesion;
     private javax.swing.JPanel pnlEliminarDv;
     private javax.swing.JPanel pnlEliminarGP;
     private javax.swing.JPanel pnlEscanearCodBarraDv;
     private javax.swing.JPanel pnlFSLogin;
-    private javax.swing.JPanel pnlGuardarVentaDv;
     private javax.swing.JPanel pnlInventario;
     private javax.swing.JPanel pnlInventarioTitulo;
     private javax.swing.JPanel pnlIzquierdaOperacionesProducto;

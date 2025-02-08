@@ -3,7 +3,7 @@ package com.codigodebarra.model;
 public class DetalleVenta {
 
     int idDetalle, idVenta, idProducto, cant;
-    double impSnIgv, igv, impCnIgv, descProdu, subtotCnDesc;
+    double impSnIgvOExo, igv, impMasIgv, descProdu, subtotCnDesc;
 
     public int getIdDetalle() {
         return idDetalle;
@@ -37,12 +37,20 @@ public class DetalleVenta {
         this.cant = cant;
     }
 
-    public double getImpSnIgv() {
-        return impSnIgv;
+    public double getImpSnIgvOExo() {
+        return impSnIgvOExo;
     }
 
-    public void setImpSnIgv(double impSnIgv) {
-        this.impSnIgv = impSnIgv;
+    public void setImpSnIgvOExo(double impSnIgvOExo) {
+        this.impSnIgvOExo = impSnIgvOExo;
+    }
+
+    public double getImpMasIgv() {
+        return impMasIgv;
+    }
+
+    public void setImpMasIgv(double impMasIgv) {
+        this.impMasIgv = impMasIgv;
     }
 
     public double getIgv() {
@@ -51,14 +59,6 @@ public class DetalleVenta {
 
     public void setIgv(double igv) {
         this.igv = igv;
-    }
-
-    public double getImpCnIgv() {
-        return impCnIgv;
-    }
-
-    public void setImpCnIgv(double impCnIgv) {
-        this.impCnIgv = impCnIgv;
     }
 
     public double getDescProdu() {

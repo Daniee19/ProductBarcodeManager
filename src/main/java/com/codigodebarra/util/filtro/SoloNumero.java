@@ -6,19 +6,31 @@ import javax.swing.text.DocumentFilter;
 
 public class SoloNumero extends DocumentFilter {
 
-    //Método para insertar en un textfield
     @Override
     public void insertString(FilterBypass fb, int offset, String string, AttributeSet as) throws BadLocationException {
-        if (string.matches("[0-9,\\.]*")) {
+        String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+        String newText = currentText.substring(0, offset) + string + currentText.substring(offset);
+        if (isValidDecimal(newText)) {
             super.insertString(fb, offset, string, as);
         }
     }
 
-    //Metodo para evitar que se pegue texto que no coincida con la expresión
     @Override
     public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet as) throws BadLocationException {
-        if (text.matches("[0-9,\\.]*")) {
+        String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
+        String newText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+
+        if (isValidDecimal(newText)) {
             super.replace(fb, offset, length, text, as);
         }
+    }
+
+    private boolean isValidDecimal(String text) {
+        if (text.isEmpty()) {
+            return true; // Permitir cadenas vacías
+        }
+
+        // Expresión regular mejorada para validar decimales con hasta 2 decimales.
+        return text.matches("^\\d*(\\.\\d{0,1})?$");
     }
 }

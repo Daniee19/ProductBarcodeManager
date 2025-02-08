@@ -7,6 +7,8 @@ import com.codigodebarra.model.Usuario;
 import com.codigodebarra.view.JInterfazPrincipal;
 import com.codigodebarra.view.JLogin;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -33,6 +35,14 @@ public class LoginController {
 
             if (usuario != null) {
                 JInterfazPrincipal ip = new JInterfazPrincipal();
+                // Obtener tamaño de pantalla
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                int width = (int) screenSize.getWidth();
+                int height = (int) screenSize.getHeight();
+
+                // Ajustar tamaño de la ventana
+                ip.setSize(width / 2, height / 2);
+                ip.setLocationRelativeTo(null); // Centrar ventana
                 PrincipalController pc = new PrincipalController(ip, usuario);
                 vistaLogin.dispose();
             } else {
