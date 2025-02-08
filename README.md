@@ -28,9 +28,9 @@ create table venta(
 idVenta integer primary key not null auto_increment,
 idUsuario integer not null, foreign key(idUsuario) REFERENCES usuario(idUsuario) ON DELETE CASCADE ON UPDATE CASCADE,
 fechaVenta timestamp default current_timestamp,
-impTotSnIgv decimal(8,2) not null default 0,
+impTotSnIgvOExo decimal(8,2) not null default 0,
 igvTotal decimal(6,2) not null default 0,
-impTotCnIgv decimal(8,2) not null default 0,
+impTotMasIgv decimal(8,2) not null default 0,
 descTot decimal(6,2) not null default 0,
 total decimal(8,2) not null default 0,
 tipoVenta enum('Boleta', 'Factura') default 'Boleta',
@@ -38,14 +38,14 @@ metPago enum('Efectivo', 'Tarjeta', 'Yape', 'Plin', 'Transacción', 'Fiado') not
 observacion varchar(250) null
 );
 
-create table detalle_venta(
+create table detalleVenta(
 idDetalle integer primary key not null auto_increment,
 idVenta integer not null, foreign key(idVenta) REFERENCES venta(idVenta) ON DELETE CASCADE ON UPDATE CASCADE,
 idProducto integer not null, foreign key(idProducto) REFERENCES producto(idProducto) ON DELETE CASCADE ON UPDATE CASCADE, 
 cant decimal(6,2) not null default 0,
-impSnIgv decimal(8,2) not null default 0,
+impSnIgvOExo decimal(8,2) not null default 0,
 igv decimal(6,2) not null default 0,
-impCnIgv decimal(8,2) not null default 0,
+impMasIgv decimal(8,2) not null default 0,
 descProdu decimal(6,2) not null default 0,
 subtotCnDesc decimal(8,2) not null default 0
 );
