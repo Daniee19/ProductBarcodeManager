@@ -122,7 +122,7 @@ public final class PrincipalController implements ActionListener {
             } else {
                 valVisual = "Exo";
             }
-            Object[] fila = {p.getCodBarra(), p.getNombre(), p.getMarca(), p.getCont(), p.getPrecio(), p.getStock(), valVisual};
+            Object[] fila = {p.getCodBarra(), p.getNombre(), p.getMarca(), p.getCont(), precisionDouble(p.getPrecio()), p.getStock(), valVisual};
             modelo.addRow(fila);
         }
         vistaIp.getTxtValorProd().setText("");
@@ -351,6 +351,7 @@ public final class PrincipalController implements ActionListener {
     public void gestionProductoIp() {
         //Por default, los paneles en la gestión de producto deben estar así
         alternarPanelesGP(true);
+
         vistaIp.getBtnGroupContieneIgv().add(vistaIp.getRbSiContieneIgv());
         vistaIp.getBtnGroupContieneIgv().add(vistaIp.getRbNoContieneIgv());
         //Al comienzo 
@@ -362,7 +363,13 @@ public final class PrincipalController implements ActionListener {
                 //Lógica para agregar producto
                 if (!codigoB.isEmpty()) {
                     if (productoDao.findByCodeProduct(codigoB) == null) {
-
+                        try {
+                            //Forzar a que se utilice el valor escrito manualmente (textField)
+                            vistaIp.getSpnCantidadGP().commitEdit();
+                            vistaIp.getSpnPrecioGP().commitEdit();
+                        } catch (ParseException pe) {
+                            pe.printStackTrace();
+                        }
                         //int cantidadP = (int) vistaIp.getSpnCantidadGP().getValue();
                         Producto p = new Producto();
                         p.setCodBarra(codigoB);
@@ -370,6 +377,7 @@ public final class PrincipalController implements ActionListener {
                         p.setMarca(vistaIp.getTxtMarcaGP().getText());
                         p.setCont(vistaIp.getTxtContenidoGP().getText());
                         p.setPrecio(((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue());
+                        p.setStock(((Number) vistaIp.getSpnCantidadGP().getValue()).intValue());
                         if (vistaIp.getRbSiContieneIgv().isSelected()) {
                             p.setIgvAplicable(true);
                         } else if (vistaIp.getRbNoContieneIgv().isSelected()) {
@@ -383,8 +391,8 @@ public final class PrincipalController implements ActionListener {
                             ImageIcon x = iconoResources("xRoja.png");
                             JOptionPane.showMessageDialog(null, "Error: El producto no se pudo agregar", "Error", 1, x);
                         }
-                        List<Producto> productos = productoDao.selectAll();
-                        mostrarElementosEnTabla(productos);
+
+                        mostrarElementosEnTabla(productoDao.selectAll());
                     } else {
                         ImageIcon x = iconoResources("xRoja.png");
                         JOptionPane.showMessageDialog(null, "No se aceptan códigos de barras duplicados", "Error", 1, x);
@@ -410,6 +418,7 @@ public final class PrincipalController implements ActionListener {
             //Se ejecutará cuando escuche un cambio en la tabla
             @Override
             public void valueChanged(ListSelectionEvent e) {
+
                 if (!e.getValueIsAdjusting()) {
 
                     int fila = vistaIp.getTablaProductos().getSelectedRow();
@@ -472,10 +481,10 @@ public final class PrincipalController implements ActionListener {
                         vistaIp.getPnlActualizarGP().addMouseListener(new MouseAdapter() {
                             @Override
                             public void mouseClicked(MouseEvent ev) {
+
                                 //Código de actualizar
                                 int fila = vistaIp.getTablaProductos().getSelectedRow();
                                 if (fila > -1) {
-
                                     try {
                                         //Forzar a que se utilice el valor escrito manualmente (textField)
                                         vistaIp.getSpnCantidadGP().commitEdit();
@@ -483,11 +492,10 @@ public final class PrincipalController implements ActionListener {
                                     } catch (ParseException pe) {
                                         pe.printStackTrace();
                                     }
-
                                     modelo.setValueAt(vistaIp.getTxtNombreGP().getText(), fila, 1);
                                     modelo.setValueAt(vistaIp.getTxtMarcaGP().getText(), fila, 2);
                                     modelo.setValueAt(vistaIp.getTxtContenidoGP().getText(), fila, 3);
-                                    modelo.setValueAt(vistaIp.getSpnPrecioGP().getValue(), fila, 4);
+                                    modelo.setValueAt(precisionDouble(((Number) vistaIp.getSpnPrecioGP().getValue()).doubleValue()), fila, 4);
                                     modelo.setValueAt(((Number) vistaIp.getSpnCantidadGP().getValue()).intValue(), fila, 5);
 
                                     if (vistaIp.getRbSiContieneIgv().isSelected()) {
@@ -547,21 +555,16 @@ public final class PrincipalController implements ActionListener {
 
     public String mostrarValoresFilaSelecionada(int fila) {
         String codBarra = (String) vistaIp.getTablaProductos().getValueAt(fila, 0);
-        String nombre = (String) vistaIp.getTablaProductos().getValueAt(fila, 1);
-        String marca = (String) vistaIp.getTablaProductos().getValueAt(fila, 2);
-        String contenido = (String) vistaIp.getTablaProductos().getValueAt(fila, 3);
-        double precio = ((Number) vistaIp.getTablaProductos().getValueAt(fila, 4)).doubleValue();
-        int cantidad = ((Number) vistaIp.getTablaProductos().getValueAt(fila, 5)).intValue();
         String valVisual = ((String) vistaIp.getTablaProductos().getValueAt(fila, 6));
 
-        Producto pr = new Producto();
         //Mostrar valores en los textFields
         vistaIp.getTxtCodBarraGP().setText(codBarra);
-        vistaIp.getTxtNombreGP().setText(nombre);
-        vistaIp.getTxtMarcaGP().setText(marca);
-        vistaIp.getTxtContenidoGP().setText(contenido);
-        vistaIp.getSpnPrecioGP().setValue(precio);
-        vistaIp.getSpnCantidadGP().setValue(cantidad);
+        vistaIp.getTxtNombreGP().setText((String) vistaIp.getTablaProductos().getValueAt(fila, 1));
+        vistaIp.getTxtMarcaGP().setText((String) vistaIp.getTablaProductos().getValueAt(fila, 2));
+        vistaIp.getTxtContenidoGP().setText((String) vistaIp.getTablaProductos().getValueAt(fila, 3));
+        vistaIp.getSpnPrecioGP().setValue(Double.valueOf((vistaIp.getTablaProductos().getValueAt(fila, 4).toString())));
+        vistaIp.getSpnCantidadGP().setValue(((Number) vistaIp.getTablaProductos().getValueAt(fila, 5)).intValue());
+
         if (valVisual.equals("IGV")) {
             vistaIp.getRbSiContieneIgv().setSelected(true);
         } else {
@@ -1154,7 +1157,7 @@ public final class PrincipalController implements ActionListener {
         modeloDv.setColumnIdentifiers(nombreColumnas);
         vistaIp.getTablaDetalleVenta().setModel(modeloDv);
 
-        String[] nombreColumnas2 = {"Cód. Barra", "Nombre", "Marca", "Cont.", "Prec. sin IGV o exonerado", "Cant.", "Imp. sin IGV o exonerado", "IGV", "Imp. más IGV", "Desc.", "Subtot. con desc."};
+        String[] nombreColumnas2 = {"Cód. Barra", "Nombre", "Marca", "Cont.", "Prec. sin IGV o exonerado", "Cant.", "Importe", "IGV", "Importe + IGV", "Desc.", "Subtot. con desc."};
         modeloDv2.setColumnIdentifiers(nombreColumnas2);
         vistaIp.getTablaDv2().setModel(modeloDv2);
         //Ajustar el tamaño de las columnas de la tabla para que se ajuste a su contenido
@@ -1198,6 +1201,11 @@ public final class PrincipalController implements ActionListener {
 
                     double importe = p.getPrecio() * Double.parseDouble(vistaIp.getSpnCantidadDv().getValue().toString());
                     double impPreciso = Double.parseDouble(precisionDouble(importe));
+
+                    if (((Number) vistaIp.getSpnCantidadDv().getValue()).intValue() == 0) {
+                        JOptionPane.showMessageDialog(null, "Necesita agregar la cantidad para realizar la venta");
+                        return;
+                    }
                     /**
                      * Lógica acerca del checkbox y que el descuento no sea
                      * mayor que el importe obtenido.
@@ -1228,7 +1236,7 @@ public final class PrincipalController implements ActionListener {
                     if (disponible == true) {
                         if (vistaIp.getRbBoleta().isSelected() || vistaIp.getRbBoleta1().isSelected()) {
                             double valor = impPreciso - desc;
-                            Object[] filaTdetV = {p.getCodBarra(), retInfo[0], retInfo[1], retInfo[2], p.getPrecio(), vistaIp.getSpnCantidadDv().getValue(), impPreciso, desc, precisionDouble(valor)};
+                            Object[] filaTdetV = {p.getCodBarra(), retInfo[0], retInfo[1], retInfo[2], precisionDouble(p.getPrecio()), vistaIp.getSpnCantidadDv().getValue(), precisionDouble(impPreciso), precisionDouble(desc), precisionDouble(valor)};
 
                             modeloDv.addRow(filaTdetV);
                             vistaIp.getTablaDetalleVenta().setModel(modeloDv);
@@ -1286,12 +1294,12 @@ public final class PrincipalController implements ActionListener {
                                 descT += Double.parseDouble(vistaIp.getTablaDv2().getValueAt(i, 9).toString());
                             }
 
-                            vistaIp.getTxtImpTotalSinIgv().setText(precisionDouble(importeTsn).toString());
-                            vistaIp.getTxtIgvTotal().setText(precisionDouble(igvT).toString());
-                            vistaIp.getTxtImpTotalConIgv2Dv().setText(precisionDouble(importeTcn).toString());
-                            vistaIp.getTxtDescuentoTotal2Dv().setText(precisionDouble(descT).toString());
+                            vistaIp.getTxtImpTotalSinIgv().setText(precisionDouble(importeTsn));
+                            vistaIp.getTxtIgvTotal().setText(precisionDouble(igvT));
+                            vistaIp.getTxtImpTotalConIgv2Dv().setText(precisionDouble(importeTcn));
+                            vistaIp.getTxtDescuentoTotal2Dv().setText(precisionDouble(descT));
                             double totalDv2 = importeTcn - descT;
-                            vistaIp.getTxtTotalPagar2Dv().setText(precisionDouble(totalDv2).toString());
+                            vistaIp.getTxtTotalPagar2Dv().setText(precisionDouble(totalDv2));
                         }
                     }
                 }
