@@ -11,6 +11,7 @@ import com.codigodebarra.model.Venta;
 import com.codigodebarra.util.ApiProductos;
 import com.codigodebarra.util.Barras;
 import com.codigodebarra.util.filtro.SoloNumero;
+import com.codigodebarra.view.JCategoria;
 import com.codigodebarra.view.JInformacion;
 import com.codigodebarra.view.JInterfazPrincipal;
 import com.codigodebarra.view.JLogin;
@@ -37,6 +38,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -57,6 +59,7 @@ public final class PrincipalController implements ActionListener {
 
     JInterfazPrincipal vistaIp;
     JInformacion vistaInfo;
+    JCategoria vistaCate;
     ProductoDao productoDao;
     ApiProductos api;
     Producto productoGlobal;
@@ -72,8 +75,9 @@ public final class PrincipalController implements ActionListener {
         bienvenida(usuario);
         this.vistaIp.setVisible(true);
         this.vistaIp.setLocationRelativeTo(null);
-
+        vistaCate = new JCategoria(vistaIp, true);
         vistaInfo = new JInformacion(vistaIp, true);
+
         productoDao = new ProductoDaoImpl(usuario);
         api = new ApiProductos();
         Disenio.getDesignWindows();
@@ -103,6 +107,10 @@ public final class PrincipalController implements ActionListener {
         vistaInfo.getBtnCancelar().addActionListener(this);
         vistaIp.getBtnGuardarVenta().addActionListener(this);
         vistaIp.getBtnCancelarVenta().addActionListener(this);
+        vistaCate.getBtnAgregarCate().addActionListener(this);
+        vistaCate.getBtnActuCate().addActionListener(this);
+        vistaCate.getBtnEliminarCate().addActionListener(this);
+        vistaCate.getBtnDesactivarCate().addActionListener(this);
         metodosDVenta();
     }
 
@@ -198,7 +206,7 @@ public final class PrincipalController implements ActionListener {
                 vistaIp.getTablaProductos().clearSelection();
             }
         });
-        vistaIp.getPanelInventario().addMouseListener(new MouseAdapter() {
+        vistaIp.getPanelProducto().addMouseListener(new MouseAdapter() {
 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -588,9 +596,6 @@ public final class PrincipalController implements ActionListener {
         Producto producto_bd = productoDao.findByCodeProduct(codBarraProdu);
 
         if (productoApi.getCodBarra() != null) {
-
-            System.out.println("Funciono la api");
-
             /*Si no hay info en la Api, pue bueno analicemos la bd, sino existe la bd entonces '--'*/
             condicionalBrindarDatosProductoApiOBd(productoApi, producto_bd);
 
@@ -681,53 +686,6 @@ public final class PrincipalController implements ActionListener {
                 vistaIp.getCbInfoProduDv().addItem(String.format("%s - %s - %s", p.getNombre(), p.getMarca(), p.getCont()));
             }
         }
-    }
-
-    public void popMenuInventario() {
-        //Se crean los items
-        JMenuItem escanearProducto = new JMenuItem("Escanear Producto");
-        JMenuItem controlInventario = new JMenuItem("Gestionar Inventario");
-
-        //Se agregan al popmenu
-        vistaIp.getPmInventario().add(escanearProducto);
-        vistaIp.getPmInventario().add(controlInventario);
-
-        //Se agrega al componente el cual al hacer clic derecho mostrará el popmenu con los items
-        vistaIp.getPnlInventario().setComponentPopupMenu(vistaIp.getPmInventario());
-        //Configurar para mostrar el popmenu con el clic izquierdo y derecho
-        vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-                if (e.getButton() == MouseEvent.BUTTON1 || e.getButton() == MouseEvent.BUTTON3) {
-                    vistaIp.getPmInventario().show(e.getComponent(), e.getX(), e.getY());
-                }
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent event) {
-                vistaIp.getPnlInventario().setBackground(new Color(220, 220, 220));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent event) {
-                vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
-            }
-        });
-        //Acciones de los items
-        escanearProducto.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(1);
-            }
-        });
-        controlInventario.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(2);
-                mostrarElementosEnTabla(productoDao.selectAll());
-            }
-        });
     }
 
     private void ocultarPestaniasTdP(JTabbedPane tbdPane) {
@@ -844,9 +802,73 @@ public final class PrincipalController implements ActionListener {
                 vistaIp.getPnlPrincipal().setBackground(new Color(255, 255, 255));
             }
         });
-        popMenuInventario();
-        popMenuVenta();
+        //popMenuProducto();
+        vistaIp.getPnlCategoria().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vistaCate.setLocationRelativeTo(null);
+                vistaCate.setVisible(true);
+            }
 
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlCategoria().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlCategoria().setBackground(new Color(255, 255, 255));
+            }
+        });
+        vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(2);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlInventario().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlInventario().setBackground(new Color(255, 255, 255));
+            }
+        });
+        vistaIp.getPnlProducto().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(2);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlProducto().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlProducto().setBackground(new Color(255, 255, 255));
+            }
+        });
+        popMenuVenta();
+        vistaIp.getPnlEstadistica().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                vistaIp.getjTabbedPane1().setSelectedIndex(4);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent event) {
+                vistaIp.getPnlEstadistica().setBackground(new Color(220, 220, 220));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent event) {
+                vistaIp.getPnlEstadistica().setBackground(new Color(255, 255, 255));
+            }
+        });
         vistaIp.getPnlCerrarSesion().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent event) {
@@ -918,6 +940,18 @@ public final class PrincipalController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == vistaCate.getBtnAgregarCate()) {
+
+        }
+        if (e.getSource() == vistaCate.getBtnActuCate()) {
+
+        }
+        if (e.getSource() == vistaCate.getBtnEliminarCate()) {
+
+        }
+        if (e.getSource() == vistaCate.getBtnDesactivarCate()) {
+
+        }
         if (e.getSource() == vistaIp.getBtnGuardarVenta()) {
             guardarVenta();
         }
