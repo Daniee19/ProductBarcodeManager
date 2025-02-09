@@ -3,8 +3,23 @@
 Create database tiendita;
 Use tiendita;
 
+create table usuario (
+idUsuario integer primary key not null auto_increment,
+nombre varchar(40) not null,
+apellido varchar(40)  not null,
+nombreUsuario varchar(20) not null,
+contrasenia blob,
+rol varchar(20) not null
+);
+
+create table categoria(
+idCategoria integer primary key not null auto_increment,
+nombreCategoria varchar(40) not null
+);
+
 create table producto (
 idProducto integer primary key not null auto_increment,
+idCategoria integer not null, foreign key(idCategoria) REFERENCES categoria(idCategoria) ON DELETE CASCADE ON UPDATE CASCADE,
 codigoBarra varchar(20) not null unique,
 nombre varchar(60)  null,
 precio decimal(8,2)  null default 0,
@@ -13,15 +28,6 @@ marca varchar(50) null,
 contenido varchar(20) null,
 igvAplicable tinyint(1) not null default 0,
 imagenUrl varchar(200) null
-);
-
-create table usuario (
-idUsuario integer primary key not null auto_increment,
-nombre varchar(40) not null,
-apellido varchar(40)  not null,
-nombreUsuario varchar(20) not null,
-contrasenia blob,
-rol varchar(20) not null
 );
 
 create table venta(
@@ -48,6 +54,14 @@ igv decimal(6,2) not null default 0,
 impMasIgv decimal(8,2) not null default 0,
 descProdu decimal(6,2) not null default 0,
 subtotCnDesc decimal(8,2) not null default 0
+);
+
+create table inventario(
+idInventario integer primary key not null auto_increment,
+idProducto integer not null, foreign key (idProducto) references producto(idProducto) ON DELETE CASCADE ON UPDATE CASCADE,
+ubicacion varchar(80) not null, 
+stockProducto integer not null default 0,
+stockMinimo integer null default 0
 );
 
 ```
