@@ -12,6 +12,7 @@ import com.codigodebarra.util.ApiProductos;
 import com.codigodebarra.util.Barras;
 import com.codigodebarra.util.filtro.SoloNumero;
 import com.codigodebarra.view.JCategoria;
+import com.codigodebarra.view.JEstadistica;
 import com.codigodebarra.view.JInformacion;
 import com.codigodebarra.view.JInterfazPrincipal;
 import com.codigodebarra.view.JLogin;
@@ -38,7 +39,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -60,6 +60,7 @@ public final class PrincipalController implements ActionListener {
     JInterfazPrincipal vistaIp;
     JInformacion vistaInfo;
     JCategoria vistaCate;
+    JEstadistica vistaEstadistica;
     ProductoDao productoDao;
     ApiProductos api;
     Producto productoGlobal;
@@ -77,6 +78,7 @@ public final class PrincipalController implements ActionListener {
         this.vistaIp.setLocationRelativeTo(null);
         vistaCate = new JCategoria(vistaIp, true);
         vistaInfo = new JInformacion(vistaIp, true);
+        vistaEstadistica = new JEstadistica(vistaIp, true);
 
         productoDao = new ProductoDaoImpl(usuario);
         api = new ApiProductos();
@@ -823,7 +825,7 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getPnlInventario().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(2);
+                vistaIp.getjTabbedPane1().setSelectedIndex(1);
             }
 
             @Override
@@ -856,7 +858,8 @@ public final class PrincipalController implements ActionListener {
         vistaIp.getPnlEstadistica().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                vistaIp.getjTabbedPane1().setSelectedIndex(4);
+                vistaEstadistica.setLocationRelativeTo(null);
+                vistaEstadistica.setVisible(true);
             }
 
             @Override

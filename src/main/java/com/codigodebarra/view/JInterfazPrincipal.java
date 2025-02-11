@@ -507,6 +507,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         lblInventarioPnl.setForeground(new java.awt.Color(0, 0, 0));
         lblInventarioPnl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInventarioPnl.setText("Inventario");
+        lblInventarioPnl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pnlInventarioLayout = new javax.swing.GroupLayout(pnlInventario);
         pnlInventario.setLayout(pnlInventarioLayout);
@@ -525,6 +526,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Estadística");
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout pnlEstadisticaLayout = new javax.swing.GroupLayout(pnlEstadistica);
         pnlEstadistica.setLayout(pnlEstadisticaLayout);
@@ -646,7 +648,7 @@ public class JInterfazPrincipal extends javax.swing.JFrame {
 
         pnlProductoTitulo.setBackground(new java.awt.Color(255, 255, 255));
         pnlProductoTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        pnlProductoTitulo.setLayout(new java.awt.GridLayout());
+        pnlProductoTitulo.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
