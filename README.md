@@ -1,3 +1,6 @@
+## Database Diagram
+![image](https://github.com/user-attachments/assets/a50bf933-d42a-4fab-97c9-ce325537d2ba)
+
 ## Database Script
 ```sql
 Create database tiendita;
@@ -63,9 +66,6 @@ stockProducto integer not null default 0,
 stockMinimo integer null default 0
 );
 ```
-
-## Database Diagram
-![image](https://github.com/user-attachments/assets/a50bf933-d42a-4fab-97c9-ce325537d2ba)
 
 ## References
 ### Project Data
