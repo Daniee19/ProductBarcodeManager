@@ -1,4 +1,7 @@
-## Database
+## Database Diagram
+![image](https://github.com/user-attachments/assets/a50bf933-d42a-4fab-97c9-ce325537d2ba)
+
+## Database Script
 ```sql
 Create database tiendita;
 Use tiendita;
@@ -23,7 +26,6 @@ idCategoria integer not null, foreign key(idCategoria) REFERENCES categoria(idCa
 codigoBarra varchar(20) not null unique,
 nombre varchar(60)  null,
 precio decimal(8,2)  null default 0,
-stock integer null default 0,
 marca varchar(50) null,
 contenido varchar(20) null,
 igvAplicable tinyint(1) not null default 0,
@@ -63,8 +65,8 @@ ubicacion varchar(80) not null,
 stockProducto integer not null default 0,
 stockMinimo integer null default 0
 );
-
 ```
+
 ## References
 ### Project Data
 ![image](https://github.com/user-attachments/assets/cc4e79c0-06fc-438f-94c9-d0495c1a62a9)
