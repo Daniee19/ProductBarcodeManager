@@ -79,4 +79,6 @@ The data is available under the [Open Database License (ODbL)](https://opendatac
 <a target="_blank" href="https://icons8.com/icon/85458/minus">Menos</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
 <a target="_blank" href="https://icons8.com/icon/38033/full-screen">Full Screen</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
 <a target="_blank" href="https://icons8.com/icon/10421/pdf">PDF</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
-<a target="_blank" href="https://icons8.com/icon/11594/microsoft-excel">MS Excel</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a>
+<a target="_blank" href="https://icons8.com/icon/11594/microsoft-excel">MS Excel</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
+<a target="_blank" href="https://icons8.com/icon/63262/checkmark">Comprobado</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
+<a target="_blank" href="https://icons8.com/icon/rmf1Fvj5nBib/close-window">X</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
