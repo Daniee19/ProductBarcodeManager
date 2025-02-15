@@ -74,6 +74,7 @@ stockMinimo integer null default 0
 <br/>
 This project uses data from [Open Food Facts](https://world.openfoodfacts.org), an open database of food products.  
 The data is available under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/).  
+
 ### Icons
 <a target="_blank" href="https://icons8.com/icon/32244/barcode-reader">Escáner de código de barras 2 Filled</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a> </br>
 <a target="_blank" href="https://icons8.com/icon/6483/multiply">X</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
