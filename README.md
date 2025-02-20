@@ -74,6 +74,7 @@ stockMinimo integer null default 0
 
 ### Project Data
 ![image](https://github.com/user-attachments/assets/cc4e79c0-06fc-438f-94c9-d0495c1a62a9)
+
 <br/>
 
 This project uses data from [Open Food Facts](https://world.openfoodfacts.org), an open database of food products.  
