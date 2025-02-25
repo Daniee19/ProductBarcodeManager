@@ -3,6 +3,7 @@
 ![image](https://github.com/user-attachments/assets/a50bf933-d42a-4fab-97c9-ce325537d2ba)
 
 ## Database Script
+
 ```sql
 Create database tiendita;
 Use tiendita;
