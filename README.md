@@ -4,6 +4,7 @@
 
 ## Database Script
 ```sql
+
 Create database tiendita;
 Use tiendita;
 
