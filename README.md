@@ -67,6 +67,7 @@ ubicacion varchar(80) not null,
 stockProducto integer not null default 0,
 stockMinimo integer null default 0
 );
+
 ```
 
 ## References
