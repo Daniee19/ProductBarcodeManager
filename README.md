@@ -1,4 +1,4 @@
-An inventory and sales management system developed in Java using Java Swing for the graphical user interface.
+# An inventory and sales management system developed in Java using Java Swing for the graphical user interface.
 
 ## Database Diagram
 
