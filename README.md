@@ -85,3 +85,21 @@ The data is available under the [Open Database License (ODbL)](https://opendatac
 <a target="_blank" href="https://icons8.com/icon/11594/microsoft-excel">MS Excel</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
 <a target="_blank" href="https://icons8.com/icon/63262/checkmark">Comprobado</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
 <a target="_blank" href="https://icons8.com/icon/rmf1Fvj5nBib/close-window">X</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
+
+## 🤝 Contribuciones
+¡Las contribuciones son bienvenidas! Si quieres mejorar este proyecto:
+
+1. Haz un fork del repositorio.
+2. Crea una nueva rama:  
+   ```bash
+   git checkout -b feature-nueva
+   ```
+3. Realiza tus cambios y súbelos
+   ```bash
+   git commit -m "Agrega nueva funcionalidad"
+   ```
+4. Envía un pull request
+
+## Licencia
+Este proyecto está bajo la Licencia MIT. </br>
+📌 Si te gustó este proyecto, ¡dale una ⭐ en GitHub! 😃🔥 </br>
