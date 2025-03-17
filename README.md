@@ -88,20 +88,20 @@ The data is available under the [Open Database License (ODbL)](https://opendatac
 <a target="_blank" href="https://icons8.com/icon/63262/checkmark">Comprobado</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
 <a target="_blank" href="https://icons8.com/icon/rmf1Fvj5nBib/close-window">X</a> icono de <a target="_blank" href="https://icons8.com">Icons8</a></br>
 
-## 🤝 Contribuciones
-¡Las contribuciones son bienvenidas! Si quieres mejorar este proyecto:
+## 🤝 Contributions
+Contributions are welcome! If you want to improve this project:
 
-1. Haz un fork del repositorio.
-2. Crea una nueva rama:  
+1. Fork the repository.
+2. Create a new branch.
    ```bash
    git checkout -b feature-nueva
    ```
-3. Realiza tus cambios y súbelos
+3. Make your changes and push them:
    ```bash
    git commit -m "Agrega nueva funcionalidad"
    ```
-4. Envía un pull request
+4. Submit a pull request.
 
-## Licencia
-Este proyecto está bajo la Licencia MIT. </br>
-📌 Si te gustó este proyecto, ¡dale una ⭐ en GitHub! 😃🔥 </br>
+## License
+This project is licensed unde the MTA License </br>
+📌 If you liked this project, give it a ⭐ on GitHub! 😃🔥 </br>
